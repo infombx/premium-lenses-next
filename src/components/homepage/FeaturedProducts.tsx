@@ -4,9 +4,10 @@ import { ImageWithFallback } from '../figma/ImageWithFallback';
 import { motion } from 'motion/react';
 import { Star, MapPin, ChevronLeft, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
-import { products } from '@/app/data/products';
+import { products as staticProducts } from '@/app/data/products';
+import type { Product as WooMappedProduct } from '@/app/data/products';
 
-interface Product {
+interface FeaturedProduct {
   id: number;
   name: string;
   category: string;
@@ -17,47 +18,24 @@ interface Product {
   badge?: string;
 }
 
-export function FeaturedProducts() {
-  const featuredProducts: Product[] = [
-    {
-      id: products[0].id,
-      name: products[0].name,
-      category: products[0].category,
-      price: products[0].price,
-      rating: 4.8,
-      reviews: 1200,
-      image: products[0].image,
-      badge: 'Best Seller',
-    },
-    {
-      id: products[1].id,
-      name: products[1].name,
-      category: products[1].category,
-      price: products[1].price,
-      rating: 4.6,
-      reviews: 950,
-      image: products[1].image,
-    },
-    {
-      id: products[2].id,
-      name: products[2].name,
-      category: products[2].category,
-      price: products[2].price,
-      rating: 4.9,
-      reviews: 2000,
-      image: products[2].image,
-      badge: 'New',
-    },
-    {
-      id: products[3].id,
-      name: products[3].name,
-      category: products[3].category,
-      price: products[3].price,
-      rating: 4.7,
-      reviews: 780,
-      image: products[3].image,
-    },
-  ];
+interface Props {
+  products?: WooMappedProduct[];
+}
+
+const BADGES = ['Best Seller', undefined, 'New', undefined];
+
+export function FeaturedProducts({ products }: Props) {
+  const source = (products ?? staticProducts).slice(0, 4);
+  const featuredProducts: FeaturedProduct[] = source.map((p, i) => ({
+    id: p.id,
+    name: p.name,
+    category: p.category,
+    price: p.price,
+    rating: 4.8,
+    reviews: 1200,
+    image: p.image,
+    badge: BADGES[i],
+  }));
 
   return (
     <section className="py-24 md:py-32 bg-white">

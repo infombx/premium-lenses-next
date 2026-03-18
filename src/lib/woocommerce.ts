@@ -81,6 +81,51 @@ export async function getProduct(id: number): Promise<WooProduct | null> {
   return res.json()
 }
 
+export async function getCategories(): Promise<{ id: number; name: string; slug: string; count: number }[]> {
+  if (!WOO_URL) return []
+  const res = await fetch(`${WOO_URL}/wp-json/wc/v3/products/categories?per_page=100&hide_empty=true`, {
+    headers: { Authorization: getAuthHeader() },
+    next: { revalidate: 300 },
+  })
+  if (!res.ok) return []
+  return res.json()
+}
+
+function stripHtml(html: string): string {
+  return html.replace(/<[^>]*>/g, '').trim()
+}
+
+function getAttr(product: WooProduct, ...names: string[]): string | undefined {
+  for (const name of names) {
+    const attr = product.attributes.find(a => a.name.toLowerCase() === name.toLowerCase())
+    if (attr?.options[0]) return attr.options[0]
+  }
+}
+
+import type { Product } from '@/app/data/products'
+
+export function mapWooProduct(p: WooProduct): Product {
+  return {
+    id: p.id,
+    name: p.name,
+    price: parseFloat(p.price) || 0,
+    image: p.images[0]?.src || '',
+    images: p.images.map(img => img.src),
+    category: p.categories[0]?.name?.toUpperCase() || 'PRODUCTS',
+    description: stripHtml(p.short_description || p.description || ''),
+    features: p.attributes.flatMap(a => a.options.map(o => `${a.name}: ${o}`)),
+    specs: {
+      dia: getAttr(p, 'diameter', 'dia', 'DIA'),
+      bc: getAttr(p, 'base curve', 'bc', 'B.C'),
+      waterContent: getAttr(p, 'water content'),
+      duration: getAttr(p, 'duration', 'wear period', 'replacement'),
+      material: getAttr(p, 'material', 'lens type', 'type'),
+      pieces: getAttr(p, 'pieces', 'quantity', 'pack size'),
+      madeIn: getAttr(p, 'made in', 'origin', 'country'),
+    },
+  }
+}
+
 export async function createOrder(order: WooOrder): Promise<{ id: number; number: string } | null> {
   if (!WOO_URL) return null
   const res = await fetch(`${WOO_URL}/wp-json/wc/v3/orders`, {
