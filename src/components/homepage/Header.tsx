@@ -5,10 +5,15 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useCart } from '@/app/context/CartContext';
+import type { GlobalContent } from '@/lib/wordpress';
 
 const logo = '/logo_black_white.svg';
 
-export function Header() {
+interface Props {
+  content: Pick<GlobalContent, 'nav_links' | 'site_tagline'>
+}
+
+export function Header({ content }: Props) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { getCartCount } = useCart();
   const cartCount = getCartCount();
@@ -35,13 +40,7 @@ export function Header() {
     return pathname === path;
   };
 
-  const navLinks = [
-    { path: '/', label: 'Home' },
-    { path: '/shop', label: 'Shop' },
-    { path: '/about', label: 'About' },
-    { path: '/contact', label: 'Contact' },
-    { path: '/guide', label: 'Guide' },
-  ];
+  const navLinks = content.nav_links.map((l) => ({ path: l.href, label: l.label }));
 
   return (
     <>
@@ -219,7 +218,7 @@ export function Header() {
             `}
             style={{ transitionDelay: mobileMenuOpen ? '300ms' : '0ms' }}
           >
-            Premium Vision Care Since 2014
+            {content.site_tagline}
           </div>
         </div>
       </div>

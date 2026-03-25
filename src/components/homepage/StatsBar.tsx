@@ -1,10 +1,8 @@
-export function StatsBar() {
-  const stats = [
-    { value: '50K+', label: 'CUSTOMERS' },
-    { value: '99%', label: 'SATISFACTION' },
-    { value: '24/7', label: 'SUPPORT' },
-    { value: '100+', label: 'PRODUCTS' },
-  ];
+import type { Stat } from '@/lib/wordpress'
+
+interface Props { stats: Stat[] }
+
+export function StatsBar({ stats }: Props) {
 
   return (
     <section className="bg-white border-t border-black/10">

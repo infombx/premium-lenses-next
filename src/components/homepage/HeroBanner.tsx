@@ -3,10 +3,15 @@
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'motion/react';
 import Link from 'next/link';
+import type { HomepageContent } from '@/lib/wordpress';
 
 const heroImage = '/assets/7dcec5984ee2016a07e7cf6622999ce93bb0b5b8.png';
 
-export function HeroBanner() {
+interface Props {
+  content: Pick<HomepageContent, 'hero_headline' | 'hero_subheading' | 'hero_cta_primary' | 'hero_cta_secondary'>
+}
+
+export function HeroBanner({ content }: Props) {
   return (
     <section className="relative min-h-screen bg-white overflow-hidden">
       {/* Background Image */}
@@ -28,16 +33,13 @@ export function HeroBanner() {
           <div className="space-y-6 md:space-y-8 max-w-xl">
             {/* Main Headline */}
             <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-[1.1] tracking-tight text-white">
-              Transform Your Look,
-              <br />
-              Naturally.
+              {content.hero_headline}
             </h1>
 
             {/* Description */}
             <div className="max-w-md">
               <p className="text-sm md:text-base text-white/80 leading-relaxed">
-                Discover stunning colored contact lenses that enhance your natural beauty
-                with vibrant hues and comfortable all-day wear.
+                {content.hero_subheading}
               </p>
             </div>
 
@@ -50,7 +52,7 @@ export function HeroBanner() {
                   className="group relative px-8 py-3 bg-white text-black overflow-hidden transition-all duration-300 w-full rounded-lg"
                 >
                   <span className="relative z-10 text-sm tracking-wider group-hover:text-white transition-colors duration-300 flex items-center justify-center gap-2">
-                    Shop
+                    {content.hero_cta_primary}
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </span>
                   <div className="absolute inset-0 bg-black transform translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
@@ -58,7 +60,7 @@ export function HeroBanner() {
               </Link>
               <Link href="/shop">
                 <button className="px-8 py-3 border border-white/40 text-white hover:bg-white hover:text-black transition-all flex items-center justify-center gap-2 group rounded-lg w-full">
-                  Explore
+                  {content.hero_cta_secondary}
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </button>
               </Link>

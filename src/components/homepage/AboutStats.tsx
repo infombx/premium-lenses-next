@@ -4,6 +4,7 @@ import { ImageWithFallback } from '../figma/ImageWithFallback';
 import { motion } from 'motion/react';
 import { Award, Users, Globe, Clock } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
+import type { HomepageContent, Stat as WPStat } from '@/lib/wordpress';
 
 // Import all eye color variations as paths
 const image1 = '/assets/3c7399a71e1ca7130bfad8769df3a0bd8a15e860.png';
@@ -12,41 +13,30 @@ const image3 = '/assets/61f6e644cf51f6ae867d9a3d8576e7f2a6fbc311.png';
 const image4 = '/assets/4323b2606492e25d7805f6e389ef484148cd1514.png';
 const image5 = '/assets/477535dc8f09e1bbb59f0a34ca52544474e3fa96.png';
 
+const STAT_ICONS = [Users, Globe, Award, Clock];
+
 interface Stat {
   icon: React.ElementType;
   value: string;
   label: string;
 }
 
-export function AboutStats() {
+interface Props {
+  content: Pick<HomepageContent, 'about_label' | 'about_title' | 'about_body_1' | 'about_body_2' | 'about_stats'>
+}
+
+export function AboutStats({ content }: Props) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isInView, setIsInView] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
   const images = [image1, image2, image3, image4, image5];
 
-  const stats: Stat[] = [
-    {
-      icon: Users,
-      value: '500K+',
-      label: 'Style Transformations',
-    },
-    {
-      icon: Globe,
-      value: '50+',
-      label: 'Countries Worldwide',
-    },
-    {
-      icon: Award,
-      value: '15+',
-      label: 'Years of Beauty Innovation',
-    },
-    {
-      icon: Clock,
-      value: '24/7',
-      label: 'Customer Support',
-    },
-  ];
+  const stats: Stat[] = content.about_stats.map((s: WPStat, i: number) => ({
+    icon: STAT_ICONS[i % STAT_ICONS.length],
+    value: s.value,
+    label: s.label,
+  }));
 
   // Start cycling through images when section comes into view
   useEffect(() => {
@@ -119,20 +109,13 @@ export function AboutStats() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
           >
-            <p className="text-xs tracking-wider mb-4 text-black/40">ABOUT US</p>
+            <p className="text-xs tracking-wider mb-4 text-black/40">{content.about_label}</p>
             <h2 className="text-3xl md:text-4xl mb-6">
-              Beauty Meets Comfort
+              {content.about_title}
             </h2>
             <div className="space-y-4 text-black/60 mb-12">
-              <p>
-                For over 15 years, we&apos;ve been helping people express their unique style through
-                premium colored contact lenses. From subtle enhancements to bold transformations,
-                our collection brings your vision to life with stunning, natural-looking colors.
-              </p>
-              <p>
-                We partner with trusted manufacturers to ensure every lens combines breathtaking
-                aesthetics with exceptional comfort and safety, so you can look amazing all day long.
-              </p>
+              <p>{content.about_body_1}</p>
+              <p>{content.about_body_2}</p>
             </div>
 
             {/* Stats Grid */}

@@ -5,55 +5,39 @@ import { motion } from 'motion/react';
 import { ArrowRight, Eye, Droplets, Palette, Grid } from 'lucide-react';
 import { products } from '@/app/data/products';
 import Link from 'next/link';
+import type { HomepageContent } from '@/lib/wordpress';
+
+const CATEGORY_ICONS = [Palette, Eye, Droplets, Grid];
 
 interface Category {
   title: string;
   description: string;
   link: string;
   image: string;
-  icon: any;
+  icon: React.ElementType;
 }
 
-export function CategorySection() {
-  const categories: Category[] = [
-    {
-      title: 'COLORED SHADES',
-      description: 'Transform your look with vibrant, natural-looking colors',
-      link: '/shop?category=COLORED SHADES',
-      image: products[0].image, // AI Blue
-      icon: Palette,
-    },
-    {
-      title: 'PRESCRIBED SHADES',
-      description: 'Corrective lenses for clear, comfortable vision',
-      link: '/shop?category=PRESCRIBED SHADES',
-      image: products[1].image, // Angeles Fe Gray
-      icon: Eye,
-    },
-    {
-      title: 'SOLUTIONS',
-      description: 'Premium care products for your lenses',
-      link: '/shop?category=SOLUTIONS',
-      image: 'https://images.unsplash.com/photo-1550572017-4b7a301b9d81?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb250YWN0JTIwbGVucyUyMHNvbHV0aW9uJTIwYm90dGxlfGVufDF8fHx8MTc3MjY5NjM0MHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      icon: Droplets,
-    },
-    {
-      title: 'ALL ITEMS',
-      description: 'Browse our complete collection',
-      link: '/shop',
-      image: products[3].image, // Amazon Brown
-      icon: Grid,
-    },
-  ];
+interface Props {
+  content: Pick<HomepageContent, 'categories_title' | 'categories_description' | 'categories'>
+}
+
+export function CategorySection({ content }: Props) {
+  const categories: Category[] = content.categories.map((c, i) => ({
+    title: c.title,
+    description: c.description,
+    link: c.slug === 'all' ? '/shop' : `/shop?category=${encodeURIComponent(c.title)}`,
+    image: products[i]?.image ?? products[0].image,
+    icon: CATEGORY_ICONS[i % CATEGORY_ICONS.length],
+  }));
 
   return (
     <section className="py-16 md:py-24 bg-black/[0.02]">
       <div className="max-w-[1200px] mx-auto px-6 md:px-12">
         {/* Section Header */}
         <div className="text-center mb-12 md:mb-16">
-          <h2 className="text-3xl md:text-4xl mb-4">Shop by Category</h2>
+          <h2 className="text-3xl md:text-4xl mb-4">{content.categories_title}</h2>
           <p className="text-black/60 max-w-2xl mx-auto">
-            Discover the perfect lenses tailored to your lifestyle and vision requirements
+            {content.categories_description}
           </p>
         </div>
 

@@ -1,34 +1,12 @@
 import { Facebook, Instagram, Twitter, Mail } from 'lucide-react';
+import type { GlobalContent } from '@/lib/wordpress';
 
 const logo = '/logo_black_white.svg';
 
-export function Footer() {
-  const footerLinks = {
-    shop: [
-      { label: 'Daily Lenses', href: '/shop/daily' },
-      { label: 'Monthly Lenses', href: '/shop/monthly' },
-      { label: 'Colored Lenses', href: '/shop/colored' },
-      { label: 'Specialty Lenses', href: '/shop/specialty' },
-    ],
-    support: [
-      { label: 'Contact Us', href: '/contact' },
-      { label: 'FAQs', href: '/faqs' },
-      { label: 'Shipping Info', href: '/shipping' },
-      { label: 'Returns', href: '/returns' },
-    ],
-    company: [
-      { label: 'About Us', href: '/about' },
-      { label: 'Our Story', href: '/story' },
-      { label: 'Careers', href: '/careers' },
-      { label: 'Press', href: '/press' },
-    ],
-    legal: [
-      { label: 'Privacy Policy', href: '/privacy' },
-      { label: 'Terms of Service', href: '/terms' },
-      { label: 'Cookie Policy', href: '/cookies' },
-      { label: 'Accessibility', href: '/accessibility' },
-    ],
-  };
+interface Props { content: GlobalContent }
+
+export function Footer({ content }: Props) {
+  const footerLinks = content.footer_links;
 
   return (
     <footer className="bg-white border-t border-black/10">
@@ -42,13 +20,13 @@ export function Footer() {
                 <img src={logo} alt="Premium Lenses" className="h-16 mb-6" />
               </a>
               <p className="text-sm text-black/60 leading-relaxed mb-6 max-w-xs">
-                Premium contact lenses and eye care products for exceptional comfort and clarity.
+                {content.footer_description}
               </p>
 
               {/* Social Links */}
               <div className="flex gap-3">
                 <a
-                  href="https://facebook.com"
+                  href={content.social.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 border border-black/10 rounded-full flex items-center justify-center hover:bg-black hover:text-white hover:border-black transition-colors"
@@ -57,7 +35,7 @@ export function Footer() {
                   <Facebook className="w-4 h-4" />
                 </a>
                 <a
-                  href="https://instagram.com"
+                  href={content.social.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 border border-black/10 rounded-full flex items-center justify-center hover:bg-black hover:text-white hover:border-black transition-colors"
@@ -66,7 +44,7 @@ export function Footer() {
                   <Instagram className="w-4 h-4" />
                 </a>
                 <a
-                  href="https://twitter.com"
+                  href={content.social.twitter}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 border border-black/10 rounded-full flex items-center justify-center hover:bg-black hover:text-white hover:border-black transition-colors"
@@ -150,9 +128,9 @@ export function Footer() {
         {/* Newsletter Section */}
         <div className="py-12 border-t border-black/10">
           <div className="max-w-md">
-            <h3 className="text-sm mb-2 tracking-wider">STAY UPDATED</h3>
+            <h3 className="text-sm mb-2 tracking-wider">{content.newsletter_title}</h3>
             <p className="text-sm text-black/60 mb-6">
-              Subscribe to our newsletter for exclusive offers and eye care tips.
+              {content.newsletter_description}
             </p>
             <form className="flex flex-col sm:flex-row gap-2">
               <div className="flex-1 relative">
@@ -177,7 +155,7 @@ export function Footer() {
         <div className="py-6 border-t border-black/10">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-black/40">
-              &copy; 2026 Premium Lenses. All rights reserved.
+              {content.copyright}
             </p>
             <div className="flex gap-6">
               <a href="/privacy" className="text-sm text-black/40 hover:text-black transition-colors">
