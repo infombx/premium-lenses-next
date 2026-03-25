@@ -1,4 +1,4 @@
-import { Facebook, Instagram, Twitter, Mail } from 'lucide-react';
+import { Facebook, Instagram, Twitter } from 'lucide-react';
 import type { GlobalContent } from '@/lib/wordpress';
 
 const logo = '/logo_black_white.svg';
@@ -122,32 +122,6 @@ export function Footer({ content }: Props) {
                 ))}
               </ul>
             </div>
-          </div>
-        </div>
-
-        {/* Newsletter Section */}
-        <div className="py-12 border-t border-black/10">
-          <div className="max-w-md">
-            <h3 className="text-sm mb-2 tracking-wider">{content.newsletter_title}</h3>
-            <p className="text-sm text-black/60 mb-6">
-              {content.newsletter_description}
-            </p>
-            <form className="flex flex-col sm:flex-row gap-2">
-              <div className="flex-1 relative">
-                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-black/40" />
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="w-full pl-12 pr-4 py-3 border border-black/20 rounded text-sm focus:outline-none focus:border-black transition-colors"
-                />
-              </div>
-              <button
-                type="submit"
-                className="px-6 py-3 bg-black text-white text-sm tracking-wider hover:bg-black/80 transition-colors rounded-lg whitespace-nowrap"
-              >
-                Subscribe
-              </button>
-            </form>
           </div>
         </div>
 
