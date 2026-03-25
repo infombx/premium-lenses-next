@@ -6,11 +6,14 @@
  * WordPress pages/fields haven't been created yet.
  *
  * WordPress Setup Requirements:
- *  - ACF Pro (or free ACF + "ACF to REST API" plugin)
- *  - Each field group must have "Show in REST API" enabled
- *  - Pages: homepage, about, contact, guide, shop-hero
- *  - Custom Post Types: testimonial, faq, timeline_item
- *  - ACF Options Page: global_options (header/footer content)
+ *  - Plugin: "Advanced Custom Fields" (free version from wordpress.org)
+ *  - Each ACF field group must have "Show in REST API" enabled
+ *  - Pages with these slugs: homepage, about, contact, guide, shop-hero, global-settings
+ *
+ * ACF Free Field Naming Convention for arrays:
+ *  Instead of Repeater fields (Pro only), use numbered individual fields:
+ *  e.g. stat_1_value / stat_1_label / stat_2_value / stat_2_label / ...
+ *  The buildRepeater() and buildStringArray() helpers assemble them into arrays.
  */
 
 const WP_URL = process.env.NEXT_PUBLIC_WC_URL ?? ''
@@ -26,6 +29,48 @@ async function wpFetch<T>(path: string): Promise<T | null> {
   } catch {
     return null
   }
+}
+
+// ---------------------------------------------------------------------------
+// Helpers for ACF Free (numbered individual fields → arrays)
+// ---------------------------------------------------------------------------
+
+/**
+ * Builds an array of objects from numbered ACF fields.
+ * e.g. prefix="stat", keys=["value","label"]
+ * reads stat_1_value / stat_1_label / stat_2_value / stat_2_label / …
+ */
+function buildRepeater<T extends object>(
+  acf: Record<string, unknown>,
+  prefix: string,
+  keys: (keyof T)[],
+  max = 10,
+): T[] {
+  const items: T[] = []
+  for (let i = 1; i <= max; i++) {
+    const firstKey = `${prefix}_${i}_${String(keys[0])}`
+    if (!acf[firstKey]) break
+    const item = {} as T
+    for (const key of keys) {
+      ;(item as Record<string, unknown>)[String(key)] = acf[`${prefix}_${i}_${String(key)}`] ?? ''
+    }
+    items.push(item)
+  }
+  return items
+}
+
+/**
+ * Builds a string array from numbered ACF fields.
+ * e.g. prefix="safety_tip" reads safety_tip_1 / safety_tip_2 / …
+ */
+function buildStringArray(acf: Record<string, unknown>, prefix: string, max = 20): string[] {
+  const items: string[] = []
+  for (let i = 1; i <= max; i++) {
+    const val = acf[`${prefix}_${i}`]
+    if (typeof val !== 'string' || !val) break
+    items.push(val)
+  }
+  return items
 }
 
 // ---------------------------------------------------------------------------
@@ -179,7 +224,26 @@ export async function getHomepageContent(): Promise<HomepageContent> {
   const page = await wpFetch<WPPage>('/wp/v2/pages?slug=homepage&_fields=id,acf')
   const acf = (Array.isArray(page) ? page[0]?.acf : null) ?? {}
   if (!Object.keys(acf).length) return homepageFallback
-  return { ...homepageFallback, ...acf } as HomepageContent
+
+  const base = { ...homepageFallback, ...acf } as HomepageContent
+
+  // Support ACF Free (numbered fields) and ACF Pro (repeater arrays)
+  const stats = Array.isArray(acf.stats) ? (acf.stats as Stat[]) : buildRepeater<Stat>(acf, 'stat', ['value', 'label'])
+  if (stats.length) base.stats = stats
+
+  const categories = Array.isArray(acf.categories) ? (acf.categories as Category[]) : buildRepeater<Category>(acf, 'category', ['title', 'description', 'slug'])
+  if (categories.length) base.categories = categories
+
+  const testimonials = Array.isArray(acf.testimonials) ? (acf.testimonials as Testimonial[]) : buildRepeater<Testimonial>(acf, 'testimonial', ['name', 'role', 'quote'])
+  if (testimonials.length) base.testimonials = testimonials
+
+  const testimonialStats = Array.isArray(acf.testimonial_stats) ? (acf.testimonial_stats as Stat[]) : buildRepeater<Stat>(acf, 'testimonial_stat', ['value', 'label'])
+  if (testimonialStats.length) base.testimonial_stats = testimonialStats
+
+  const aboutStats = Array.isArray(acf.about_stats) ? (acf.about_stats as Stat[]) : buildRepeater<Stat>(acf, 'about_stat', ['value', 'label'])
+  if (aboutStats.length) base.about_stats = aboutStats
+
+  return base
 }
 
 // ---------------------------------------------------------------------------
@@ -261,7 +325,22 @@ export async function getAboutContent(): Promise<AboutContent> {
   const page = await wpFetch<WPPage>('/wp/v2/pages?slug=about&_fields=id,acf')
   const acf = (Array.isArray(page) ? page[0]?.acf : null) ?? {}
   if (!Object.keys(acf).length) return aboutFallback
-  return { ...aboutFallback, ...acf } as AboutContent
+
+  const base = { ...aboutFallback, ...acf } as AboutContent
+
+  const stats = Array.isArray(acf.stats) ? (acf.stats as Stat[]) : buildRepeater<Stat>(acf, 'stat', ['value', 'label'])
+  if (stats.length) base.stats = stats
+
+  const storyParas = Array.isArray(acf.story_paragraphs) ? (acf.story_paragraphs as string[]) : buildStringArray(acf, 'story_para')
+  if (storyParas.length) base.story_paragraphs = storyParas
+
+  const values = Array.isArray(acf.values) ? (acf.values as Value[]) : buildRepeater<Value>(acf, 'value', ['title', 'badge', 'short', 'expanded'])
+  if (values.length) base.values = values
+
+  const timeline = Array.isArray(acf.timeline) ? (acf.timeline as TimelineItem[]) : buildRepeater<TimelineItem>(acf, 'timeline', ['year', 'title', 'description', 'details'])
+  if (timeline.length) base.timeline = timeline
+
+  return base
 }
 
 // ---------------------------------------------------------------------------
@@ -363,7 +442,16 @@ export async function getGuideContent(): Promise<GuideContent> {
   const page = await wpFetch<WPPage>('/wp/v2/pages?slug=guide&_fields=id,acf')
   const acf = (Array.isArray(page) ? page[0]?.acf : null) ?? {}
   if (!Object.keys(acf).length) return guideFallback
-  return { ...guideFallback, ...acf } as GuideContent
+
+  const base = { ...guideFallback, ...acf } as GuideContent
+
+  const safetyTips = Array.isArray(acf.safety_tips) ? (acf.safety_tips as string[]) : buildStringArray(acf, 'safety_tip')
+  if (safetyTips.length) base.safety_tips = safetyTips
+
+  const faqs = Array.isArray(acf.faqs) ? (acf.faqs as FAQItem[]) : buildRepeater<FAQItem>(acf, 'faq', ['question', 'answer'])
+  if (faqs.length) base.faqs = faqs
+
+  return base
 }
 
 // ---------------------------------------------------------------------------
@@ -433,11 +521,26 @@ const globalFallback: GlobalContent = {
 }
 
 export async function getGlobalContent(): Promise<GlobalContent> {
-  // ACF Options Page: requires ACF Pro + Options page registered
-  const options = await wpFetch<{ acf?: Record<string, unknown> }>('/acf/v3/options/options')
-  const acf = options?.acf ?? {}
+  // Uses a regular WordPress page (slug: global-settings) — ACF Free compatible.
+  // ACF Pro users can use an Options Page instead; change the fetch path to
+  // /acf/v3/options/options and adjust the acf extraction accordingly.
+  const page = await wpFetch<WPPage>('/wp/v2/pages?slug=global-settings&_fields=id,acf')
+  const acf = (Array.isArray(page) ? page[0]?.acf : null) ?? {}
   if (!Object.keys(acf).length) return globalFallback
-  return { ...globalFallback, ...acf } as GlobalContent
+
+  const result = { ...globalFallback, ...acf } as GlobalContent
+
+  // ACF Free: individual fields facebook_url / instagram_url / twitter_url
+  // instead of a nested 'social' object
+  if (!acf.social && (acf.facebook_url || acf.instagram_url || acf.twitter_url)) {
+    result.social = {
+      facebook: (acf.facebook_url as string) || globalFallback.social.facebook,
+      instagram: (acf.instagram_url as string) || globalFallback.social.instagram,
+      twitter: (acf.twitter_url as string) || globalFallback.social.twitter,
+    }
+  }
+
+  return result
 }
 
 // ---------------------------------------------------------------------------
