@@ -481,6 +481,8 @@ export async function getGuideContent(): Promise<GuideContent> {
 
 export interface GlobalContent {
   site_tagline: string
+  logo_light: string
+  logo_dark: string
   nav_links: Array<{ label: string; href: string }>
   footer_description: string
   footer_links: {
@@ -497,6 +499,8 @@ export interface GlobalContent {
 
 const globalFallback: GlobalContent = {
   site_tagline: 'Premium Vision Care Since 2014',
+  logo_light: '/logo_black_white.svg',
+  logo_dark: '/logo_black_white.svg',
   nav_links: [
     { label: 'Home', href: '/' },
     { label: 'Shop', href: '/shop' },

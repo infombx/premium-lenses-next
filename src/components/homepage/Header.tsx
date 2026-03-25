@@ -7,10 +7,8 @@ import { usePathname } from 'next/navigation';
 import { useCart } from '@/app/context/CartContext';
 import type { GlobalContent } from '@/lib/wordpress';
 
-const logo = '/logo_black_white.svg';
-
 interface Props {
-  content: Pick<GlobalContent, 'nav_links' | 'site_tagline'>
+  content: Pick<GlobalContent, 'nav_links' | 'site_tagline' | 'logo_light' | 'logo_dark'>
 }
 
 export function Header({ content }: Props) {
@@ -63,9 +61,9 @@ export function Header({ content }: Props) {
               {/* Logo */}
               <Link href="/" className="flex items-center group flex-shrink-0">
                 <img
-                  src={logo}
+                  src={content.logo_light}
                   alt="Premium Lenses"
-                  className="h-20 md:h-28 transition-all duration-500 mx-[20px] my-[0px]"
+                  className="h-16 md:h-20 transition-all duration-500 mx-[20px] my-[0px]"
                 />
               </Link>
 

@@ -1,8 +1,6 @@
 import { Facebook, Instagram, Twitter } from 'lucide-react';
 import type { GlobalContent } from '@/lib/wordpress';
 
-const logo = '/logo_black_white.svg';
-
 interface Props { content: GlobalContent }
 
 export function Footer({ content }: Props) {
@@ -17,7 +15,7 @@ export function Footer({ content }: Props) {
             {/* Brand Column */}
             <div className="lg:col-span-2">
               <a href="/">
-                <img src={logo} alt="Premium Lenses" className="h-24 mb-6 invert" />
+                <img src={content.logo_dark} alt="Premium Lenses" className="h-16 mb-6" />
               </a>
               <p className="text-sm text-black/60 leading-relaxed mb-6 max-w-xs">
                 {content.footer_description}
@@ -132,7 +130,7 @@ export function Footer({ content }: Props) {
               &copy; {new Date().getFullYear()} Premium Lenses. All rights reserved.
             </p>
             <p className="text-sm text-black/40">
-              Design by{' '}
+              Designed by{' '}
               <a href="https://blkbox.mu" target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors">
                 BLKBOX Creative
               </a>
