@@ -500,7 +500,7 @@ export interface GlobalContent {
 const globalFallback: GlobalContent = {
   site_tagline: 'Premium Vision Care Since 2014',
   logo_light: '/logo_black_white.svg',
-  logo_dark: '/logo_black_white.svg',
+  logo_dark: '/logo_black.svg',
   nav_links: [
     { label: 'Home', href: '/' },
     { label: 'Shop', href: '/shop' },

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 375 375">
+  <defs>
+    <style>
+      .cls-1 {
+        font-size: 9px;
+      }
+
+      .cls-1, .cls-2, .cls-3 {
+        fill: #000;
+        font-family: NotoSerifDisplay-Medium, 'NotoSerifDisplay Medium';
+        font-weight: 500;
+      }
+
+      .cls-2 {
+        font-size: 50.72px;
+      }
+
+      .cls-4 {
+        fill: none;
+      }
+
+      .cls-3 {
+        font-size: 175px;
+      }
+
+      .cls-5 {
+        clip-path: url(#clippath);
+      }
+    </style>
+    <clipPath id="clippath">
+      <rect class="cls-4" width="375" height="375"/>
+    </clipPath>
+  </defs>
+  <g class="cls-5">
+    <text class="cls-2" transform="translate(43.88 184.56)"><tspan x="0" y="0">P</tspan></text>
+    <text class="cls-2" transform="translate(74.97 184.56)"><tspan x="0" y="0">r</tspan></text>
+    <text class="cls-3" transform="translate(93.4 227.46)"><tspan x="0" y="0">e</tspan></text>
+    <text class="cls-2" transform="translate(181.99 179.09)"><tspan x="0" y="0">m</tspan></text>
+    <text class="cls-2" transform="translate(230.46 179.09)"><tspan x="0" y="0">i</tspan></text>
+    <text class="cls-2" transform="translate(247.14 179.09)"><tspan x="0" y="0">u</tspan></text>
+    <text class="cls-2" transform="translate(279.8 179.09)"><tspan x="0" y="0">m</tspan></text>
+    <text class="cls-2" transform="translate(186.54 222.05)"><tspan x="0" y="0">n</tspan></text>
+    <text class="cls-2" transform="translate(219.55 222.05)"><tspan x="0" y="0">s</tspan></text>
+    <text class="cls-2" transform="translate(242.93 222.05)"><tspan x="0" y="0">e</tspan></text>
+    <text class="cls-2" transform="translate(270.56 222.05)"><tspan x="0" y="0">s</tspan></text>
+    <text class="cls-2" transform="translate(74.22 222.05)"><tspan x="0" y="0">L</tspan></text>
+    <text class="cls-1" transform="translate(265.69 242.5)"><tspan x="0" y="0">M</tspan></text>
+    <text class="cls-1" transform="translate(275.52 242.5)"><tspan x="0" y="0">A</tspan></text>
+    <text class="cls-1" transform="translate(283.33 242.5)"><tspan x="0" y="0">U</tspan></text>
+    <text class="cls-1" transform="translate(291.21 242.5)"><tspan x="0" y="0">R</tspan></text>
+    <text class="cls-1" transform="translate(298.59 242.5)"><tspan x="0" y="0">I</tspan></text>
+    <text class="cls-1" transform="translate(303.32 242.5)"><tspan x="0" y="0">T</tspan></text>
+    <text class="cls-1" transform="translate(310.29 242.5)"><tspan x="0" y="0">I</tspan></text>
+    <text class="cls-1" transform="translate(315.02 242.5)"><tspan x="0" y="0">U</tspan></text>
+    <text class="cls-1" transform="translate(322.89 242.5)"><tspan x="0" y="0">S</tspan></text>
+    <text class="cls-1" transform="translate(329.24 242.5)"><tspan x="0" y="0"> </tspan></text>
+  </g>
+</svg>
