@@ -1,0 +1,3213 @@
+[
+  {
+    "key": "group_homepage",
+    "title": "Homepage Content",
+    "fields": [
+      {
+        "key": "field_hero_badge",
+        "label": "Hero Badge",
+        "name": "hero_badge",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "e.g. BEAUTY COLLECTION",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_hero_headline",
+        "label": "Hero Headline",
+        "name": "hero_headline",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "e.g. Transform Your Look, Naturally.",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_hero_subheading",
+        "label": "Hero Subheading",
+        "name": "hero_subheading",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "100",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3,
+        "new_lines": "",
+        "placeholder": ""
+      },
+      {
+        "key": "field_hero_cta_primary",
+        "label": "Hero CTA - Primary",
+        "name": "hero_cta_primary",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "e.g. Shop",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_hero_cta_secondary",
+        "label": "Hero CTA - Secondary",
+        "name": "hero_cta_secondary",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "e.g. Explore",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_stat_1_value",
+        "label": "Stat 1 - Value",
+        "name": "stat_1_value",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "e.g. 50K+",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_stat_1_label",
+        "label": "Stat 1 - Label",
+        "name": "stat_1_label",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "e.g. CUSTOMERS",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_stat_2_value",
+        "label": "Stat 2 - Value",
+        "name": "stat_2_value",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "e.g. 50K+",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_stat_2_label",
+        "label": "Stat 2 - Label",
+        "name": "stat_2_label",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "e.g. CUSTOMERS",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_stat_3_value",
+        "label": "Stat 3 - Value",
+        "name": "stat_3_value",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "e.g. 50K+",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_stat_3_label",
+        "label": "Stat 3 - Label",
+        "name": "stat_3_label",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "e.g. CUSTOMERS",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_stat_4_value",
+        "label": "Stat 4 - Value",
+        "name": "stat_4_value",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "e.g. 50K+",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_stat_4_label",
+        "label": "Stat 4 - Label",
+        "name": "stat_4_label",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "e.g. CUSTOMERS",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_categories_title",
+        "label": "Categories Title",
+        "name": "categories_title",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_categories_description",
+        "label": "Categories Description",
+        "name": "categories_description",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "100",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3,
+        "new_lines": "",
+        "placeholder": ""
+      },
+      {
+        "key": "field_category_1_title",
+        "label": "Category 1 - Title",
+        "name": "category_1_title",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_category_1_description",
+        "label": "Category 1 - Description",
+        "name": "category_1_description",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "100",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3,
+        "new_lines": "",
+        "placeholder": ""
+      },
+      {
+        "key": "field_category_1_slug",
+        "label": "Category 1 - Slug (WooCommerce)",
+        "name": "category_1_slug",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_category_2_title",
+        "label": "Category 2 - Title",
+        "name": "category_2_title",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_category_2_description",
+        "label": "Category 2 - Description",
+        "name": "category_2_description",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "100",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3,
+        "new_lines": "",
+        "placeholder": ""
+      },
+      {
+        "key": "field_category_2_slug",
+        "label": "Category 2 - Slug (WooCommerce)",
+        "name": "category_2_slug",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_category_3_title",
+        "label": "Category 3 - Title",
+        "name": "category_3_title",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_category_3_description",
+        "label": "Category 3 - Description",
+        "name": "category_3_description",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "100",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3,
+        "new_lines": "",
+        "placeholder": ""
+      },
+      {
+        "key": "field_category_3_slug",
+        "label": "Category 3 - Slug (WooCommerce)",
+        "name": "category_3_slug",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_category_4_title",
+        "label": "Category 4 - Title",
+        "name": "category_4_title",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_category_4_description",
+        "label": "Category 4 - Description",
+        "name": "category_4_description",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "100",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3,
+        "new_lines": "",
+        "placeholder": ""
+      },
+      {
+        "key": "field_category_4_slug",
+        "label": "Category 4 - Slug (WooCommerce)",
+        "name": "category_4_slug",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_featured_title",
+        "label": "Featured Products Title",
+        "name": "featured_title",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_featured_description",
+        "label": "Featured Products Description",
+        "name": "featured_description",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "100",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3,
+        "new_lines": "",
+        "placeholder": ""
+      },
+      {
+        "key": "field_about_label",
+        "label": "About Label",
+        "name": "about_label",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "e.g. ABOUT US",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_about_title",
+        "label": "About Title",
+        "name": "about_title",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_about_body_1",
+        "label": "About Body - Paragraph 1",
+        "name": "about_body_1",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "100",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3,
+        "new_lines": "",
+        "placeholder": ""
+      },
+      {
+        "key": "field_about_body_2",
+        "label": "About Body - Paragraph 2",
+        "name": "about_body_2",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "100",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3,
+        "new_lines": "",
+        "placeholder": ""
+      },
+      {
+        "key": "field_about_stat_1_value",
+        "label": "Stat 1 - Value",
+        "name": "about_stat_1_value",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "e.g. 50K+",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_about_stat_1_label",
+        "label": "Stat 1 - Label",
+        "name": "about_stat_1_label",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "e.g. CUSTOMERS",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_about_stat_2_value",
+        "label": "Stat 2 - Value",
+        "name": "about_stat_2_value",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "e.g. 50K+",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_about_stat_2_label",
+        "label": "Stat 2 - Label",
+        "name": "about_stat_2_label",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "e.g. CUSTOMERS",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_about_stat_3_value",
+        "label": "Stat 3 - Value",
+        "name": "about_stat_3_value",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "e.g. 50K+",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_about_stat_3_label",
+        "label": "Stat 3 - Label",
+        "name": "about_stat_3_label",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "e.g. CUSTOMERS",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_about_stat_4_value",
+        "label": "Stat 4 - Value",
+        "name": "about_stat_4_value",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "e.g. 50K+",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_about_stat_4_label",
+        "label": "Stat 4 - Label",
+        "name": "about_stat_4_label",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "e.g. CUSTOMERS",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_testimonials_title",
+        "label": "Testimonials Title",
+        "name": "testimonials_title",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_testimonials_subtitle",
+        "label": "Testimonials Subtitle",
+        "name": "testimonials_subtitle",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_testimonial_1_name",
+        "label": "Testimonial 1 - Name",
+        "name": "testimonial_1_name",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_testimonial_1_role",
+        "label": "Testimonial 1 - Role/Title",
+        "name": "testimonial_1_role",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_testimonial_1_quote",
+        "label": "Testimonial 1 - Quote",
+        "name": "testimonial_1_quote",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "100",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3,
+        "new_lines": "",
+        "placeholder": ""
+      },
+      {
+        "key": "field_testimonial_2_name",
+        "label": "Testimonial 2 - Name",
+        "name": "testimonial_2_name",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_testimonial_2_role",
+        "label": "Testimonial 2 - Role/Title",
+        "name": "testimonial_2_role",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_testimonial_2_quote",
+        "label": "Testimonial 2 - Quote",
+        "name": "testimonial_2_quote",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "100",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3,
+        "new_lines": "",
+        "placeholder": ""
+      },
+      {
+        "key": "field_testimonial_3_name",
+        "label": "Testimonial 3 - Name",
+        "name": "testimonial_3_name",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_testimonial_3_role",
+        "label": "Testimonial 3 - Role/Title",
+        "name": "testimonial_3_role",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_testimonial_3_quote",
+        "label": "Testimonial 3 - Quote",
+        "name": "testimonial_3_quote",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "100",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3,
+        "new_lines": "",
+        "placeholder": ""
+      },
+      {
+        "key": "field_testimonial_stat_1_value",
+        "label": "Stat 1 - Value",
+        "name": "testimonial_stat_1_value",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "e.g. 50K+",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_testimonial_stat_1_label",
+        "label": "Stat 1 - Label",
+        "name": "testimonial_stat_1_label",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "e.g. CUSTOMERS",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_testimonial_stat_2_value",
+        "label": "Stat 2 - Value",
+        "name": "testimonial_stat_2_value",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "e.g. 50K+",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_testimonial_stat_2_label",
+        "label": "Stat 2 - Label",
+        "name": "testimonial_stat_2_label",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "e.g. CUSTOMERS",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_testimonial_stat_3_value",
+        "label": "Stat 3 - Value",
+        "name": "testimonial_stat_3_value",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "e.g. 50K+",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_testimonial_stat_3_label",
+        "label": "Stat 3 - Label",
+        "name": "testimonial_stat_3_label",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "e.g. CUSTOMERS",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_testimonial_stat_4_value",
+        "label": "Stat 4 - Value",
+        "name": "testimonial_stat_4_value",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "e.g. 50K+",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_testimonial_stat_4_label",
+        "label": "Stat 4 - Label",
+        "name": "testimonial_stat_4_label",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "e.g. CUSTOMERS",
+        "prepend": "",
+        "append": ""
+      }
+    ],
+    "location": [
+      [
+        {
+          "param": "page",
+          "operator": "==",
+          "value": "21"
+        }
+      ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 1,
+    "modified": 1774426947
+  },
+  {
+    "key": "group_about",
+    "title": "About Page Content",
+    "fields": [
+      {
+        "key": "field_hero_badge",
+        "label": "Hero Badge",
+        "name": "hero_badge",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "e.g. SINCE 2014",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_hero_headline",
+        "label": "Hero Headline",
+        "name": "hero_headline",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_hero_subheading",
+        "label": "Hero Subheading",
+        "name": "hero_subheading",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "100",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3,
+        "new_lines": "",
+        "placeholder": ""
+      },
+      {
+        "key": "field_stat_1_value",
+        "label": "Stat 1 - Value",
+        "name": "stat_1_value",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "e.g. 50K+",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_stat_1_label",
+        "label": "Stat 1 - Label",
+        "name": "stat_1_label",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "e.g. CUSTOMERS",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_stat_2_value",
+        "label": "Stat 2 - Value",
+        "name": "stat_2_value",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "e.g. 50K+",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_stat_2_label",
+        "label": "Stat 2 - Label",
+        "name": "stat_2_label",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "e.g. CUSTOMERS",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_stat_3_value",
+        "label": "Stat 3 - Value",
+        "name": "stat_3_value",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "e.g. 50K+",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_stat_3_label",
+        "label": "Stat 3 - Label",
+        "name": "stat_3_label",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "e.g. CUSTOMERS",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_stat_4_value",
+        "label": "Stat 4 - Value",
+        "name": "stat_4_value",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "e.g. 50K+",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_stat_4_label",
+        "label": "Stat 4 - Label",
+        "name": "stat_4_label",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "e.g. CUSTOMERS",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_story_title",
+        "label": "Story Section Title",
+        "name": "story_title",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_story_para_1",
+        "label": "Story Paragraph 1",
+        "name": "story_para_1",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "100",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3,
+        "new_lines": "",
+        "placeholder": ""
+      },
+      {
+        "key": "field_story_para_2",
+        "label": "Story Paragraph 2",
+        "name": "story_para_2",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "100",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3,
+        "new_lines": "",
+        "placeholder": ""
+      },
+      {
+        "key": "field_story_para_3",
+        "label": "Story Paragraph 3",
+        "name": "story_para_3",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "100",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3,
+        "new_lines": "",
+        "placeholder": ""
+      },
+      {
+        "key": "field_values_title",
+        "label": "Values Title",
+        "name": "values_title",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_values_description",
+        "label": "Values Description",
+        "name": "values_description",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "100",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3,
+        "new_lines": "",
+        "placeholder": ""
+      },
+      {
+        "key": "field_value_1_title",
+        "label": "Value 1 - Title",
+        "name": "value_1_title",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_value_1_badge",
+        "label": "Value 1 - Badge",
+        "name": "value_1_badge",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_value_1_short",
+        "label": "Value 1 - Short Description",
+        "name": "value_1_short",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "100",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3,
+        "new_lines": "",
+        "placeholder": ""
+      },
+      {
+        "key": "field_value_1_expanded",
+        "label": "Value 1 - Expanded Description",
+        "name": "value_1_expanded",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "100",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3,
+        "new_lines": "",
+        "placeholder": ""
+      },
+      {
+        "key": "field_value_2_title",
+        "label": "Value 2 - Title",
+        "name": "value_2_title",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_value_2_badge",
+        "label": "Value 2 - Badge",
+        "name": "value_2_badge",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_value_2_short",
+        "label": "Value 2 - Short Description",
+        "name": "value_2_short",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "100",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3,
+        "new_lines": "",
+        "placeholder": ""
+      },
+      {
+        "key": "field_value_2_expanded",
+        "label": "Value 2 - Expanded Description",
+        "name": "value_2_expanded",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "100",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3,
+        "new_lines": "",
+        "placeholder": ""
+      },
+      {
+        "key": "field_value_3_title",
+        "label": "Value 3 - Title",
+        "name": "value_3_title",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_value_3_badge",
+        "label": "Value 3 - Badge",
+        "name": "value_3_badge",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_value_3_short",
+        "label": "Value 3 - Short Description",
+        "name": "value_3_short",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "100",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3,
+        "new_lines": "",
+        "placeholder": ""
+      },
+      {
+        "key": "field_value_3_expanded",
+        "label": "Value 3 - Expanded Description",
+        "name": "value_3_expanded",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "100",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3,
+        "new_lines": "",
+        "placeholder": ""
+      },
+      {
+        "key": "field_timeline_title",
+        "label": "Timeline Title",
+        "name": "timeline_title",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_timeline_subtitle",
+        "label": "Timeline Subtitle",
+        "name": "timeline_subtitle",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_timeline_1_year",
+        "label": "Timeline 1 - Year",
+        "name": "timeline_1_year",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_timeline_1_title",
+        "label": "Timeline 1 - Title",
+        "name": "timeline_1_title",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_timeline_1_description",
+        "label": "Timeline 1 - Short Description",
+        "name": "timeline_1_description",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "100",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3,
+        "new_lines": "",
+        "placeholder": ""
+      },
+      {
+        "key": "field_timeline_1_details",
+        "label": "Timeline 1 - Details",
+        "name": "timeline_1_details",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "100",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3,
+        "new_lines": "",
+        "placeholder": ""
+      },
+      {
+        "key": "field_timeline_2_year",
+        "label": "Timeline 2 - Year",
+        "name": "timeline_2_year",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_timeline_2_title",
+        "label": "Timeline 2 - Title",
+        "name": "timeline_2_title",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_timeline_2_description",
+        "label": "Timeline 2 - Short Description",
+        "name": "timeline_2_description",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "100",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3,
+        "new_lines": "",
+        "placeholder": ""
+      },
+      {
+        "key": "field_timeline_2_details",
+        "label": "Timeline 2 - Details",
+        "name": "timeline_2_details",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "100",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3,
+        "new_lines": "",
+        "placeholder": ""
+      },
+      {
+        "key": "field_timeline_3_year",
+        "label": "Timeline 3 - Year",
+        "name": "timeline_3_year",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_timeline_3_title",
+        "label": "Timeline 3 - Title",
+        "name": "timeline_3_title",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_timeline_3_description",
+        "label": "Timeline 3 - Short Description",
+        "name": "timeline_3_description",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "100",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3,
+        "new_lines": "",
+        "placeholder": ""
+      },
+      {
+        "key": "field_timeline_3_details",
+        "label": "Timeline 3 - Details",
+        "name": "timeline_3_details",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "100",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3,
+        "new_lines": "",
+        "placeholder": ""
+      },
+      {
+        "key": "field_timeline_4_year",
+        "label": "Timeline 4 - Year",
+        "name": "timeline_4_year",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_timeline_4_title",
+        "label": "Timeline 4 - Title",
+        "name": "timeline_4_title",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_timeline_4_description",
+        "label": "Timeline 4 - Short Description",
+        "name": "timeline_4_description",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "100",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3,
+        "new_lines": "",
+        "placeholder": ""
+      },
+      {
+        "key": "field_timeline_4_details",
+        "label": "Timeline 4 - Details",
+        "name": "timeline_4_details",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "100",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3,
+        "new_lines": "",
+        "placeholder": ""
+      },
+      {
+        "key": "field_timeline_5_year",
+        "label": "Timeline 5 - Year",
+        "name": "timeline_5_year",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_timeline_5_title",
+        "label": "Timeline 5 - Title",
+        "name": "timeline_5_title",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_timeline_5_description",
+        "label": "Timeline 5 - Short Description",
+        "name": "timeline_5_description",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "100",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3,
+        "new_lines": "",
+        "placeholder": ""
+      },
+      {
+        "key": "field_timeline_5_details",
+        "label": "Timeline 5 - Details",
+        "name": "timeline_5_details",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "100",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3,
+        "new_lines": "",
+        "placeholder": ""
+      },
+      {
+        "key": "field_cta_title",
+        "label": "CTA Title",
+        "name": "cta_title",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_cta_subtitle",
+        "label": "CTA Subtitle",
+        "name": "cta_subtitle",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_cta_button",
+        "label": "CTA Button Text",
+        "name": "cta_button",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      }
+    ],
+    "location": [
+      [
+        {
+          "param": "page",
+          "operator": "==",
+          "value": "30"
+        }
+      ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 1,
+    "modified": 1774426947
+  },
+  {
+    "key": "group_contact",
+    "title": "Contact Page Content",
+    "fields": [
+      {
+        "key": "field_hero_title",
+        "label": "Hero Title",
+        "name": "hero_title",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "e.g. Contact Us",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_hero_subtitle",
+        "label": "Hero Subtitle",
+        "name": "hero_subtitle",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "e.g. Get In Touch",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_phone",
+        "label": "Phone Number",
+        "name": "phone",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_email",
+        "label": "Email Address",
+        "name": "email",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_address",
+        "label": "Address",
+        "name": "address",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_form_title",
+        "label": "Form Title",
+        "name": "form_title",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_form_description",
+        "label": "Form Description",
+        "name": "form_description",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "100",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3,
+        "new_lines": "",
+        "placeholder": ""
+      },
+      {
+        "key": "field_map_embed_url",
+        "label": "Google Maps Embed URL",
+        "name": "map_embed_url",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "100",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3,
+        "new_lines": "",
+        "placeholder": ""
+      }
+    ],
+    "location": [
+      [
+        {
+          "param": "page",
+          "operator": "==",
+          "value": "32"
+        }
+      ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 1,
+    "modified": 1774426947
+  },
+  {
+    "key": "group_guide",
+    "title": "Guide Page Content",
+    "fields": [
+      {
+        "key": "field_hero_badge",
+        "label": "Hero Badge",
+        "name": "hero_badge",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "e.g. EXPERT KNOWLEDGE",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_hero_title",
+        "label": "Hero Title",
+        "name": "hero_title",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_hero_subtitle",
+        "label": "Hero Subtitle",
+        "name": "hero_subtitle",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "100",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3,
+        "new_lines": "",
+        "placeholder": ""
+      },
+      {
+        "key": "field_safety_tip_1",
+        "label": "Safety Tip 1",
+        "name": "safety_tip_1",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_safety_tip_2",
+        "label": "Safety Tip 2",
+        "name": "safety_tip_2",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_safety_tip_3",
+        "label": "Safety Tip 3",
+        "name": "safety_tip_3",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_safety_tip_4",
+        "label": "Safety Tip 4",
+        "name": "safety_tip_4",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_safety_tip_5",
+        "label": "Safety Tip 5",
+        "name": "safety_tip_5",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_safety_tip_6",
+        "label": "Safety Tip 6",
+        "name": "safety_tip_6",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_faq_1_question",
+        "label": "FAQ 1 - Question",
+        "name": "faq_1_question",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_faq_1_answer",
+        "label": "FAQ 1 - Answer",
+        "name": "faq_1_answer",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "100",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3,
+        "new_lines": "",
+        "placeholder": ""
+      },
+      {
+        "key": "field_faq_2_question",
+        "label": "FAQ 2 - Question",
+        "name": "faq_2_question",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_faq_2_answer",
+        "label": "FAQ 2 - Answer",
+        "name": "faq_2_answer",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "100",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3,
+        "new_lines": "",
+        "placeholder": ""
+      },
+      {
+        "key": "field_faq_3_question",
+        "label": "FAQ 3 - Question",
+        "name": "faq_3_question",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_faq_3_answer",
+        "label": "FAQ 3 - Answer",
+        "name": "faq_3_answer",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "100",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3,
+        "new_lines": "",
+        "placeholder": ""
+      },
+      {
+        "key": "field_faq_4_question",
+        "label": "FAQ 4 - Question",
+        "name": "faq_4_question",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_faq_4_answer",
+        "label": "FAQ 4 - Answer",
+        "name": "faq_4_answer",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "100",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3,
+        "new_lines": "",
+        "placeholder": ""
+      },
+      {
+        "key": "field_faq_5_question",
+        "label": "FAQ 5 - Question",
+        "name": "faq_5_question",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_faq_5_answer",
+        "label": "FAQ 5 - Answer",
+        "name": "faq_5_answer",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "100",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3,
+        "new_lines": "",
+        "placeholder": ""
+      },
+      {
+        "key": "field_faq_6_question",
+        "label": "FAQ 6 - Question",
+        "name": "faq_6_question",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_faq_6_answer",
+        "label": "FAQ 6 - Answer",
+        "name": "faq_6_answer",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "100",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3,
+        "new_lines": "",
+        "placeholder": ""
+      },
+      {
+        "key": "field_cta_title",
+        "label": "CTA Title",
+        "name": "cta_title",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_cta_description",
+        "label": "CTA Description",
+        "name": "cta_description",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "100",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3,
+        "new_lines": "",
+        "placeholder": ""
+      },
+      {
+        "key": "field_cta_button",
+        "label": "CTA Button Text",
+        "name": "cta_button",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      }
+    ],
+    "location": [
+      [
+        {
+          "param": "page",
+          "operator": "==",
+          "value": "34"
+        }
+      ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 1,
+    "modified": 1774426947
+  },
+  {
+    "key": "group_shop_hero",
+    "title": "Shop Hero Content",
+    "fields": [
+      {
+        "key": "field_badge",
+        "label": "Badge Text",
+        "name": "badge",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_headline",
+        "label": "Headline",
+        "name": "headline",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_subheading",
+        "label": "Subheading",
+        "name": "subheading",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "100",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3,
+        "new_lines": "",
+        "placeholder": ""
+      },
+      {
+        "key": "field_pill_1_icon",
+        "label": "Feature Pill 1 - Icon (Eye/Star/Sparkles)",
+        "name": "pill_1_icon",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_pill_1_text",
+        "label": "Feature Pill 1 - Text",
+        "name": "pill_1_text",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_pill_2_icon",
+        "label": "Feature Pill 2 - Icon (Eye/Star/Sparkles)",
+        "name": "pill_2_icon",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_pill_2_text",
+        "label": "Feature Pill 2 - Text",
+        "name": "pill_2_text",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_pill_3_icon",
+        "label": "Feature Pill 3 - Icon (Eye/Star/Sparkles)",
+        "name": "pill_3_icon",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_pill_3_text",
+        "label": "Feature Pill 3 - Text",
+        "name": "pill_3_text",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_cta_button",
+        "label": "CTA Button Text",
+        "name": "cta_button",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      }
+    ],
+    "location": [
+      [
+        {
+          "param": "page",
+          "operator": "==",
+          "value": "36"
+        }
+      ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 1,
+    "modified": 1774426947
+  },
+  {
+    "key": "group_global_settings",
+    "title": "Global Settings",
+    "fields": [
+      {
+        "key": "field_site_tagline",
+        "label": "Site Tagline",
+        "name": "site_tagline",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "e.g. Premium Vision Care Since 2014",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_footer_description",
+        "label": "Footer Description",
+        "name": "footer_description",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "100",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3,
+        "new_lines": "",
+        "placeholder": ""
+      },
+      {
+        "key": "field_newsletter_title",
+        "label": "Newsletter Title",
+        "name": "newsletter_title",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "",
+        "prepend": "",
+        "append": ""
+      },
+      {
+        "key": "field_newsletter_description",
+        "label": "Newsletter Description",
+        "name": "newsletter_description",
+        "type": "textarea",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "100",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "rows": 3,
+        "new_lines": "",
+        "placeholder": ""
+      },
+      {
+        "key": "field_facebook_url",
+        "label": "Facebook URL",
+        "name": "facebook_url",
+        "type": "url",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "placeholder": "https://facebook.com/..."
+      },
+      {
+        "key": "field_instagram_url",
+        "label": "Instagram URL",
+        "name": "instagram_url",
+        "type": "url",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "placeholder": "https://instagram.com/..."
+      },
+      {
+        "key": "field_twitter_url",
+        "label": "Twitter / X URL",
+        "name": "twitter_url",
+        "type": "url",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "placeholder": "https://twitter.com/..."
+      },
+      {
+        "key": "field_copyright",
+        "label": "Copyright Text",
+        "name": "copyright",
+        "type": "text",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "default_value": "",
+        "maxlength": "",
+        "placeholder": "e.g. 2026 Premium Lenses. All rights reserved.",
+        "prepend": "",
+        "append": ""
+      }
+    ],
+    "location": [
+      [
+        {
+          "param": "page",
+          "operator": "==",
+          "value": "38"
+        }
+      ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 1,
+    "modified": 1774426947
+  }
+]
