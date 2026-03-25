@@ -5,6 +5,9 @@ import { motion } from 'motion/react';
 import { Award, Users, Globe, Clock } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import type { HomepageContent, Stat as WPStat } from '@/lib/wordpress';
+import { EditableField } from '@/components/cms/EditableField';
+import { EditableImage } from '@/components/cms/EditableImage';
+import { PAGE_IDS } from '@/lib/cmsFields';
 
 const STAT_ICONS = [Users, Globe, Award, Clock];
 
@@ -85,7 +88,9 @@ export function AboutStats({ content }: Props) {
                     opacity: currentImageIndex === index ? 1 : 0,
                   }}
                 >
-                  <ImageWithFallback
+                  <EditableImage
+                    pageId={PAGE_IDS.homepage}
+                    fieldName={`about_image_${index + 1}`}
                     src={image}
                     alt="About our brand - Eye color variations"
                     className="w-full h-full object-cover scale-[2.5] object-[75%_35%] lg:object-[50%_35%]"
@@ -103,12 +108,18 @@ export function AboutStats({ content }: Props) {
             transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
           >
             <p className="text-xs tracking-wider mb-4 text-black/40">{content.about_label}</p>
-            <h2 className="text-3xl md:text-4xl mb-6">
-              {content.about_title}
-            </h2>
+            <EditableField pageId={PAGE_IDS.homepage} fieldName="about_title" value={content.about_title}>
+              <h2 className="text-3xl md:text-4xl mb-6">
+                {content.about_title}
+              </h2>
+            </EditableField>
             <div className="space-y-4 text-black/60 mb-12">
-              <p>{content.about_body_1}</p>
-              <p>{content.about_body_2}</p>
+              <EditableField pageId={PAGE_IDS.homepage} fieldName="about_body_1" value={content.about_body_1} multiline>
+                <p>{content.about_body_1}</p>
+              </EditableField>
+              <EditableField pageId={PAGE_IDS.homepage} fieldName="about_body_2" value={content.about_body_2} multiline>
+                <p>{content.about_body_2}</p>
+              </EditableField>
             </div>
 
             {/* Stats Grid */}

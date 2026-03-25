@@ -6,6 +6,8 @@ import { ArrowRight, Eye, Droplets, Palette, Grid } from 'lucide-react';
 import { products } from '@/app/data/products';
 import Link from 'next/link';
 import type { HomepageContent } from '@/lib/wordpress';
+import { EditableField } from '@/components/cms/EditableField';
+import { PAGE_IDS } from '@/lib/cmsFields';
 
 const CATEGORY_ICONS = [Palette, Eye, Droplets, Grid];
 
@@ -35,10 +37,14 @@ export function CategorySection({ content }: Props) {
       <div className="max-w-[1200px] mx-auto px-6 md:px-12">
         {/* Section Header */}
         <div className="text-center mb-12 md:mb-16">
-          <h2 className="text-3xl md:text-4xl mb-4">{content.categories_title}</h2>
-          <p className="text-black/60 max-w-2xl mx-auto">
-            {content.categories_description}
-          </p>
+          <EditableField pageId={PAGE_IDS.homepage} fieldName="categories_title" value={content.categories_title}>
+            <h2 className="text-3xl md:text-4xl mb-4">{content.categories_title}</h2>
+          </EditableField>
+          <EditableField pageId={PAGE_IDS.homepage} fieldName="categories_description" value={content.categories_description} multiline>
+            <p className="text-black/60 max-w-2xl mx-auto">
+              {content.categories_description}
+            </p>
+          </EditableField>
         </div>
 
         {/* Bento Box Grid */}

@@ -1,21 +1,31 @@
 'use client'
 
-import { ShoppingCart, Menu, X } from 'lucide-react';
+import { ShoppingCart, Menu, X, Pencil, Eye, LogOut } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useCart } from '@/app/context/CartContext';
+import { useEditMode } from '@/app/context/EditModeContext';
 import type { GlobalContent } from '@/lib/wordpress';
 
 interface Props {
   content: Pick<GlobalContent, 'nav_links' | 'site_tagline' | 'logo_light' | 'logo_dark'>
+  isLoggedIn: boolean
 }
 
-export function Header({ content }: Props) {
+export function Header({ content, isLoggedIn }: Props) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { getCartCount } = useCart();
   const cartCount = getCartCount();
   const pathname = usePathname();
+  const router = useRouter();
+  const { isEditMode, toggleEditMode } = useEditMode();
+
+  async function handleLogout() {
+    await fetch('/api/auth/logout', { method: 'POST' });
+    router.push('/');
+    router.refresh();
+  }
 
   // Close mobile menu when route changes
   useEffect(() => {
@@ -121,6 +131,36 @@ export function Header({ content }: Props) {
                     <Menu className="w-6 h-6 text-white" />
                   )}
                 </button>
+
+                {/* Edit Mode Controls (logged-in only) */}
+                {isLoggedIn && (
+                  <>
+                    <button
+                      onClick={toggleEditMode}
+                      title={isEditMode ? 'Switch to preview' : 'Switch to edit mode'}
+                      className="
+                        hidden lg:flex w-9 h-9 items-center justify-center
+                        rounded-full transition-all duration-300
+                        hover:bg-white/10
+                      "
+                    >
+                      {isEditMode
+                        ? <Eye className="w-4 h-4 text-blue-400" />
+                        : <Pencil className="w-4 h-4 text-white/60" />}
+                    </button>
+                    <button
+                      onClick={handleLogout}
+                      title="Log out"
+                      className="
+                        hidden lg:flex w-9 h-9 items-center justify-center
+                        rounded-full transition-all duration-300
+                        hover:bg-white/10
+                      "
+                    >
+                      <LogOut className="w-4 h-4 text-white/60" />
+                    </button>
+                  </>
+                )}
 
                 {/* Shop Now Button */}
                 <Link

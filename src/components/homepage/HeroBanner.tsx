@@ -4,6 +4,9 @@ import { ArrowRight } from 'lucide-react';
 import { motion } from 'motion/react';
 import Link from 'next/link';
 import type { HomepageContent } from '@/lib/wordpress';
+import { EditableField } from '@/components/cms/EditableField';
+import { EditableImage } from '@/components/cms/EditableImage';
+import { PAGE_IDS } from '@/lib/cmsFields';
 
 interface Props {
   content: Pick<HomepageContent, 'hero_headline' | 'hero_subheading' | 'hero_cta_primary' | 'hero_cta_secondary' | 'hero_image'>
@@ -14,7 +17,9 @@ export function HeroBanner({ content }: Props) {
     <section className="relative min-h-screen bg-white overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0">
-        <img
+        <EditableImage
+          pageId={PAGE_IDS.homepage}
+          fieldName="hero_image"
           src={content.hero_image}
           alt="Hero background"
           className="w-full h-full object-cover object-[75%_center] md:object-center"
@@ -30,15 +35,19 @@ export function HeroBanner({ content }: Props) {
           {/* Left Content */}
           <div className="space-y-6 md:space-y-8 max-w-xl">
             {/* Main Headline */}
-            <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-[1.1] tracking-tight text-white">
-              {content.hero_headline}
-            </h1>
+            <EditableField pageId={PAGE_IDS.homepage} fieldName="hero_headline" value={content.hero_headline}>
+              <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-[1.1] tracking-tight text-white">
+                {content.hero_headline}
+              </h1>
+            </EditableField>
 
             {/* Description */}
             <div className="max-w-md">
-              <p className="text-sm md:text-base text-white/80 leading-relaxed">
-                {content.hero_subheading}
-              </p>
+              <EditableField pageId={PAGE_IDS.homepage} fieldName="hero_subheading" value={content.hero_subheading} multiline>
+                <p className="text-sm md:text-base text-white/80 leading-relaxed">
+                  {content.hero_subheading}
+                </p>
+              </EditableField>
             </div>
 
             {/* CTA Button */}

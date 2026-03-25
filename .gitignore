@@ -43,3 +43,6 @@ next-env.d.ts
 
 # Figma Make original (not needed in new project)
 Premiumlenses/
+
+.vercel
+.env*.local

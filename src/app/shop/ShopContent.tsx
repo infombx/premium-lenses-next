@@ -8,6 +8,9 @@ import { ShoppingCart, ChevronDown, Eye, Star, Sparkles } from 'lucide-react'
 import { useCart } from '@/app/context/CartContext'
 import type { Product } from '@/app/data/products'
 import type { ShopHeroContent } from '@/lib/wordpress'
+import { EditableField } from '@/components/cms/EditableField'
+import { EditableImage } from '@/components/cms/EditableImage'
+import { PAGE_IDS } from '@/lib/cmsFields'
 
 interface Props {
   products: Product[]
@@ -40,8 +43,8 @@ export default function ShopContent({ products, categories, heroContent }: Props
       {/* Hero Banner */}
       <section className="relative -mt-32 pt-48 pb-20 md:-mt-36 md:pt-56 md:pb-32 lg:pb-40 xl:pb-48 overflow-hidden min-h-[280px] md:min-h-[800px]">
         <div className="absolute inset-0">
-          <img src={heroContent.hero_image_mobile} alt="Shop hero" className="md:hidden w-full h-full object-cover object-[center_40%]" />
-          <img src={heroContent.hero_image} alt="Shop hero" className="hidden md:block w-full h-full object-cover object-center" />
+          <EditableImage pageId={PAGE_IDS.shopHero} fieldName="hero_image_mobile" src={heroContent.hero_image_mobile} alt="Shop hero" className="md:hidden w-full h-full object-cover object-[center_40%]" />
+          <EditableImage pageId={PAGE_IDS.shopHero} fieldName="hero_image" src={heroContent.hero_image} alt="Shop hero" className="hidden md:block w-full h-full object-cover object-center" />
           <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/15 to-black/35 md:from-black/30 md:via-black/20 md:to-black/40" />
         </div>
 
@@ -49,7 +52,9 @@ export default function ShopContent({ products, categories, heroContent }: Props
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="flex justify-center mb-6 md:mb-8">
             <div className="inline-flex items-center gap-2 px-4 md:px-6 py-2 md:py-3 border border-white/20 rounded-full backdrop-blur-sm">
               <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-white/70" />
+              <EditableField pageId={PAGE_IDS.shopHero} fieldName="badge" value={heroContent.badge}>
               <span className="text-xs tracking-widest text-white/70">{heroContent.badge}</span>
+            </EditableField>
             </div>
           </motion.div>
 
@@ -59,7 +64,9 @@ export default function ShopContent({ products, categories, heroContent }: Props
               className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl mb-32 md:mb-48 lg:mb-64 leading-tight transition-transform duration-200 ease-out text-white"
               style={{ transform: `perspective(1000px) rotateX(${mousePosition.y * -15}deg) rotateY(${mousePosition.x * 15}deg)`, transformStyle: 'preserve-3d' }}
             >
-              {heroContent.headline}
+              <EditableField pageId={PAGE_IDS.shopHero} fieldName="headline" value={heroContent.headline}>
+                {heroContent.headline}
+              </EditableField>
             </motion.h1>
 
             <motion.p
@@ -67,7 +74,9 @@ export default function ShopContent({ products, categories, heroContent }: Props
               className="text-base md:text-lg lg:text-2xl text-white/70 mb-6 max-w-3xl mx-auto leading-relaxed transition-transform duration-200 ease-out px-4"
               style={{ transform: `perspective(1000px) rotateX(${mousePosition.y * -10}deg) rotateY(${mousePosition.x * 10}deg)`, transformStyle: 'preserve-3d' }}
             >
-              {heroContent.subheading}
+              <EditableField pageId={PAGE_IDS.shopHero} fieldName="subheading" value={heroContent.subheading} multiline>
+                {heroContent.subheading}
+              </EditableField>
             </motion.p>
 
             <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.6 }} className="flex flex-wrap justify-center gap-3 md:gap-4 mb-8 md:mb-12 px-4">

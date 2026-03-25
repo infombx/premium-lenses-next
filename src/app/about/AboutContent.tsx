@@ -4,6 +4,9 @@ import { useState, useEffect } from 'react';
 import { Eye, Heart, Zap, Users, Award, TrendingUp, ChevronDown, Plus, Minus } from 'lucide-react';
 import { motion } from 'motion/react';
 import type { AboutContent as AboutContentType } from '@/lib/wordpress';
+import { EditableField } from '@/components/cms/EditableField';
+import { EditableImage } from '@/components/cms/EditableImage';
+import { PAGE_IDS } from '@/lib/cmsFields';
 
 const VALUE_ICONS = [Eye, Heart, Zap];
 
@@ -67,7 +70,9 @@ export default function AboutContent({ content }: Props) {
       <section className="relative h-screen bg-black text-white overflow-hidden flex items-center">
         {/* Background Image */}
         <div className="absolute inset-0">
-          <img
+          <EditableImage
+            pageId={PAGE_IDS.about}
+            fieldName="hero_image"
             src={content.hero_image}
             alt="About hero background"
             className="w-full h-full object-cover object-[25%_20%] md:object-[center_35%]"
@@ -91,12 +96,16 @@ export default function AboutContent({ content }: Props) {
               <div className="inline-block mb-6 px-4 py-2 border border-white/20 rounded-full text-xs tracking-widest animate-pulse">
                 {content.hero_badge}
               </div>
-              <h1 className="text-3xl md:text-7xl mb-6 md:mb-8 leading-tight">
-                {content.hero_headline}
-              </h1>
-              <p className="text-base md:text-2xl text-white/80 leading-relaxed">
-                {content.hero_subheading}
-              </p>
+              <EditableField pageId={PAGE_IDS.about} fieldName="hero_headline" value={content.hero_headline}>
+                <h1 className="text-3xl md:text-7xl mb-6 md:mb-8 leading-tight">
+                  {content.hero_headline}
+                </h1>
+              </EditableField>
+              <EditableField pageId={PAGE_IDS.about} fieldName="hero_subheading" value={content.hero_subheading} multiline>
+                <p className="text-base md:text-2xl text-white/80 leading-relaxed">
+                  {content.hero_subheading}
+                </p>
+              </EditableField>
             </div>
           </div>
         </div>

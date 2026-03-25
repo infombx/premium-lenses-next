@@ -24,6 +24,8 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import type { GuideContent as GuideContentType } from '@/lib/wordpress';
+import { EditableField } from '@/components/cms/EditableField';
+import { PAGE_IDS } from '@/lib/cmsFields';
 
 const TIP_ICONS = [ThumbsUp, Clock, Droplets, Moon, Sun, Calendar];
 
@@ -226,7 +228,9 @@ export default function GuideContent({ content }: Props) {
           >
             <div className="inline-flex items-center gap-2 px-4 md:px-6 py-2 md:py-3 border border-white/20 rounded-full backdrop-blur-sm">
               <Info className="w-3 h-3 md:w-4 md:h-4 text-white/70" />
+              <EditableField pageId={PAGE_IDS.guide} fieldName="hero_badge" value={content.hero_badge}>
               <span className="text-xs tracking-widest text-white/70">{content.hero_badge}</span>
+            </EditableField>
             </div>
           </motion.div>
 
@@ -237,7 +241,9 @@ export default function GuideContent({ content }: Props) {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-3xl md:text-6xl lg:text-7xl mb-6 md:mb-8 leading-tight px-4"
             >
-              {content.hero_title}
+              <EditableField pageId={PAGE_IDS.guide} fieldName="hero_title" value={content.hero_title}>
+                {content.hero_title}
+              </EditableField>
             </motion.h1>
 
             <motion.p
@@ -246,7 +252,9 @@ export default function GuideContent({ content }: Props) {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="text-base md:text-lg lg:text-xl text-white/70 mb-8 max-w-3xl mx-auto leading-relaxed px-4"
             >
-              {content.hero_subtitle}
+              <EditableField pageId={PAGE_IDS.guide} fieldName="hero_subtitle" value={content.hero_subtitle} multiline>
+                {content.hero_subtitle}
+              </EditableField>
             </motion.p>
 
             {/* Quick Stats */}
@@ -359,7 +367,9 @@ export default function GuideContent({ content }: Props) {
                   onClick={() => setActiveFaq(activeFaq === index ? null : index)}
                   className="w-full px-6 md:px-8 py-5 md:py-6 flex items-center justify-between gap-4 text-left hover:bg-black/[0.02] transition-colors"
                 >
-                  <span className="text-sm md:text-base font-normal">{faq.question}</span>
+                  <EditableField pageId={PAGE_IDS.guide} fieldName={`faq_${index + 1}_question`} value={faq.question}>
+                    <span className="text-sm md:text-base font-normal">{faq.question}</span>
+                  </EditableField>
                   <motion.div
                     animate={{ rotate: activeFaq === index ? 180 : 0 }}
                     transition={{ duration: 0.3 }}
@@ -379,7 +389,9 @@ export default function GuideContent({ content }: Props) {
                       className="overflow-hidden"
                     >
                       <div className="px-6 md:px-8 pb-5 md:pb-6 text-sm md:text-base text-black/60 leading-relaxed border-t border-black/5 pt-5">
-                        {faq.answer}
+                        <EditableField pageId={PAGE_IDS.guide} fieldName={`faq_${index + 1}_answer`} value={faq.answer} multiline>
+                          {faq.answer}
+                        </EditableField>
                       </div>
                     </motion.div>
                   )}

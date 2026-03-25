@@ -4,6 +4,8 @@ import { motion } from 'motion/react';
 import { Star } from 'lucide-react';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
 import type { HomepageContent } from '@/lib/wordpress';
+import { EditableField } from '@/components/cms/EditableField';
+import { PAGE_IDS } from '@/lib/cmsFields';
 
 const TESTIMONIAL_IMAGES = [
   'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400',
@@ -22,10 +24,14 @@ export function Testimonials({ content }: Props) {
         {/* Section Header */}
         <div className="text-center mb-16 md:mb-20">
           <p className="text-xs tracking-wider mb-4 text-black/40">TESTIMONIALS</p>
-          <h2 className="text-3xl md:text-4xl mb-4">{content.testimonials_title}</h2>
-          <p className="text-black/60 max-w-2xl mx-auto">
-            {content.testimonials_subtitle}
-          </p>
+          <EditableField pageId={PAGE_IDS.homepage} fieldName="testimonials_title" value={content.testimonials_title}>
+            <h2 className="text-3xl md:text-4xl mb-4">{content.testimonials_title}</h2>
+          </EditableField>
+          <EditableField pageId={PAGE_IDS.homepage} fieldName="testimonials_subtitle" value={content.testimonials_subtitle} multiline>
+            <p className="text-black/60 max-w-2xl mx-auto">
+              {content.testimonials_subtitle}
+            </p>
+          </EditableField>
         </div>
 
         {/* Testimonials Grid */}
@@ -51,9 +57,11 @@ export function Testimonials({ content }: Props) {
                 </div>
 
                 {/* Content */}
-                <p className="text-black/80 mb-8 flex-grow leading-relaxed">
-                  &ldquo;{testimonial.quote}&rdquo;
-                </p>
+                <EditableField pageId={PAGE_IDS.homepage} fieldName={`testimonial_${index + 1}_quote`} value={testimonial.quote} multiline className="flex-grow">
+                  <p className="text-black/80 mb-8 flex-grow leading-relaxed">
+                    &ldquo;{testimonial.quote}&rdquo;
+                  </p>
+                </EditableField>
 
                 {/* Author */}
                 <div className="flex items-center gap-4 pt-6 border-t border-black/10">
@@ -65,8 +73,12 @@ export function Testimonials({ content }: Props) {
                     height={48}
                   />
                   <div>
-                    <p className="text-sm mb-1">{testimonial.name}</p>
-                    <p className="text-xs text-black/40">{testimonial.role}</p>
+                    <EditableField pageId={PAGE_IDS.homepage} fieldName={`testimonial_${index + 1}_name`} value={testimonial.name}>
+                      <p className="text-sm mb-1">{testimonial.name}</p>
+                    </EditableField>
+                    <EditableField pageId={PAGE_IDS.homepage} fieldName={`testimonial_${index + 1}_role`} value={testimonial.role}>
+                      <p className="text-xs text-black/40">{testimonial.role}</p>
+                    </EditableField>
                   </div>
                 </div>
               </div>

@@ -4,6 +4,9 @@ import { Phone, Mail, MapPin } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import type { ContactContent as ContactContentType } from '@/lib/wordpress';
+import { EditableField } from '@/components/cms/EditableField';
+import { EditableImage } from '@/components/cms/EditableImage';
+import { PAGE_IDS } from '@/lib/cmsFields';
 
 interface Props { content: ContactContentType }
 
@@ -38,24 +41,38 @@ export default function ContactContent({ content }: Props) {
 
         <div className="relative z-10 max-w-[1440px] mx-auto px-6 md:px-12">
           <div className="text-center">
-            <h1
-              className="text-5xl md:text-7xl lg:text-8xl mb-8 leading-tight transition-transform duration-200 ease-out"
-              style={{
-                transform: `perspective(1000px) rotateX(${mousePosition.y * -15}deg) rotateY(${mousePosition.x * 15}deg)`,
-                transformStyle: 'preserve-3d',
-              }}
-            >
-              {content.hero_title}
-            </h1>
-            <p
-              className="text-xl md:text-2xl lg:text-3xl text-white/90 max-w-3xl mx-auto transition-transform duration-200 ease-out"
-              style={{
-                transform: `perspective(1000px) rotateX(${mousePosition.y * -10}deg) rotateY(${mousePosition.x * 10}deg)`,
-                transformStyle: 'preserve-3d',
-              }}
-            >
-              {content.hero_subtitle}
-            </p>
+            {/* Hidden EditableImage for background URL editing */}
+            <div className="flex justify-center mb-2">
+              <EditableImage
+                pageId={PAGE_IDS.contact}
+                fieldName="hero_image"
+                src={content.hero_image}
+                alt="Contact hero background"
+                className="h-0 w-0 overflow-hidden"
+              />
+            </div>
+            <EditableField pageId={PAGE_IDS.contact} fieldName="hero_title" value={content.hero_title}>
+              <h1
+                className="text-5xl md:text-7xl lg:text-8xl mb-8 leading-tight transition-transform duration-200 ease-out"
+                style={{
+                  transform: `perspective(1000px) rotateX(${mousePosition.y * -15}deg) rotateY(${mousePosition.x * 15}deg)`,
+                  transformStyle: 'preserve-3d',
+                }}
+              >
+                {content.hero_title}
+              </h1>
+            </EditableField>
+            <EditableField pageId={PAGE_IDS.contact} fieldName="hero_subtitle" value={content.hero_subtitle} multiline>
+              <p
+                className="text-xl md:text-2xl lg:text-3xl text-white/90 max-w-3xl mx-auto transition-transform duration-200 ease-out"
+                style={{
+                  transform: `perspective(1000px) rotateX(${mousePosition.y * -10}deg) rotateY(${mousePosition.x * 10}deg)`,
+                  transformStyle: 'preserve-3d',
+                }}
+              >
+                {content.hero_subtitle}
+              </p>
+            </EditableField>
           </div>
         </div>
       </section>
@@ -70,7 +87,9 @@ export default function ContactContent({ content }: Props) {
                 <Phone className="w-5 h-5 text-black" />
               </div>
               <p className="text-sm text-black/60 mb-2">Call Us</p>
-              <p className="text-black">{content.phone}</p>
+              <EditableField pageId={PAGE_IDS.contact} fieldName="phone" value={content.phone}>
+                <p className="text-black">{content.phone}</p>
+              </EditableField>
             </div>
 
             {/* Email Card */}
@@ -79,7 +98,9 @@ export default function ContactContent({ content }: Props) {
                 <Mail className="w-5 h-5 text-black" />
               </div>
               <p className="text-sm text-black/60 mb-2">Email Us</p>
-              <p className="text-black">{content.email}</p>
+              <EditableField pageId={PAGE_IDS.contact} fieldName="email" value={content.email}>
+                <p className="text-black">{content.email}</p>
+              </EditableField>
             </div>
 
             {/* Location Card */}

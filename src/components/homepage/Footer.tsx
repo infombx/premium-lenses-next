@@ -1,5 +1,10 @@
+'use client'
+
 import { Facebook, Instagram, Twitter } from 'lucide-react';
 import type { GlobalContent } from '@/lib/wordpress';
+import { EditableField } from '@/components/cms/EditableField';
+import { EditableImage } from '@/components/cms/EditableImage';
+import { PAGE_IDS } from '@/lib/cmsFields';
 
 interface Props { content: GlobalContent }
 
@@ -15,11 +20,19 @@ export function Footer({ content }: Props) {
             {/* Brand Column */}
             <div className="lg:col-span-2">
               <a href="/">
-                <img src={content.logo_dark} alt="Premium Lenses" className="h-16 mb-6" />
+                <EditableImage
+                  pageId={PAGE_IDS.global}
+                  fieldName="logo_dark"
+                  src={content.logo_dark}
+                  alt="Premium Lenses"
+                  className="h-16 mb-6"
+                />
               </a>
-              <p className="text-sm text-black/60 leading-relaxed mb-6 max-w-xs">
-                {content.footer_description}
-              </p>
+              <EditableField pageId={PAGE_IDS.global} fieldName="footer_description" value={content.footer_description} multiline>
+                <p className="text-sm text-black/60 leading-relaxed mb-6 max-w-xs">
+                  {content.footer_description}
+                </p>
+              </EditableField>
 
               {/* Social Links */}
               <div className="flex gap-3">
