@@ -65,7 +65,7 @@ export function Header({ content }: Props) {
                 <img
                   src={logo}
                   alt="Premium Lenses"
-                  className="h-16 md:h-20 transition-all duration-500 mx-[20px] my-[0px]"
+                  className="h-20 md:h-28 transition-all duration-500 mx-[20px] my-[0px]"
                 />
               </Link>
 

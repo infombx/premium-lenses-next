@@ -17,7 +17,7 @@ export function Footer({ content }: Props) {
             {/* Brand Column */}
             <div className="lg:col-span-2">
               <a href="/">
-                <img src={logo} alt="Premium Lenses" className="h-16 mb-6 invert" />
+                <img src={logo} alt="Premium Lenses" className="h-24 mb-6 invert" />
               </a>
               <p className="text-sm text-black/60 leading-relaxed mb-6 max-w-xs">
                 {content.footer_description}
