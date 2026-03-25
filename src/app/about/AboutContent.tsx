@@ -5,8 +5,6 @@ import { Eye, Heart, Zap, Users, Award, TrendingUp, ChevronDown, Plus, Minus } f
 import { motion } from 'motion/react';
 import type { AboutContent as AboutContentType } from '@/lib/wordpress';
 
-const aboutHeroImage = '/assets/f7c7946c85a38c2f9e0c12270faf1c001faa0d27.png';
-
 const VALUE_ICONS = [Eye, Heart, Zap];
 
 function parseStatValue(s: string): { value: number; suffix: string } {
@@ -70,7 +68,7 @@ export default function AboutContent({ content }: Props) {
         {/* Background Image */}
         <div className="absolute inset-0">
           <img
-            src={aboutHeroImage}
+            src={content.hero_image}
             alt="About hero background"
             className="w-full h-full object-cover object-[25%_20%] md:object-[center_35%]"
           />

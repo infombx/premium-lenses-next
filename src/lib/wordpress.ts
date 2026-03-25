@@ -140,6 +140,7 @@ export interface HomepageContent {
   hero_subheading: string
   hero_cta_primary: string
   hero_cta_secondary: string
+  hero_image: string
   stats: Stat[]
   categories_title: string
   categories_description: string
@@ -150,6 +151,7 @@ export interface HomepageContent {
   about_title: string
   about_body_1: string
   about_body_2: string
+  about_images: string[]
   about_stats: Stat[]
   testimonials_title: string
   testimonials_subtitle: string
@@ -164,6 +166,7 @@ const homepageFallback: HomepageContent = {
     'Discover stunning colored contact lenses that enhance your natural beauty with vibrant hues and comfortable all-day wear.',
   hero_cta_primary: 'Shop',
   hero_cta_secondary: 'Explore',
+  hero_image: '/assets/7dcec5984ee2016a07e7cf6622999ce93bb0b5b8.png',
   stats: [
     { value: '50K+', label: 'CUSTOMERS' },
     { value: '99%', label: 'SATISFACTION' },
@@ -187,6 +190,13 @@ const homepageFallback: HomepageContent = {
     "For over 15 years, we've been helping people express their unique style through premium colored contact lenses. From subtle enhancements to bold transformations, our collection brings your vision to life with stunning, natural-looking colors.",
   about_body_2:
     'We partner with trusted manufacturers to ensure every lens combines breathtaking aesthetics with exceptional comfort and safety, so you can look amazing all day long.',
+  about_images: [
+    '/assets/3c7399a71e1ca7130bfad8769df3a0bd8a15e860.png',
+    '/assets/7ce218e3c3182be1fd5d77b2fc156b9da7983fa5.png',
+    '/assets/61f6e644cf51f6ae867d9a3d8576e7f2a6fbc311.png',
+    '/assets/4323b2606492e25d7805f6e389ef484148cd1514.png',
+    '/assets/477535dc8f09e1bbb59f0a34ca52544474e3fa96.png',
+  ],
   about_stats: [
     { value: '500K+', label: 'Style Transformations' },
     { value: '50+', label: 'Countries Worldwide' },
@@ -243,6 +253,13 @@ export async function getHomepageContent(): Promise<HomepageContent> {
   const aboutStats = Array.isArray(acf.about_stats) ? (acf.about_stats as Stat[]) : buildRepeater<Stat>(acf, 'about_stat', ['value', 'label'])
   if (aboutStats.length) base.about_stats = aboutStats
 
+  if (acf.hero_image) base.hero_image = acf.hero_image as string
+
+  const aboutImages = Array.isArray(acf.about_images)
+    ? (acf.about_images as string[])
+    : buildStringArray(acf, 'about_image', 5)
+  if (aboutImages.length) base.about_images = aboutImages
+
   return base
 }
 
@@ -254,6 +271,7 @@ export interface AboutContent {
   hero_badge: string
   hero_headline: string
   hero_subheading: string
+  hero_image: string
   stats: Stat[]
   story_title: string
   story_paragraphs: string[]
@@ -273,6 +291,7 @@ const aboutFallback: AboutContent = {
   hero_headline: 'Redefining Beauty',
   hero_subheading:
     'We combine stunning aesthetics with uncompromising quality to deliver exceptional beauty transformation.',
+  hero_image: '/assets/f7c7946c85a38c2f9e0c12270faf1c001faa0d27.png',
   stats: [
     { value: '10+', label: 'YEARS' },
     { value: '50K+', label: 'CUSTOMERS' },
@@ -350,6 +369,7 @@ export async function getAboutContent(): Promise<AboutContent> {
 export interface ContactContent {
   hero_title: string
   hero_subtitle: string
+  hero_image: string
   phone: string
   email: string
   address: string
@@ -361,6 +381,7 @@ export interface ContactContent {
 const contactFallback: ContactContent = {
   hero_title: 'Contact Us',
   hero_subtitle: 'Get In Touch',
+  hero_image: '/assets/bd6db3455f9fbd65eb2b7f615633839089ab5a7d.png',
   phone: '+230 XXX XXXX',
   email: 'hello@premiumlenses.mu',
   address: 'Mauritius',
@@ -551,6 +572,8 @@ export interface ShopHeroContent {
   badge: string
   headline: string
   subheading: string
+  hero_image: string
+  hero_image_mobile: string
   feature_pills: Array<{ icon: string; text: string }>
   cta_button: string
 }
@@ -559,6 +582,8 @@ const shopHeroFallback: ShopHeroContent = {
   badge: 'BEAUTY COLLECTION',
   headline: 'Express Your Style',
   subheading: 'Curated selection of stunning colored contact lenses designed for effortless beauty, all-day comfort, and mesmerizing looks',
+  hero_image: '/assets/d57cdca6fd40b75203c33e78dffacd20f4175fc8.png',
+  hero_image_mobile: '/assets/3a74539b273495185fd1bd4324da22c3f1ca7f98.png',
   feature_pills: [
     { icon: 'Eye', text: 'Safe & Certified' },
     { icon: 'Star', text: 'Stunning Colors' },

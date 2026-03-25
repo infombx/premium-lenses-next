@@ -5,8 +5,6 @@ import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import type { ContactContent as ContactContentType } from '@/lib/wordpress';
 
-const contactBgImage = '/assets/bd6db3455f9fbd65eb2b7f615633839089ab5a7d.png';
-
 interface Props { content: ContactContentType }
 
 export default function ContactContent({ content }: Props) {
@@ -29,7 +27,7 @@ export default function ContactContent({ content }: Props) {
       <section
         className="relative -mt-40 pt-72 pb-20 md:-mt-44 md:pt-80 md:pb-32 text-white overflow-hidden"
         style={{
-          backgroundImage: `url(${contactBgImage})`,
+          backgroundImage: `url(${content.hero_image})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',

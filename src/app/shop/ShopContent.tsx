@@ -7,16 +7,15 @@ import { ImageWithFallback } from '@/components/figma/ImageWithFallback'
 import { ShoppingCart, ChevronDown, Eye, Star, Sparkles } from 'lucide-react'
 import { useCart } from '@/app/context/CartContext'
 import type { Product } from '@/app/data/products'
-
-const shopHeroImage = '/assets/d57cdca6fd40b75203c33e78dffacd20f4175fc8.png'
-const shopHeroImageMobile = '/assets/3a74539b273495185fd1bd4324da22c3f1ca7f98.png'
+import type { ShopHeroContent } from '@/lib/wordpress'
 
 interface Props {
   products: Product[]
   categories: string[]
+  heroContent: ShopHeroContent
 }
 
-export default function ShopContent({ products, categories }: Props) {
+export default function ShopContent({ products, categories, heroContent }: Props) {
   const [activeCategory, setActiveCategory] = useState('ALL ITEMS')
   const [hoveredProduct, setHoveredProduct] = useState<number | null>(null)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
@@ -41,8 +40,8 @@ export default function ShopContent({ products, categories }: Props) {
       {/* Hero Banner */}
       <section className="relative -mt-32 pt-48 pb-20 md:-mt-36 md:pt-56 md:pb-32 lg:pb-40 xl:pb-48 overflow-hidden min-h-[280px] md:min-h-[800px]">
         <div className="absolute inset-0">
-          <img src={shopHeroImageMobile} alt="Shop hero" className="md:hidden w-full h-full object-cover object-[center_40%]" />
-          <img src={shopHeroImage} alt="Shop hero" className="hidden md:block w-full h-full object-cover object-center" />
+          <img src={heroContent.hero_image_mobile} alt="Shop hero" className="md:hidden w-full h-full object-cover object-[center_40%]" />
+          <img src={heroContent.hero_image} alt="Shop hero" className="hidden md:block w-full h-full object-cover object-center" />
           <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/15 to-black/35 md:from-black/30 md:via-black/20 md:to-black/40" />
         </div>
 
@@ -50,7 +49,7 @@ export default function ShopContent({ products, categories }: Props) {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="flex justify-center mb-6 md:mb-8">
             <div className="inline-flex items-center gap-2 px-4 md:px-6 py-2 md:py-3 border border-white/20 rounded-full backdrop-blur-sm">
               <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-white/70" />
-              <span className="text-xs tracking-widest text-white/70">BEAUTY COLLECTION</span>
+              <span className="text-xs tracking-widest text-white/70">{heroContent.badge}</span>
             </div>
           </motion.div>
 
@@ -60,7 +59,7 @@ export default function ShopContent({ products, categories }: Props) {
               className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl mb-32 md:mb-48 lg:mb-64 leading-tight transition-transform duration-200 ease-out text-white"
               style={{ transform: `perspective(1000px) rotateX(${mousePosition.y * -15}deg) rotateY(${mousePosition.x * 15}deg)`, transformStyle: 'preserve-3d' }}
             >
-              Express Your Style
+              {heroContent.headline}
             </motion.h1>
 
             <motion.p
@@ -68,16 +67,20 @@ export default function ShopContent({ products, categories }: Props) {
               className="text-base md:text-lg lg:text-2xl text-white/70 mb-6 max-w-3xl mx-auto leading-relaxed transition-transform duration-200 ease-out px-4"
               style={{ transform: `perspective(1000px) rotateX(${mousePosition.y * -10}deg) rotateY(${mousePosition.x * 10}deg)`, transformStyle: 'preserve-3d' }}
             >
-              Curated selection of stunning colored contact lenses designed for effortless beauty, all-day comfort, and mesmerizing looks
+              {heroContent.subheading}
             </motion.p>
 
             <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.6 }} className="flex flex-wrap justify-center gap-3 md:gap-4 mb-8 md:mb-12 px-4">
-              {[{ icon: Eye, text: 'Safe & Certified' }, { icon: Star, text: 'Stunning Colors' }, { icon: Sparkles, text: 'Free Shipping' }].map((f, i) => (
-                <motion.div key={f.text} initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.4, delay: 0.8 + i * 0.1 }} whileHover={{ scale: 1.05, y: -2 }} className="flex items-center gap-2 px-4 md:px-5 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
-                  <f.icon className="w-3 h-3 md:w-4 md:h-4 text-white/80" />
-                  <span className="text-xs md:text-sm text-white/80">{f.text}</span>
-                </motion.div>
-              ))}
+              {heroContent.feature_pills.map((f, i) => {
+                const ICONS: Record<string, React.ElementType> = { Eye, Star, Sparkles }
+                const Icon = ICONS[f.icon] ?? Sparkles
+                return (
+                  <motion.div key={f.text} initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.4, delay: 0.8 + i * 0.1 }} whileHover={{ scale: 1.05, y: -2 }} className="flex items-center gap-2 px-4 md:px-5 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
+                    <Icon className="w-3 h-3 md:w-4 md:h-4 text-white/80" />
+                    <span className="text-xs md:text-sm text-white/80">{f.text}</span>
+                  </motion.div>
+                )
+              })}
             </motion.div>
 
             <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 1 }} className="flex justify-center">

@@ -6,13 +6,6 @@ import { Award, Users, Globe, Clock } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import type { HomepageContent, Stat as WPStat } from '@/lib/wordpress';
 
-// Import all eye color variations as paths
-const image1 = '/assets/3c7399a71e1ca7130bfad8769df3a0bd8a15e860.png';
-const image2 = '/assets/7ce218e3c3182be1fd5d77b2fc156b9da7983fa5.png';
-const image3 = '/assets/61f6e644cf51f6ae867d9a3d8576e7f2a6fbc311.png';
-const image4 = '/assets/4323b2606492e25d7805f6e389ef484148cd1514.png';
-const image5 = '/assets/477535dc8f09e1bbb59f0a34ca52544474e3fa96.png';
-
 const STAT_ICONS = [Users, Globe, Award, Clock];
 
 interface Stat {
@@ -22,7 +15,7 @@ interface Stat {
 }
 
 interface Props {
-  content: Pick<HomepageContent, 'about_label' | 'about_title' | 'about_body_1' | 'about_body_2' | 'about_stats'>
+  content: Pick<HomepageContent, 'about_label' | 'about_title' | 'about_body_1' | 'about_body_2' | 'about_images' | 'about_stats'>
 }
 
 export function AboutStats({ content }: Props) {
@@ -30,7 +23,7 @@ export function AboutStats({ content }: Props) {
   const [isInView, setIsInView] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
-  const images = [image1, image2, image3, image4, image5];
+  const images = content.about_images;
 
   const stats: Stat[] = content.about_stats.map((s: WPStat, i: number) => ({
     icon: STAT_ICONS[i % STAT_ICONS.length],

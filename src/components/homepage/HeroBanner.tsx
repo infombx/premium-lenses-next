@@ -5,10 +5,8 @@ import { motion } from 'motion/react';
 import Link from 'next/link';
 import type { HomepageContent } from '@/lib/wordpress';
 
-const heroImage = '/assets/7dcec5984ee2016a07e7cf6622999ce93bb0b5b8.png';
-
 interface Props {
-  content: Pick<HomepageContent, 'hero_headline' | 'hero_subheading' | 'hero_cta_primary' | 'hero_cta_secondary'>
+  content: Pick<HomepageContent, 'hero_headline' | 'hero_subheading' | 'hero_cta_primary' | 'hero_cta_secondary' | 'hero_image'>
 }
 
 export function HeroBanner({ content }: Props) {
@@ -17,7 +15,7 @@ export function HeroBanner({ content }: Props) {
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
-          src={heroImage}
+          src={content.hero_image}
           alt="Hero background"
           className="w-full h-full object-cover object-[75%_center] md:object-center"
         />
