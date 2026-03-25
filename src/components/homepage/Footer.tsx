@@ -155,19 +155,19 @@ export function Footer({ content }: Props) {
         <div className="py-6 border-t border-black/10">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-black/40">
-              {content.copyright}
+              &copy; {new Date().getFullYear()} Premium Lenses. All rights reserved.
             </p>
-            <div className="flex gap-6">
-              <a href="/privacy" className="text-sm text-black/40 hover:text-black transition-colors">
-                Privacy
+            <p className="text-sm text-black/40">
+              Design by{' '}
+              <a href="https://blkbox.mu" target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors">
+                BLKBOX Creative
               </a>
-              <a href="/terms" className="text-sm text-black/40 hover:text-black transition-colors">
-                Terms
+              {' | '}
+              Developed by{' '}
+              <a href="https://metabox.mu" target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors">
+                MetaBox Technology
               </a>
-              <a href="/cookies" className="text-sm text-black/40 hover:text-black transition-colors">
-                Cookies
-              </a>
-            </div>
+            </p>
           </div>
         </div>
       </div>
