@@ -19,10 +19,10 @@
 const WP_URL = process.env.NEXT_PUBLIC_WC_URL ?? ''
 const REVALIDATE = 3600 // 1 hour ISR
 
-async function wpFetch<T>(path: string): Promise<T | null> {
+async function wpFetch<T>(path: string, options?: { revalidate?: number | false }): Promise<T | null> {
   try {
     const res = await fetch(`${WP_URL}/wp-json${path}`, {
-      next: { revalidate: REVALIDATE },
+      next: { revalidate: options?.revalidate !== undefined ? options.revalidate : REVALIDATE },
     })
     if (!res.ok) return null
     return res.json() as Promise<T>
@@ -559,7 +559,7 @@ export async function getGlobalContent(): Promise<GlobalContent> {
   // Uses a regular WordPress page (slug: global-settings) — ACF Free compatible.
   // ACF Pro users can use an Options Page instead; change the fetch path to
   // /acf/v3/options/options and adjust the acf extraction accordingly.
-  const page = await wpFetch<WPPage>('/wp/v2/pages?slug=global-settings&_fields=id,acf')
+  const page = await wpFetch<WPPage>('/wp/v2/pages?slug=global-settings&_fields=id,acf', { revalidate: 60 })
   const acf = (Array.isArray(page) ? page[0]?.acf : null) ?? {}
   if (!Object.keys(acf).length) return globalFallback
 
