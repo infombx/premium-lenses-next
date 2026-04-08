@@ -54,6 +54,8 @@ export interface WooOrder {
     product_id: number
     quantity: number
   }[]
+  customer_note?: string
+  coupon_lines?: { code: string }[]
 }
 
 export async function getProducts(params?: { category?: string; per_page?: number; page?: number }): Promise<WooProduct[]> {

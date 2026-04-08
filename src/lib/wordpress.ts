@@ -495,6 +495,11 @@ export interface GlobalContent {
   newsletter_description: string
   social: { facebook: string; instagram: string; twitter: string }
   copyright: string
+  juice_number: string
+  bank_account_number: string
+  bank_name: string
+  account_holder_name: string
+  whatsapp_number: string
 }
 
 const globalFallback: GlobalContent = {
@@ -543,6 +548,11 @@ const globalFallback: GlobalContent = {
     twitter: 'https://twitter.com',
   },
   copyright: `© ${new Date().getFullYear()} Premium Lenses. All rights reserved.`,
+  juice_number: '',
+  bank_account_number: '',
+  bank_name: '',
+  account_holder_name: '',
+  whatsapp_number: '',
 }
 
 export async function getGlobalContent(): Promise<GlobalContent> {
