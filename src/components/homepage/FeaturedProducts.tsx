@@ -80,7 +80,7 @@ export function FeaturedProducts({ products }: Props) {
                 {/* Price Tag - Top Right */}
                 <div className="absolute top-4 right-4 px-4 py-2 bg-white/90 backdrop-blur-sm rounded-full">
                   <p className="text-xs">
-                    starts at <span className="font-medium">${product.price}</span>
+                    starts at <span className="font-medium">Rs{product.price}</span>
                   </p>
                 </div>
 

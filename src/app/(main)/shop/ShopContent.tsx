@@ -168,7 +168,7 @@ export default function ShopContent({ products, categories, heroContent }: Props
                       </div>
                       <div className="mt-3 md:mt-4">
                         <h3 className="text-xs md:text-sm mb-1 truncate">{product.name}</h3>
-                        <p className="text-xs md:text-sm text-black/60">${product.price}</p>
+                        <p className="text-xs md:text-sm text-black/60">Rs{product.price}</p>
                       </div>
                     </Link>
                   </motion.div>

@@ -137,7 +137,7 @@ export default function CartPage() {
                     {/* Price */}
                     <div className="md:col-span-2 flex items-center">
                       <span className="text-sm text-black/60 md:hidden mr-2">Price:</span>
-                      <span className="text-sm">${item.price.toFixed(2)}</span>
+                      <span className="text-sm">Rs{item.price.toFixed(2)}</span>
                     </div>
 
                     {/* Quantity */}
@@ -166,7 +166,7 @@ export default function CartPage() {
                     {/* Subtotal */}
                     <div className="md:col-span-2 flex items-center md:justify-end">
                       <span className="text-sm text-black/60 md:hidden mr-2">Subtotal:</span>
-                      <span className="text-sm font-medium">${(item.price * item.quantity).toFixed(2)}</span>
+                      <span className="text-sm font-medium">Rs{(item.price * item.quantity).toFixed(2)}</span>
                     </div>
                   </div>
                 ))}
@@ -206,23 +206,23 @@ export default function CartPage() {
                 <div className="space-y-4 mb-6">
                   <div className="flex justify-between text-sm">
                     <span className="text-black/60">Subtotal:</span>
-                    <span>${subtotal.toFixed(2)}</span>
+                    <span>Rs{subtotal.toFixed(2)}</span>
                   </div>
                   {discount > 0 && (
                     <div className="flex justify-between text-sm">
                       <span className="text-black/60">Discount:</span>
-                      <span className="text-green-600">-${discount.toFixed(2)}</span>
+                      <span className="text-green-600">-Rs{discount.toFixed(2)}</span>
                     </div>
                   )}
                   <div className="flex justify-between text-sm">
                     <span className="text-black/60">Shipping:</span>
-                    <span>{shipping === 0 ? 'Free' : `$${shipping.toFixed(2)}`}</span>
+                    <span>{shipping === 0 ? 'Free' : `Rs${shipping.toFixed(2)}`}</span>
                   </div>
                 </div>
 
                 <div className="flex justify-between text-base mb-6 pt-6 border-t border-black/10">
                   <span className="font-medium">Total:</span>
-                  <span className="font-medium">${total.toFixed(2)}</span>
+                  <span className="font-medium">Rs{total.toFixed(2)}</span>
                 </div>
 
                 <Link href="/checkout">
@@ -247,7 +247,7 @@ export default function CartPage() {
                 {subtotal < 50 && (
                   <div className="mt-6 pt-6 border-t border-black/10">
                     <p className="text-xs text-black/60">
-                      Add <span className="font-medium text-black">${(50 - subtotal).toFixed(2)}</span> more to get free shipping!
+                      Add <span className="font-medium text-black">Rs{(50 - subtotal).toFixed(2)}</span> more to get free shipping!
                     </p>
                   </div>
                 )}

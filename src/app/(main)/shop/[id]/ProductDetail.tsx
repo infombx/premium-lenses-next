@@ -84,8 +84,7 @@ export default function ProductDetail({ product, relatedProducts }: Props) {
               <motion.h1 initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="text-4xl md:text-5xl mb-4">{product.name}</motion.h1>
 
               <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }} className="flex items-baseline gap-3 mb-6">
-                <p className="text-3xl">${product.price}.00</p>
-                <span className="text-sm text-black/40 line-through">${product.price + 10}.00</span>
+                <p className="text-3xl">Rs{product.price}</p>
               </motion.div>
 
               <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }} className="text-sm text-black/60 leading-relaxed mb-8">
@@ -213,7 +212,7 @@ export default function ProductDetail({ product, relatedProducts }: Props) {
                       </div>
                       <p className="text-xs text-black/40 mb-1">{p.category}</p>
                       <h3 className="text-sm mb-1 group-hover:text-black/80 transition-colors">{p.name}</h3>
-                      <p className="text-sm">${p.price}.00</p>
+                      <p className="text-sm">Rs{p.price}</p>
                     </motion.div>
                   </Link>
                 </motion.div>
