@@ -73,6 +73,17 @@ export async function getProducts(params?: { category?: string; per_page?: numbe
   return res.json()
 }
 
+export async function getProductBySlug(slug: string): Promise<WooProduct | null> {
+  if (!WOO_URL) return null
+  const res = await fetch(`${WOO_URL}/wp-json/wc/v3/products?slug=${slug}&_fields=id,name,slug,price,regular_price,sale_price,description,short_description,images,categories,attributes,stock_status,meta_data`, {
+    headers: { Authorization: getAuthHeader() },
+    next: { revalidate: 60 },
+  })
+  if (!res.ok) return null
+  const data = await res.json()
+  return Array.isArray(data) && data.length > 0 ? data[0] : null
+}
+
 export async function getProduct(id: number): Promise<WooProduct | null> {
   if (!WOO_URL) return null
   const res = await fetch(`${WOO_URL}/wp-json/wc/v3/products/${id}`, {
@@ -97,6 +108,22 @@ function stripHtml(html: string): string {
   return html.replace(/<[^>]*>/g, '').trim()
 }
 
+function decodeHtml(html: string): string {
+  return html
+    .replace(/&#(\d+);/g, (_, code) => String.fromCharCode(Number(code)))
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#039;/g, "'")
+    .replace(/&rsquo;/g, '\u2019')
+    .replace(/&lsquo;/g, '\u2018')
+    .replace(/&rdquo;/g, '\u201D')
+    .replace(/&ldquo;/g, '\u201C')
+    .replace(/&ndash;/g, '\u2013')
+    .replace(/&mdash;/g, '\u2014')
+}
+
 function getAttr(product: WooProduct, ...names: string[]): string | undefined {
   for (const name of names) {
     const attr = product.attributes.find(a => a.name.toLowerCase() === name.toLowerCase())
@@ -109,12 +136,13 @@ import type { Product } from '@/app/data/products'
 export function mapWooProduct(p: WooProduct): Product {
   return {
     id: p.id,
-    name: p.name,
+    slug: p.slug,
+    name: decodeHtml(p.name),
     price: parseFloat(p.price) || 0,
     image: p.images[0]?.src || '',
     images: p.images.map(img => img.src),
     category: p.categories[0]?.name?.toUpperCase() || 'PRODUCTS',
-    description: stripHtml(p.short_description || p.description || ''),
+    description: p.description || p.short_description || '',
     features: p.attributes.flatMap(a => a.options.map(o => `${a.name}: ${o}`)),
     specs: {
       dia: getAttr(p, 'diameter', 'dia', 'DIA'),

@@ -4,6 +4,7 @@ import { createContext, useContext, useState, useEffect, ReactNode } from 'react
 
 export interface CartItem {
   id: number
+  slug: string
   name: string
   price: number
   image: string

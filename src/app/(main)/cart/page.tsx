@@ -125,7 +125,7 @@ export default function CartPage() {
                       {/* Name */}
                       <div className="flex flex-col justify-center">
                         <Link
-                          href={`/shop/${item.id}`}
+                          href={`/shop/${item.slug}`}
                           className="text-sm hover:text-black/60 transition-colors"
                         >
                           {item.name}

@@ -205,7 +205,7 @@ export default function ProductDetail({ product, relatedProducts }: Props) {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
               {relatedProducts.map((p, i) => (
                 <motion.div key={p.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.1 }}>
-                  <Link href={`/shop/${p.id}`} className="group block">
+                  <Link href={`/shop/${p.slug}`} className="group block">
                     <motion.div whileHover={{ y: -5 }} transition={{ duration: 0.2 }}>
                       <div className="bg-gradient-to-br from-black/[0.02] to-black/[0.05] rounded-xl overflow-hidden aspect-square p-8 mb-3 border border-black/5 group-hover:border-black/10 transition-all">
                         <ImageWithFallback src={p.image} alt={p.name} className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300" />
