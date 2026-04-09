@@ -86,14 +86,14 @@ export default function CheckoutPage() {
       if (res.ok) {
         const result = await res.json()
         clearCart()
-        router.push(`/order-confirmation?order=${result.number}&total=${total.toFixed(2)}`)
+        router.push(`/guide?order=${result.number}&total=${total.toFixed(2)}`)
       } else {
         clearCart()
-        router.push(`/order-confirmation?order=DEMO-001&total=${total.toFixed(2)}`)
+        router.push(`/guide?order=DEMO-001&total=${total.toFixed(2)}`)
       }
     } catch {
       clearCart()
-      router.push(`/order-confirmation?order=DEMO-001&total=${total.toFixed(2)}`)
+      router.push(`/guide?order=DEMO-001&total=${total.toFixed(2)}`)
     } finally {
       setSubmitting(false)
     }
@@ -105,7 +105,7 @@ export default function CheckoutPage() {
         <div className="border-b border-black/10">
           <div className="max-w-[1440px] mx-auto px-6 md:px-12 py-4">
             <div className="flex items-center gap-2 text-xs text-black/40">
-              <Link href="/" className="hover:text-black transition-colors">Home</Link>
+              <Link href="/home" className="hover:text-black transition-colors">Home</Link>
               <span>/</span>
               <Link href="/cart" className="hover:text-black transition-colors">Cart</Link>
               <span>/</span>
@@ -132,7 +132,7 @@ export default function CheckoutPage() {
       <div className="border-b border-black/10">
         <div className="max-w-[1440px] mx-auto px-6 md:px-12 py-4">
           <div className="flex items-center gap-2 text-xs text-black/40">
-            <Link href="/" className="hover:text-black transition-colors">Home</Link>
+            <Link href="/home" className="hover:text-black transition-colors">Home</Link>
             <span>/</span>
             <Link href="/cart" className="hover:text-black transition-colors">Cart</Link>
             <span>/</span>

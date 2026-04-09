@@ -19,7 +19,7 @@ export function Footer({ content }: Props) {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12 lg:gap-8">
             {/* Brand Column */}
             <div className="lg:col-span-2">
-              <a href="/">
+              <a href="/home">
                 <EditableImage
                   pageId={PAGE_IDS.global}
                   fieldName="logo_dark"

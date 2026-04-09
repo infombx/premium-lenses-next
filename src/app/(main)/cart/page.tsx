@@ -37,7 +37,7 @@ export default function CartPage() {
         <div className="border-b border-black/10">
           <div className="max-w-[1440px] mx-auto px-6 md:px-12 py-4">
             <div className="flex items-center gap-2 text-xs text-black/40">
-              <Link href="/" className="hover:text-black transition-colors">Home</Link>
+              <Link href="/home" className="hover:text-black transition-colors">Home</Link>
               <span>/</span>
               <span className="text-black">Shopping Cart</span>
             </div>
@@ -68,7 +68,7 @@ export default function CartPage() {
       <div className="border-b border-black/10">
         <div className="max-w-[1440px] mx-auto px-6 md:px-12 py-4">
           <div className="flex items-center gap-2 text-xs text-black/40">
-            <Link href="/" className="hover:text-black transition-colors">Home</Link>
+            <Link href="/home" className="hover:text-black transition-colors">Home</Link>
             <span>/</span>
             <span className="text-black">Shopping Cart</span>
           </div>

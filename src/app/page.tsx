@@ -1,27 +1,25 @@
-import { getProducts, mapWooProduct } from '@/lib/woocommerce'
-import { getHomepageContent } from '@/lib/wordpress'
-import { HeroBanner } from '@/components/homepage/HeroBanner'
-import { StatsBar } from '@/components/homepage/StatsBar'
-import { CategorySection } from '@/components/homepage/CategorySection'
-import { FeaturedProducts } from '@/components/homepage/FeaturedProducts'
-import { AboutStats } from '@/components/homepage/AboutStats'
-import { Testimonials } from '@/components/homepage/Testimonials'
+import Image from 'next/image'
 
-export default async function HomePage() {
-  const [wooProducts, cms] = await Promise.all([
-    getProducts({ per_page: 4 }),
-    getHomepageContent(),
-  ])
-  const products = wooProducts.length > 0 ? wooProducts.map(mapWooProduct) : undefined
-
+export default function ComingSoonPage() {
   return (
-    <>
-      <HeroBanner content={cms} />
-      <StatsBar stats={cms.stats} />
-      <CategorySection content={cms} />
-      <FeaturedProducts products={products} />
-      <AboutStats content={cms} />
-      <Testimonials content={cms} />
-    </>
+    <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center px-6 text-center">
+      <div className="max-w-md w-full space-y-10">
+        <Image
+          src="/logo_black_white.svg"
+          alt="Premium Lenses"
+          width={160}
+          height={48}
+          className="mx-auto"
+        />
+
+        <div className="space-y-4">
+          <h1 className="text-4xl md:text-5xl font-light tracking-wide">Coming Soon</h1>
+          <p className="text-white/50 text-sm md:text-base leading-relaxed">
+            We&apos;re putting the finishing touches on something special.<br />
+            Premium contact lenses, delivered to you.
+          </p>
+        </div>
+      </div>
+    </div>
   )
 }

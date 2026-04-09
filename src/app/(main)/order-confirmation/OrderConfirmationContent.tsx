@@ -21,7 +21,7 @@ export default function OrderConfirmationContent({ paymentInfo }: Props) {
   const waLink = `https://wa.me/${paymentInfo.whatsapp_number}?text=${waMessage}`
 
   return (
-    <div className="min-h-screen bg-white pt-44 pb-20">
+    <div className="min-h-screen bg-white pt-44 pb-40">
       <div className="max-w-xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
@@ -131,7 +131,7 @@ export default function OrderConfirmationContent({ paymentInfo }: Props) {
                 <div className="absolute inset-0 bg-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
               </motion.button>
             </Link>
-            <Link href="/">
+            <Link href="/home">
               <button className="px-8 py-3 border border-black/20 text-sm hover:bg-black/5 transition-colors rounded-lg">
                 Back to Home
               </button>

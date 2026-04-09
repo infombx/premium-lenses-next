@@ -36,7 +36,7 @@ export default function ProductDetail({ product, relatedProducts }: Props) {
       <div className="border-b border-black/10">
         <div className="max-w-[1440px] mx-auto px-6 md:px-12 py-4">
           <div className="flex items-center gap-2 text-xs text-black/40">
-            <Link href="/" className="hover:text-black transition-colors">Home</Link>
+            <Link href="/home" className="hover:text-black transition-colors">Home</Link>
             <span>/</span>
             <Link href="/shop" className="hover:text-black transition-colors">Shop</Link>
             <span>/</span>

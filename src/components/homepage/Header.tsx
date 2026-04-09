@@ -69,7 +69,7 @@ export function Header({ content, isLoggedIn }: Props) {
           >
             <div className="flex items-center justify-between px-3 md:px-4">
               {/* Logo */}
-              <Link href="/" className="flex items-center group flex-shrink-0">
+              <Link href="/home" className="flex items-center group flex-shrink-0">
                 <img
                   src={content.logo_light}
                   alt="Premium Lenses"
