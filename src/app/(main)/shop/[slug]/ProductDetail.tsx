@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { Share2, Truck, Shield, RotateCcw, ShoppingCart, Star, Facebook, Twitter, Instagram, Linkedin, Minus, Plus, ArrowLeft, Check, Eye, Sparkles, Award } from 'lucide-react'
+import { Truck, Shield, RotateCcw, ShoppingCart, Star, Facebook, Twitter, Instagram, Linkedin, Minus, Plus, ArrowLeft, Check, Eye, Sparkles, Award } from 'lucide-react'
 import { ImageWithFallback } from '@/components/figma/ImageWithFallback'
 import { useCart } from '@/app/context/CartContext'
 import { motion, AnimatePresence } from 'motion/react'
@@ -17,7 +17,6 @@ interface Props {
 export default function ProductDetail({ product, relatedProducts }: Props) {
   const [quantity, setQuantity] = useState(1)
   const [selectedImage, setSelectedImage] = useState(0)
-  const [activeTab, setActiveTab] = useState<'description' | 'reviews'>('description')
   const router = useRouter()
   const { addToCart } = useCart()
 
@@ -151,45 +150,31 @@ export default function ProductDetail({ product, relatedProducts }: Props) {
         </div>
       </section>
 
-      {/* Description & Reviews Tabs */}
-      <section className="py-12 md:py-16 border-t border-black/10 bg-gradient-to-b from-black/[0.01] to-transparent">
+      {/* Description + Key Features */}
+      <section className="py-12 md:py-16 border-t border-black/10">
         <div className="max-w-[1440px] mx-auto px-6 md:px-12">
-          <div className="flex gap-8 mb-8 border-b border-black/10">
-            {(['description', 'reviews'] as const).map(tab => (
-              <button key={tab} onClick={() => setActiveTab(tab)} className={`pb-4 text-sm relative transition-colors capitalize ${activeTab === tab ? 'text-black' : 'text-black/40'}`}>
-                {tab === 'reviews' ? 'Reviews (0)' : 'Description'}
-                {activeTab === tab && <motion.div layoutId="activeTab" className="absolute bottom-0 left-0 right-0 h-[2px] bg-black" />}
-              </button>
-            ))}
-          </div>
+          <div className={`grid gap-10 ${product.features.length > 0 ? 'md:grid-cols-2' : ''}`}>
+            {/* Description */}
+            <div>
+              <h3 className="text-lg mb-4">Product Description</h3>
+              <div className="text-sm text-black/60 leading-relaxed prose prose-sm max-w-none [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1 [&_li]:leading-relaxed" dangerouslySetInnerHTML={{ __html: product.description }} />
+            </div>
 
-          <AnimatePresence mode="wait">
-            <motion.div key={activeTab} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.3 }} className="max-w-3xl">
-              {activeTab === 'description' ? (
-                <div>
-                  <div className="text-sm text-black/60 leading-relaxed mb-8 prose prose-sm max-w-none [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1 [&_li]:leading-relaxed" dangerouslySetInnerHTML={{ __html: product.description }} />
-                  {product.features.length > 0 && (
-                    <>
-                      <h3 className="text-lg mb-6 flex items-center gap-2"><Sparkles className="w-5 h-5" />Key Features</h3>
-                      <div className="grid gap-3">
-                        {product.features.map((feature, i) => (
-                          <motion.div key={i} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.1 }} className="flex items-start gap-3 p-4 bg-white rounded-lg border border-black/5 hover:border-black/10 transition-all">
-                            <div className="w-5 h-5 rounded-full bg-black/5 flex items-center justify-center flex-shrink-0 mt-0.5"><Check className="w-3 h-3 text-black/60" /></div>
-                            <span className="text-sm text-black/60">{feature}</span>
-                          </motion.div>
-                        ))}
-                      </div>
-                    </>
-                  )}
+            {/* Key Features — only if present */}
+            {product.features.length > 0 && (
+              <div>
+                <h3 className="text-lg mb-4 flex items-center gap-2"><Sparkles className="w-5 h-5" />Key Features</h3>
+                <div className="grid gap-3">
+                  {product.features.map((feature, i) => (
+                    <motion.div key={i} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.05 }} className="flex items-start gap-3 p-3 bg-white rounded-lg border border-black/5 hover:border-black/10 transition-all">
+                      <div className="w-5 h-5 rounded-full bg-black/5 flex items-center justify-center flex-shrink-0 mt-0.5"><Check className="w-3 h-3 text-black/60" /></div>
+                      <span className="text-sm text-black/60">{feature}</span>
+                    </motion.div>
+                  ))}
                 </div>
-              ) : (
-                <div className="text-center py-12 bg-white rounded-xl border border-black/5">
-                  <div className="w-16 h-16 bg-black/5 rounded-full flex items-center justify-center mx-auto mb-4"><Star className="w-8 h-8 text-black/20" /></div>
-                  <p className="text-sm text-black/40">No reviews yet. Be the first to review this product!</p>
-                </div>
-              )}
-            </motion.div>
-          </AnimatePresence>
+              </div>
+            )}
+          </div>
         </div>
       </section>
 
