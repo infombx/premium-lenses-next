@@ -88,7 +88,7 @@ export default function ProductDetail({ product, relatedProducts }: Props) {
               </motion.div>
 
               <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }} className="text-sm text-black/60 leading-relaxed mb-8">
-                {product.description}
+                {product.description.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()}
               </motion.p>
 
               <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7 }} className="grid grid-cols-2 gap-3 mb-8">
