@@ -167,7 +167,7 @@ export default function ProductDetail({ product, relatedProducts }: Props) {
             <motion.div key={activeTab} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.3 }} className="max-w-3xl">
               {activeTab === 'description' ? (
                 <div>
-                  <p className="text-sm text-black/60 leading-relaxed mb-8">{product.description}</p>
+                  <div className="text-sm text-black/60 leading-relaxed mb-8 prose prose-sm max-w-none [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1 [&_li]:leading-relaxed" dangerouslySetInnerHTML={{ __html: product.description }} />
                   {product.features.length > 0 && (
                     <>
                       <h3 className="text-lg mb-6 flex items-center gap-2"><Sparkles className="w-5 h-5" />Key Features</h3>
