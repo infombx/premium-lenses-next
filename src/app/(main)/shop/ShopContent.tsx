@@ -147,7 +147,7 @@ export default function ShopContent({ products, categories, heroContent }: Props
                   <motion.div key={product.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: index * 0.05 }} className="group relative" onMouseEnter={() => setHoveredProduct(product.id)} onMouseLeave={() => setHoveredProduct(null)}>
                     <Link href={`/shop/${product.slug}`}>
                       <div className="relative bg-[#F5F5F5] rounded-xl md:rounded-2xl overflow-hidden aspect-square">
-                        <motion.div className="w-full h-full p-4 md:p-8" animate={{ scale: hoveredProduct === product.id ? 1.05 : 1 }} transition={{ type: 'spring', stiffness: 300, damping: 20 }}>
+                        <motion.div className="absolute inset-0" animate={{ scale: hoveredProduct === product.id ? 1.05 : 1 }} transition={{ type: 'spring', stiffness: 300, damping: 20 }}>
                           <ImageWithFallback src={product.image} alt={product.name} className="w-full h-full object-contain" />
                         </motion.div>
                         <AnimatePresence>
