@@ -148,17 +148,12 @@ export default function ShopContent({ products, categories, heroContent }: Props
                     <Link href={`/shop/${product.slug}`}>
                       <div className="relative bg-[#F5F5F5] rounded-xl md:rounded-2xl overflow-hidden aspect-square">
                         <motion.div
-                          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[72%] h-[72%]"
+                          className="absolute inset-4 md:inset-8"
                           animate={{ scale: hoveredProduct === product.id ? 1.05 : 1 }}
                           transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                          style={{
-                            backgroundImage: `url(${product.image})`,
-                            backgroundSize: 'contain',
-                            backgroundRepeat: 'no-repeat',
-                            backgroundPosition: 'center',
-                          }}
-                          aria-label={product.name}
-                        />
+                        >
+                          <ImageWithFallback src={product.image} alt={product.name} className="w-full h-full object-contain" />
+                        </motion.div>
 
                         <AnimatePresence>
                           {hoveredProduct === product.id && (
