@@ -35,7 +35,7 @@ export function EditableField({ pageId, fieldName, value, multiline, className, 
 
   if (editing) {
     return (
-      <span className={`relative inline-block w-full ${className ?? ''}`}>
+      <span className={`relative block w-full ${className ?? ''}`}>
         {multiline ? (
           <textarea
             ref={inputRef as React.RefObject<HTMLTextAreaElement>}
@@ -87,7 +87,7 @@ export function EditableField({ pageId, fieldName, value, multiline, className, 
   }
 
   return (
-    <span className={`relative group/ef inline-block outline outline-1 outline-dashed outline-black/20 rounded ${className ?? ''}`}>
+    <span className={`relative group/ef block outline outline-1 outline-dashed outline-black/20 rounded ${className ?? ''}`}>
       {children}
       <button
         onClick={() => setEditing(true)}
