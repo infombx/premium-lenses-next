@@ -110,6 +110,7 @@ function stripHtml(html: string): string {
 
 function decodeHtml(html: string): string {
   return html
+    .replace(/&#x([0-9a-fA-F]+);/g, (_, code) => String.fromCharCode(parseInt(code, 16)))
     .replace(/&#(\d+);/g, (_, code) => String.fromCharCode(Number(code)))
     .replace(/&amp;/g, '&')
     .replace(/&lt;/g, '<')
@@ -122,6 +123,15 @@ function decodeHtml(html: string): string {
     .replace(/&ldquo;/g, '\u201C')
     .replace(/&ndash;/g, '\u2013')
     .replace(/&mdash;/g, '\u2014')
+}
+
+// Fix double-encoded entities in HTML description (e.g. &amp;#x25aa; → ▪, &amp;amp; → &)
+function cleanDescription(html: string): string {
+  return html
+    .replace(/&amp;#x([0-9a-fA-F]+);/g, (_, code) => String.fromCharCode(parseInt(code, 16)))
+    .replace(/&amp;#(\d+);/g, (_, code) => String.fromCharCode(Number(code)))
+    .replace(/&amp;amp;/g, '&amp;')
+    .replace(/&amp;/g, '&')
 }
 
 function getAttr(product: WooProduct, ...names: string[]): string | undefined {
@@ -142,7 +152,7 @@ export function mapWooProduct(p: WooProduct): Product {
     image: p.images[0]?.src || '',
     images: p.images.map(img => img.src),
     category: p.categories[0]?.name?.toUpperCase() || 'PRODUCTS',
-    description: p.description || p.short_description || '',
+    description: cleanDescription(p.description || p.short_description || ''),
     features: p.attributes.flatMap(a => a.options.map(o => `${a.name}: ${o}`)),
     specs: {
       dia: getAttr(p, 'diameter', 'dia', 'DIA'),
