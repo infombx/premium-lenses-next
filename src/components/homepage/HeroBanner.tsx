@@ -5,7 +5,6 @@ import { motion } from 'motion/react';
 import Link from 'next/link';
 import type { HomepageContent } from '@/lib/wordpress';
 import { EditableField } from '@/components/cms/EditableField';
-import { EditableImage } from '@/components/cms/EditableImage';
 import { PAGE_IDS } from '@/lib/cmsFields';
 
 interface Props {
@@ -17,9 +16,7 @@ export function HeroBanner({ content }: Props) {
     <section className="relative min-h-screen bg-white overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0">
-        <EditableImage
-          pageId={PAGE_IDS.homepage}
-          fieldName="hero_image"
+        <img
           src={content.hero_image}
           alt="Hero background"
           className="w-full h-full object-cover object-[75%_center] md:object-center"

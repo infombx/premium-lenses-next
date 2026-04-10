@@ -60,19 +60,23 @@ export function EditModeProvider({ children }: { children: React.ReactNode }) {
   return (
     <EditModeContext.Provider value={{ isEditMode, saveField }}>
       {isEditMode && (
-        <div className="fixed top-0 left-0 right-0 z-[9999] h-8 flex items-center justify-between px-4 bg-black text-white text-xs font-medium border-b border-white/10">
-          <span className="flex items-center gap-2">
-            <Pencil className="w-3 h-3" />
-            Edit Mode Active
-          </span>
-          <button
-            onClick={handleLogout}
-            className="flex items-center gap-1.5 hover:text-white/70 transition-colors"
-          >
-            <LogOut className="w-3 h-3" />
-            Exit Edit
-          </button>
-        </div>
+        <>
+          <div className="fixed top-0 left-0 right-0 z-[9999] h-8 flex items-center justify-between px-4 bg-black text-white text-xs font-medium border-b border-white/10">
+            <span className="flex items-center gap-2">
+              <Pencil className="w-3 h-3" />
+              Edit Mode Active
+            </span>
+            <button
+              onClick={handleLogout}
+              className="flex items-center gap-1.5 hover:text-white/70 transition-colors"
+            >
+              <LogOut className="w-3 h-3" />
+              Exit Edit
+            </button>
+          </div>
+          {/* Spacer so fixed banner doesn't overlap header */}
+          <div className="h-8" />
+        </>
       )}
       {children}
     </EditModeContext.Provider>
