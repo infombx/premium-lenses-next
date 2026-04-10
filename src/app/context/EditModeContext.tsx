@@ -74,8 +74,6 @@ export function EditModeProvider({ children }: { children: React.ReactNode }) {
               Exit Edit
             </button>
           </div>
-          {/* Spacer so fixed banner doesn't overlap header */}
-          <div className="h-8" />
         </>
       )}
       {children}

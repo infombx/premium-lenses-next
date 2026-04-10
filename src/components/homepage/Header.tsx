@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useCart } from '@/app/context/CartContext';
+import { useEditMode } from '@/app/context/EditModeContext';
 import type { GlobalContent } from '@/lib/wordpress';
 
 interface Props {
@@ -15,6 +16,7 @@ export function Header({ content }: Props) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { getCartCount } = useCart();
   const cartCount = getCartCount();
+  const { isEditMode } = useEditMode();
   const pathname = usePathname();
 
   // Close mobile menu when route changes
@@ -40,7 +42,7 @@ export function Header({ content }: Props) {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 pt-2 px-6">
+      <header className={`fixed left-0 right-0 z-50 pt-2 px-6 transition-[top] duration-200 ${isEditMode ? 'top-8' : 'top-0'}`}>
         <div className="max-w-[1440px] mx-auto">
           <div
             className="

@@ -9,12 +9,14 @@ interface Props {
   fieldName: string
   value: string
   multiline?: boolean
+  /** Use inline-block instead of block — for centered or inline-context fields */
+  inline?: boolean
   /** Extra classes applied to the editable wrapper (not the children) */
   className?: string
   children: React.ReactNode
 }
 
-export function EditableField({ pageId, fieldName, value, multiline, className, children }: Props) {
+export function EditableField({ pageId, fieldName, value, multiline, inline, className, children }: Props) {
   const { isEditMode, saveField } = useEditMode()
   const [editing, setEditing] = useState(false)
   const [draft, setDraft] = useState(value)
@@ -22,7 +24,6 @@ export function EditableField({ pageId, fieldName, value, multiline, className, 
   const [error, setError] = useState('')
   const inputRef = useRef<HTMLTextAreaElement & HTMLInputElement>(null)
 
-  // Keep draft in sync if the underlying value changes (e.g. after router.refresh)
   useEffect(() => {
     if (!editing) setDraft(value)
   }, [value, editing])
@@ -33,9 +34,11 @@ export function EditableField({ pageId, fieldName, value, multiline, className, 
 
   if (!isEditMode) return <>{children}</>
 
+  const displayClass = inline ? 'inline-block' : 'block w-full'
+
   if (editing) {
     return (
-      <span className={`relative block w-full ${className ?? ''}`}>
+      <span className={`relative ${displayClass} ${className ?? ''}`}>
         {multiline ? (
           <textarea
             ref={inputRef as React.RefObject<HTMLTextAreaElement>}
@@ -87,7 +90,7 @@ export function EditableField({ pageId, fieldName, value, multiline, className, 
   }
 
   return (
-    <span className={`relative group/ef block outline outline-1 outline-dashed outline-black/20 rounded ${className ?? ''}`}>
+    <span className={`relative group/ef ${displayClass} outline outline-1 outline-dashed outline-black/20 rounded ${className ?? ''}`}>
       {children}
       <button
         onClick={() => setEditing(true)}
