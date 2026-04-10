@@ -42,7 +42,7 @@ export function Header({ content }: Props) {
 
   return (
     <>
-      <header className={`fixed left-0 right-0 z-50 pt-2 px-6 transition-[top] duration-200 ${isEditMode ? 'top-8' : 'top-0'}`}>
+      <header className="fixed left-0 right-0 z-50 pt-2 px-6 transition-all duration-200" style={{ top: isEditMode ? '2.5rem' : '0' }}>
         <div className="max-w-[1440px] mx-auto">
           <div
             className="
