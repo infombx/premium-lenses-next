@@ -140,8 +140,12 @@ export function AboutStats({ content }: Props) {
                     className="border border-black/10 rounded-lg p-6 bg-black/[0.02]"
                   >
                     <Icon className="w-6 h-6 mb-4 text-black/40" strokeWidth={1.5} />
-                    <div className="text-2xl md:text-3xl mb-1">{stat.value}</div>
-                    <div className="text-sm text-black/60">{stat.label}</div>
+                    <EditableField pageId={PAGE_IDS.homepage} fieldName={`about_stat_${index + 1}_value`} value={stat.value}>
+                      <div className="text-2xl md:text-3xl mb-1">{stat.value}</div>
+                    </EditableField>
+                    <EditableField pageId={PAGE_IDS.homepage} fieldName={`about_stat_${index + 1}_label`} value={stat.label}>
+                      <div className="text-sm text-black/60">{stat.label}</div>
+                    </EditableField>
                   </motion.div>
                 );
               })}

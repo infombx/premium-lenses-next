@@ -3,7 +3,6 @@
 import { Facebook, Instagram, Twitter } from 'lucide-react';
 import type { GlobalContent } from '@/lib/wordpress';
 import { EditableField } from '@/components/cms/EditableField';
-import { EditableImage } from '@/components/cms/EditableImage';
 import { PAGE_IDS } from '@/lib/cmsFields';
 
 interface Props { content: GlobalContent }
@@ -20,13 +19,7 @@ export function Footer({ content }: Props) {
             {/* Brand Column */}
             <div className="lg:col-span-2">
               <a href="/home">
-                <EditableImage
-                  pageId={PAGE_IDS.global}
-                  fieldName="logo_dark"
-                  src={content.logo_dark}
-                  alt="Premium Lenses"
-                  className="h-16 mb-6"
-                />
+                <img src={content.logo_dark} alt="Premium Lenses" className="h-16 mb-6" />
               </a>
               <EditableField pageId={PAGE_IDS.global} fieldName="footer_description" value={content.footer_description} multiline>
                 <p className="text-sm text-black/60 leading-relaxed mb-6 max-w-xs">
@@ -36,33 +29,21 @@ export function Footer({ content }: Props) {
 
               {/* Social Links */}
               <div className="flex gap-3">
-                <a
-                  href={content.social.facebook}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 border border-black/10 rounded-full flex items-center justify-center hover:bg-black hover:text-white hover:border-black transition-colors"
-                  aria-label="Facebook"
-                >
-                  <Facebook className="w-4 h-4" />
-                </a>
-                <a
-                  href={content.social.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 border border-black/10 rounded-full flex items-center justify-center hover:bg-black hover:text-white hover:border-black transition-colors"
-                  aria-label="Instagram"
-                >
-                  <Instagram className="w-4 h-4" />
-                </a>
-                <a
-                  href={content.social.twitter}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 border border-black/10 rounded-full flex items-center justify-center hover:bg-black hover:text-white hover:border-black transition-colors"
-                  aria-label="Twitter"
-                >
-                  <Twitter className="w-4 h-4" />
-                </a>
+                <EditableField pageId={PAGE_IDS.global} fieldName="social_facebook" value={content.social.facebook}>
+                  <a href={content.social.facebook} target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-black/10 rounded-full flex items-center justify-center hover:bg-black hover:text-white hover:border-black transition-colors" aria-label="Facebook">
+                    <Facebook className="w-4 h-4" />
+                  </a>
+                </EditableField>
+                <EditableField pageId={PAGE_IDS.global} fieldName="social_instagram" value={content.social.instagram}>
+                  <a href={content.social.instagram} target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-black/10 rounded-full flex items-center justify-center hover:bg-black hover:text-white hover:border-black transition-colors" aria-label="Instagram">
+                    <Instagram className="w-4 h-4" />
+                  </a>
+                </EditableField>
+                <EditableField pageId={PAGE_IDS.global} fieldName="social_twitter" value={content.social.twitter}>
+                  <a href={content.social.twitter} target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-black/10 rounded-full flex items-center justify-center hover:bg-black hover:text-white hover:border-black transition-colors" aria-label="Twitter">
+                    <Twitter className="w-4 h-4" />
+                  </a>
+                </EditableField>
               </div>
             </div>
 

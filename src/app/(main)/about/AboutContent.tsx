@@ -133,6 +133,11 @@ export default function AboutContent({ content }: Props) {
                   stat={{ value, suffix, label: s.label, icon: STAT_ICONS[index % STAT_ICONS.length] }}
                   isVisible={visibleSections.has('stats')}
                   delay={index * 100}
+                  pageId={PAGE_IDS.about}
+                  fieldNameValue={`stat_${index + 1}_value`}
+                  fieldNameLabel={`stat_${index + 1}_label`}
+                  rawValue={s.value}
+                  rawLabel={s.label}
                 />
               );
             })}
@@ -155,9 +160,15 @@ export default function AboutContent({ content }: Props) {
                   : 'opacity-0 -translate-x-12'
               }`}
             >
-              <h2 className="text-4xl md:text-5xl mb-8">{content.story_title}</h2>
+              <EditableField pageId={PAGE_IDS.about} fieldName="story_title" value={content.story_title}>
+                <h2 className="text-4xl md:text-5xl mb-8">{content.story_title}</h2>
+              </EditableField>
               <div className="space-y-6 text-black/70 leading-relaxed text-lg">
-                {content.story_paragraphs.map((p, i) => <p key={i}>{p}</p>)}
+                {content.story_paragraphs.map((p, i) => (
+                  <EditableField key={i} pageId={PAGE_IDS.about} fieldName={`story_paragraph_${i + 1}`} value={p} multiline>
+                    <p>{p}</p>
+                  </EditableField>
+                ))}
               </div>
             </div>
 
@@ -200,10 +211,12 @@ export default function AboutContent({ content }: Props) {
       >
         <div className="max-w-[1440px] mx-auto px-6 md:px-12">
           <div className="text-center mb-16 md:mb-20">
-            <h2 className="text-4xl md:text-5xl mb-4">{content.values_title}</h2>
-            <p className="text-black/60 max-w-2xl mx-auto text-lg">
-              {content.values_description}
-            </p>
+            <EditableField pageId={PAGE_IDS.about} fieldName="values_title" value={content.values_title}>
+              <h2 className="text-4xl md:text-5xl mb-4">{content.values_title}</h2>
+            </EditableField>
+            <EditableField pageId={PAGE_IDS.about} fieldName="values_description" value={content.values_description} multiline>
+              <p className="text-black/60 max-w-2xl mx-auto text-lg">{content.values_description}</p>
+            </EditableField>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -233,10 +246,12 @@ export default function AboutContent({ content }: Props) {
       >
         <div className="max-w-[1440px] mx-auto px-6 md:px-12">
           <div className="text-center mb-16 md:mb-20">
-            <h2 className="text-4xl md:text-5xl mb-4">{content.timeline_title}</h2>
-            <p className="text-white/70 max-w-2xl mx-auto text-lg">
-              {content.timeline_subtitle}
-            </p>
+            <EditableField pageId={PAGE_IDS.about} fieldName="timeline_title" value={content.timeline_title}>
+              <h2 className="text-4xl md:text-5xl mb-4">{content.timeline_title}</h2>
+            </EditableField>
+            <EditableField pageId={PAGE_IDS.about} fieldName="timeline_subtitle" value={content.timeline_subtitle} multiline>
+              <p className="text-white/70 max-w-2xl mx-auto text-lg">{content.timeline_subtitle}</p>
+            </EditableField>
           </div>
 
           <div className="max-w-4xl mx-auto">
@@ -305,18 +320,22 @@ export default function AboutContent({ content }: Props) {
       {/* CTA Section */}
       <section className="py-24 md:py-32 bg-white">
         <div className="max-w-[1440px] mx-auto px-6 md:px-12 text-center">
-          <h2 className="text-4xl md:text-5xl mb-6">{content.cta_title}</h2>
-          <p className="text-black/60 max-w-2xl mx-auto text-lg mb-8">
-            {content.cta_subtitle}
-          </p>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="group relative px-10 py-4 bg-black text-white overflow-hidden transition-all duration-300 rounded-lg"
-          >
-            <span className="relative z-10 text-sm tracking-widest group-hover:text-black transition-colors duration-300">{content.cta_button}</span>
-            <div className="absolute inset-0 bg-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-          </motion.button>
+          <EditableField pageId={PAGE_IDS.about} fieldName="cta_title" value={content.cta_title}>
+            <h2 className="text-4xl md:text-5xl mb-6">{content.cta_title}</h2>
+          </EditableField>
+          <EditableField pageId={PAGE_IDS.about} fieldName="cta_subtitle" value={content.cta_subtitle} multiline>
+            <p className="text-black/60 max-w-2xl mx-auto text-lg mb-8">{content.cta_subtitle}</p>
+          </EditableField>
+          <EditableField pageId={PAGE_IDS.about} fieldName="cta_button" value={content.cta_button}>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="group relative px-10 py-4 bg-black text-white overflow-hidden transition-all duration-300 rounded-lg"
+            >
+              <span className="relative z-10 text-sm tracking-widest group-hover:text-black transition-colors duration-300">{content.cta_button}</span>
+              <div className="absolute inset-0 bg-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+            </motion.button>
+          </EditableField>
         </div>
       </section>
     </div>
@@ -327,11 +346,21 @@ export default function AboutContent({ content }: Props) {
 function StatCounter({
   stat,
   isVisible,
-  delay
+  delay,
+  pageId,
+  fieldNameValue,
+  fieldNameLabel,
+  rawValue,
+  rawLabel,
 }: {
   stat: { value: number; suffix: string; label: string; icon: any };
   isVisible: boolean;
   delay: number;
+  pageId?: number;
+  fieldNameValue?: string;
+  fieldNameLabel?: string;
+  rawValue?: string;
+  rawLabel?: string;
 }) {
   const [count, setCount] = useState(0);
   const [hasAnimated, setHasAnimated] = useState(false);
@@ -370,10 +399,20 @@ function StatCounter({
           <Icon className="w-8 h-8 text-white group-hover:text-black transition-colors duration-300" />
         </div>
       </div>
-      <div className="text-5xl md:text-6xl mb-2 font-light">
-        {count}{stat.suffix}
-      </div>
-      <p className="text-sm text-black/60 tracking-widest">{stat.label}</p>
+      {pageId && fieldNameValue ? (
+        <EditableField pageId={pageId} fieldName={fieldNameValue} value={rawValue ?? ''}>
+          <div className="text-5xl md:text-6xl mb-2 font-light">{count}{stat.suffix}</div>
+        </EditableField>
+      ) : (
+        <div className="text-5xl md:text-6xl mb-2 font-light">{count}{stat.suffix}</div>
+      )}
+      {pageId && fieldNameLabel ? (
+        <EditableField pageId={pageId} fieldName={fieldNameLabel} value={rawLabel ?? ''}>
+          <p className="text-sm text-black/60 tracking-widest">{stat.label}</p>
+        </EditableField>
+      ) : (
+        <p className="text-sm text-black/60 tracking-widest">{stat.label}</p>
+      )}
     </div>
   );
 }
