@@ -125,13 +125,16 @@ function decodeHtml(html: string): string {
     .replace(/&mdash;/g, '\u2014')
 }
 
-// Fix double-encoded entities in HTML description (e.g. &amp;#x25aa; → ▪, &amp;amp; → &)
+// Fix encoded entities in HTML description
 function cleanDescription(html: string): string {
   return html
-    .replace(/&amp;#x([0-9a-fA-F]+);/g, (_, code) => String.fromCharCode(parseInt(code, 16)))
+    // Double-encoded: &amp;#x25aa; → ▪
+    .replace(/&amp;#x([0-9a-fA-F]+);/gi, (_, code) => String.fromCharCode(parseInt(code, 16)))
     .replace(/&amp;#(\d+);/g, (_, code) => String.fromCharCode(Number(code)))
-    .replace(/&amp;amp;/g, '&amp;')
-    .replace(/&amp;/g, '&')
+    .replace(/&amp;amp;/g, '&')
+    // Single-encoded hex entities the browser won't decode in this context: &#x25aa; → ▪
+    .replace(/&#x([0-9a-fA-F]+);/gi, (_, code) => String.fromCharCode(parseInt(code, 16)))
+    .replace(/&#(\d+);/g, (_, code) => String.fromCharCode(Number(code)))
 }
 
 function getAttr(product: WooProduct, ...names: string[]): string | undefined {
