@@ -5,9 +5,16 @@ import { REVALIDATE_PATHS } from '@/lib/cmsFields'
 const WP_URL = process.env.NEXT_PUBLIC_WC_URL ?? ''
 
 export async function POST(request: NextRequest) {
-  // Auth check
+  // Auth check — validate token against WordPress
   const token = request.cookies.get('wp_jwt')?.value
   if (!token) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
+  const validateRes = await fetch(`${WP_URL}/wp-json/jwt-auth/v1/token/validate`, {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${token}` },
+  })
+  if (!validateRes.ok) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 

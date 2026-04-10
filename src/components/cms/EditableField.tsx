@@ -42,7 +42,7 @@ export function EditableField({ pageId, fieldName, value, multiline, className, 
             value={draft}
             onChange={e => setDraft(e.target.value)}
             rows={4}
-            className="w-full border-2 border-blue-500 rounded px-2 py-1 text-inherit bg-white/90 text-black outline-none resize-y text-sm"
+            className="w-full border border-black/30 rounded px-2 py-1 text-inherit bg-white/90 text-black outline-none resize-y text-sm"
           />
         ) : (
           <input
@@ -50,7 +50,7 @@ export function EditableField({ pageId, fieldName, value, multiline, className, 
             type="text"
             value={draft}
             onChange={e => setDraft(e.target.value)}
-            className="w-full border-2 border-blue-500 rounded px-2 py-1 text-inherit bg-white/90 text-black outline-none text-sm"
+            className="w-full border border-black/30 rounded px-2 py-1 text-inherit bg-white/90 text-black outline-none text-sm"
           />
         )}
         {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
@@ -69,7 +69,7 @@ export function EditableField({ pageId, fieldName, value, multiline, className, 
               }
             }}
             disabled={saving}
-            className="flex items-center gap-1 px-2 py-1 bg-blue-600 text-white text-xs rounded hover:bg-blue-700 disabled:opacity-50"
+            className="flex items-center gap-1 px-2 py-1 bg-black text-white text-xs rounded hover:bg-black/80 disabled:opacity-50"
           >
             {saving ? <Loader2 className="w-3 h-3 animate-spin" /> : <Check className="w-3 h-3" />}
             Save
@@ -87,15 +87,15 @@ export function EditableField({ pageId, fieldName, value, multiline, className, 
   }
 
   return (
-    <span className={`relative group/ef inline-block ${className ?? ''}`}>
+    <span className={`relative group/ef inline-block outline outline-1 outline-dashed outline-black/20 rounded ${className ?? ''}`}>
       {children}
       <button
         onClick={() => setEditing(true)}
         title={`Edit ${fieldName}`}
         className="
-          absolute -top-1 -right-1
+          absolute top-1.5 right-1.5
           w-5 h-5 flex items-center justify-center
-          bg-blue-600 text-white rounded-full
+          bg-black text-white rounded-full
           opacity-0 group-hover/ef:opacity-100
           transition-opacity duration-150
           z-50 shadow-md

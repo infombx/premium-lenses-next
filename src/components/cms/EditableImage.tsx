@@ -25,7 +25,7 @@ export function EditableImage({ pageId, fieldName, src, alt, className, imgProps
   }
 
   return (
-    <span className="relative group/ei inline-block">
+    <span className="relative group/ei inline-block outline outline-1 outline-dashed outline-black/20 rounded">
       <img src={src} alt={alt} className={className} {...imgProps} />
 
       {/* Camera overlay */}
@@ -34,12 +34,14 @@ export function EditableImage({ pageId, fieldName, src, alt, className, imgProps
           onClick={() => setEditing(true)}
           title={`Edit ${fieldName}`}
           className="
-            absolute inset-0 flex items-center justify-center
-            bg-black/40 opacity-0 group-hover/ei:opacity-100
-            transition-opacity duration-150 rounded-[inherit]
+            absolute top-1.5 right-1.5
+            w-6 h-6 flex items-center justify-center
+            bg-black text-white rounded-full
+            opacity-0 group-hover/ei:opacity-100
+            transition-opacity duration-150 z-50 shadow-md
           "
         >
-          <Camera className="w-6 h-6 text-white" />
+          <Camera className="w-3 h-3" />
         </button>
       )}
 
@@ -52,7 +54,7 @@ export function EditableImage({ pageId, fieldName, src, alt, className, imgProps
             value={draft}
             onChange={e => setDraft(e.target.value)}
             autoFocus
-            className="w-full border border-blue-400 rounded px-2 py-1 text-xs text-black bg-white outline-none mb-1"
+            className="w-full border border-black/30 rounded px-2 py-1 text-xs text-black bg-white outline-none mb-1"
             placeholder="https://..."
           />
           {error && <p className="text-red-400 text-xs mb-1">{error}</p>}
@@ -71,7 +73,7 @@ export function EditableImage({ pageId, fieldName, src, alt, className, imgProps
                 }
               }}
               disabled={saving}
-              className="flex items-center gap-1 px-2 py-1 bg-blue-600 text-white text-xs rounded hover:bg-blue-700 disabled:opacity-50"
+              className="flex items-center gap-1 px-2 py-1 bg-black text-white text-xs rounded hover:bg-black/80 disabled:opacity-50"
             >
               {saving ? <Loader2 className="w-3 h-3 animate-spin" /> : <Check className="w-3 h-3" />}
               Save

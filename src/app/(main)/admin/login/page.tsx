@@ -43,7 +43,7 @@ export default function AdminLoginPage() {
           <div>
             <input
               type="text"
-              placeholder="Username"
+              placeholder="Username or Email"
               value={username}
               onChange={e => setUsername(e.target.value)}
               required
