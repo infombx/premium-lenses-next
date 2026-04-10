@@ -91,8 +91,12 @@ export function Testimonials({ content }: Props) {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {content.testimonial_stats.map((stat, i) => (
               <div key={i} className="text-center">
-                <div className="text-3xl md:text-4xl mb-2">{stat.value}</div>
-                <p className="text-sm text-black/60">{stat.label}</p>
+                <EditableField pageId={PAGE_IDS.homepage} fieldName={`testimonial_stat_${i + 1}_value`} value={stat.value} inline>
+                  <div className="text-3xl md:text-4xl mb-2">{stat.value}</div>
+                </EditableField>
+                <EditableField pageId={PAGE_IDS.homepage} fieldName={`testimonial_stat_${i + 1}_label`} value={stat.label} inline>
+                  <p className="text-sm text-black/60">{stat.label}</p>
+                </EditableField>
               </div>
             ))}
           </div>

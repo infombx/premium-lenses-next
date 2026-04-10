@@ -9,7 +9,6 @@ import { useCart } from '@/app/context/CartContext'
 import type { Product } from '@/app/data/products'
 import type { ShopHeroContent } from '@/lib/wordpress'
 import { EditableField } from '@/components/cms/EditableField'
-import { EditableImage } from '@/components/cms/EditableImage'
 import { PAGE_IDS } from '@/lib/cmsFields'
 
 interface Props {
@@ -43,8 +42,8 @@ export default function ShopContent({ products, categories, heroContent }: Props
       {/* Hero Banner */}
       <section className="relative -mt-32 pt-48 pb-20 md:-mt-36 md:pt-56 md:pb-32 lg:pb-40 xl:pb-48 overflow-hidden min-h-[280px] md:min-h-[800px]">
         <div className="absolute inset-0">
-          <EditableImage pageId={PAGE_IDS.shopHero} fieldName="hero_image_mobile" src={heroContent.hero_image_mobile} alt="Shop hero" className="md:hidden w-full h-full object-cover object-[center_40%]" />
-          <EditableImage pageId={PAGE_IDS.shopHero} fieldName="hero_image" src={heroContent.hero_image} alt="Shop hero" className="hidden md:block w-full h-full object-cover object-center" />
+          <img src={heroContent.hero_image_mobile} alt="Shop hero" className="md:hidden w-full h-full object-cover object-[center_40%]" />
+          <img src={heroContent.hero_image} alt="Shop hero" className="hidden md:block w-full h-full object-cover object-center" />
           <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/15 to-black/35 md:from-black/30 md:via-black/20 md:to-black/40" />
         </div>
 

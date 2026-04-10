@@ -5,7 +5,6 @@ import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import type { ContactContent as ContactContentType } from '@/lib/wordpress';
 import { EditableField } from '@/components/cms/EditableField';
-import { EditableImage } from '@/components/cms/EditableImage';
 import { PAGE_IDS } from '@/lib/cmsFields';
 
 interface Props { content: ContactContentType }
@@ -41,16 +40,6 @@ export default function ContactContent({ content }: Props) {
 
         <div className="relative z-10 max-w-[1440px] mx-auto px-6 md:px-12">
           <div className="text-center">
-            {/* Hidden EditableImage for background URL editing */}
-            <div className="flex justify-center mb-2">
-              <EditableImage
-                pageId={PAGE_IDS.contact}
-                fieldName="hero_image"
-                src={content.hero_image}
-                alt="Contact hero background"
-                className="h-0 w-0 overflow-hidden"
-              />
-            </div>
             <EditableField pageId={PAGE_IDS.contact} fieldName="hero_title" value={content.hero_title}>
               <h1
                 className="text-5xl md:text-7xl lg:text-8xl mb-8 leading-tight transition-transform duration-200 ease-out"

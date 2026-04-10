@@ -5,7 +5,6 @@ import { Eye, Heart, Zap, Users, Award, TrendingUp, ChevronDown, Plus, Minus } f
 import { motion } from 'motion/react';
 import type { AboutContent as AboutContentType } from '@/lib/wordpress';
 import { EditableField } from '@/components/cms/EditableField';
-import { EditableImage } from '@/components/cms/EditableImage';
 import { PAGE_IDS } from '@/lib/cmsFields';
 
 const VALUE_ICONS = [Eye, Heart, Zap];
@@ -70,9 +69,7 @@ export default function AboutContent({ content }: Props) {
       <section className="relative h-screen bg-black text-white overflow-hidden flex items-center">
         {/* Background Image */}
         <div className="absolute inset-0">
-          <EditableImage
-            pageId={PAGE_IDS.about}
-            fieldName="hero_image"
+          <img
             src={content.hero_image}
             alt="About hero background"
             className="w-full h-full object-cover object-[25%_20%] md:object-[center_35%]"
