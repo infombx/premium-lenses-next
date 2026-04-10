@@ -152,7 +152,7 @@ export default function ShopContent({ products, categories, heroContent }: Props
                           animate={{ scale: hoveredProduct === product.id ? 1.05 : 1 }}
                           transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                         >
-                          <ImageWithFallback src={product.image} alt={product.name} className="w-full h-full object-contain" />
+                          <ImageWithFallback src={product.image} alt={product.name} className="w-full h-full object-cover" />
                         </motion.div>
 
                         <AnimatePresence>
