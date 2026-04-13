@@ -109,10 +109,12 @@ export default function ContactContent({ content }: Props) {
         <div className="max-w-[1440px] mx-auto px-6 md:px-12">
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl mb-4">{content.form_title}</h2>
-              <p className="text-black/60 max-w-2xl mx-auto">
-                {content.form_description}
-              </p>
+              <EditableField pageId={PAGE_IDS.contact} fieldName="form_title" value={content.form_title}>
+                <h2 className="text-3xl md:text-4xl mb-4">{content.form_title}</h2>
+              </EditableField>
+              <EditableField pageId={PAGE_IDS.contact} fieldName="form_description" value={content.form_description} multiline>
+                <p className="text-black/60 max-w-2xl mx-auto">{content.form_description}</p>
+              </EditableField>
             </div>
 
             <form className="space-y-6">

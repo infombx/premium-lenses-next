@@ -9,14 +9,12 @@ interface Props {
   fieldName: string
   value: string
   multiline?: boolean
-  /** Use inline-block instead of block — for centered or inline-context fields */
-  inline?: boolean
   /** Extra classes applied to the editable wrapper (not the children) */
   className?: string
   children: React.ReactNode
 }
 
-export function EditableField({ pageId, fieldName, value, multiline, inline, className, children }: Props) {
+export function EditableField({ pageId, fieldName, value, multiline, className, children }: Props) {
   const { isEditMode, saveField } = useEditMode()
   const [editing, setEditing] = useState(false)
   const [draft, setDraft] = useState(value)
@@ -34,11 +32,9 @@ export function EditableField({ pageId, fieldName, value, multiline, inline, cla
 
   if (!isEditMode) return <>{children}</>
 
-  const displayClass = inline ? 'inline-block' : 'block w-full'
-
   if (editing) {
     return (
-      <span className={`relative ${displayClass} ${className ?? ''}`}>
+      <span className={`relative block w-full ${className ?? ''}`}>
         {multiline ? (
           <textarea
             ref={inputRef as React.RefObject<HTMLTextAreaElement>}
@@ -89,14 +85,19 @@ export function EditableField({ pageId, fieldName, value, multiline, inline, cla
     )
   }
 
+  // View mode: relative wrapper that shows dashed outline + pencil on hover
+  // Uses `relative` so we can absolutely position the pencil, but `block` only when className needs it
   return (
-    <span className={`relative group/ef ${displayClass} outline outline-1 outline-dashed outline-black/20 rounded ${className ?? ''}`}>
+    <span
+      className={`group/ef relative block outline outline-1 outline-dashed outline-black/20 hover:outline-black/40 rounded cursor-default ${className ?? ''}`}
+      style={{ display: 'flow-root' }}
+    >
       {children}
       <button
         onClick={() => setEditing(true)}
         title={`Edit ${fieldName}`}
         className="
-          absolute top-1.5 right-1.5
+          absolute top-1 right-1
           w-5 h-5 flex items-center justify-center
           bg-black text-white rounded-full
           opacity-0 group-hover/ef:opacity-100

@@ -5,6 +5,7 @@ import { Eye, Heart, Zap, Users, Award, TrendingUp, ChevronDown, Plus, Minus } f
 import { motion } from 'motion/react';
 import type { AboutContent as AboutContentType } from '@/lib/wordpress';
 import { EditableField } from '@/components/cms/EditableField';
+import { EditableImage } from '@/components/cms/EditableImage';
 import { PAGE_IDS } from '@/lib/cmsFields';
 
 const VALUE_ICONS = [Eye, Heart, Zap];
@@ -90,9 +91,11 @@ export default function AboutContent({ content }: Props) {
                 transform: `translateY(-${scrollY * 0.15}px)`,
               }}
             >
-              <div className="inline-block mb-6 px-4 py-2 border border-white/20 rounded-full text-xs tracking-widest animate-pulse">
-                {content.hero_badge}
-              </div>
+              <EditableField pageId={PAGE_IDS.about} fieldName="hero_badge" value={content.hero_badge}>
+                <div className="inline-block mb-6 px-4 py-2 border border-white/20 rounded-full text-xs tracking-widest animate-pulse">
+                  {content.hero_badge}
+                </div>
+              </EditableField>
               <EditableField pageId={PAGE_IDS.about} fieldName="hero_headline" value={content.hero_headline}>
                 <h1 className="text-3xl md:text-7xl mb-6 md:mb-8 leading-tight">
                   {content.hero_headline}
@@ -176,24 +179,35 @@ export default function AboutContent({ content }: Props) {
                   : 'opacity-0 translate-x-12'
               }`}
             >
-              <div className="relative group">
-                <div className="absolute inset-0 bg-gradient-to-br from-black/20 to-black/5 rounded-2xl transform group-hover:scale-105 transition-transform duration-500" />
-                <div className="aspect-[4/3] bg-black/5 rounded-2xl relative overflow-hidden">
-                  {/* Decorative grid pattern */}
-                  <div className="absolute inset-0 opacity-10">
+              <div className="aspect-[4/3] bg-black/5 rounded-2xl overflow-hidden">
+                {content.story_image ? (
+                  <EditableImage
+                    pageId={PAGE_IDS.about}
+                    fieldName="story_image"
+                    src={content.story_image}
+                    alt="Our story"
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <EditableImage
+                    pageId={PAGE_IDS.about}
+                    fieldName="story_image"
+                    src=""
+                    alt="Our story"
+                    className="w-full h-full object-cover"
+                    imgProps={{ style: { display: 'none' } }}
+                  />
+                )}
+                {/* Decorative grid shown when no image set */}
+                {!content.story_image && (
+                  <div className="absolute inset-0 opacity-10 pointer-events-none">
                     <div className="grid grid-cols-8 grid-rows-6 h-full w-full">
                       {Array.from({ length: 48 }).map((_, i) => (
-                        <div
-                          key={i}
-                          className="border border-black/20 transform transition-all duration-500 hover:bg-black/10"
-                          style={{
-                            transitionDelay: `${i * 10}ms`
-                          }}
-                        />
+                        <div key={i} className="border border-black/20" />
                       ))}
                     </div>
                   </div>
-                </div>
+                )}
               </div>
             </div>
           </div>
@@ -222,12 +236,14 @@ export default function AboutContent({ content }: Props) {
               const value = { icon: Icon, title: v.title, description: v.short, stats: v.badge, expandedText: v.expanded };
               return (
               <ValueCard
-                key={value.title}
+                key={index}
                 value={value}
                 index={index}
                 isActive={activeValue === index}
                 onClick={() => setActiveValue(activeValue === index ? null : index)}
                 isVisible={visibleSections.has('values')}
+                editPageId={PAGE_IDS.about}
+                editIndex={index}
               />
             );
             })}
@@ -283,7 +299,9 @@ export default function AboutContent({ content }: Props) {
                   onClick={() => setExpandedTimeline(expandedTimeline === index ? null : index)}
                 >
                   <div className="flex items-center gap-3 mb-2">
-                    <div className="text-sm text-white/50 tracking-wider">{milestone.year}</div>
+                    <EditableField pageId={PAGE_IDS.about} fieldName={`timeline_${index + 1}_year`} value={milestone.year}>
+                      <div className="text-sm text-white/50 tracking-wider">{milestone.year}</div>
+                    </EditableField>
                     <button className={`w-6 h-6 rounded-full border border-white/30 flex items-center justify-center transition-all duration-300 ${
                       expandedTimeline === index ? 'bg-white rotate-180' : 'hover:bg-white/10'
                     }`}>
@@ -294,17 +312,21 @@ export default function AboutContent({ content }: Props) {
                       )}
                     </button>
                   </div>
-                  <h3 className="text-2xl md:text-3xl mb-2">{milestone.title}</h3>
-                  <p className="text-white/70 leading-relaxed">{milestone.description}</p>
+                  <EditableField pageId={PAGE_IDS.about} fieldName={`timeline_${index + 1}_title`} value={milestone.title}>
+                    <h3 className="text-2xl md:text-3xl mb-2">{milestone.title}</h3>
+                  </EditableField>
+                  <EditableField pageId={PAGE_IDS.about} fieldName={`timeline_${index + 1}_description`} value={milestone.description} multiline>
+                    <p className="text-white/70 leading-relaxed">{milestone.description}</p>
+                  </EditableField>
 
                   {/* Expanded Content */}
                   <div className={`overflow-hidden transition-all duration-500 ${
                     expandedTimeline === index ? 'max-h-96 mt-4 opacity-100' : 'max-h-0 opacity-0'
                   }`}>
                     <div className="border-l-2 border-white/20 pl-4 py-2">
-                      <p className="text-white/60 leading-relaxed">
-                        {milestone.details}
-                      </p>
+                      <EditableField pageId={PAGE_IDS.about} fieldName={`timeline_${index + 1}_details`} value={milestone.details} multiline>
+                        <p className="text-white/60 leading-relaxed">{milestone.details}</p>
+                      </EditableField>
                     </div>
                   </div>
                 </div>
@@ -420,16 +442,21 @@ function ValueCard({
   index,
   isActive,
   onClick,
-  isVisible
+  isVisible,
+  editPageId,
+  editIndex,
 }: {
   value: any;
   index: number;
   isActive: boolean;
   onClick: () => void;
   isVisible: boolean;
+  editPageId?: number;
+  editIndex?: number;
 }) {
   const [hovered, setHovered] = useState(false);
   const Icon = value.icon;
+  const i = editIndex ?? index;
 
   return (
     <div
@@ -456,20 +483,37 @@ function ValueCard({
         }`} />
       </div>
 
-      <h3 className="text-2xl mb-4">{value.title}</h3>
-      <p className={`leading-relaxed mb-4 transition-colors duration-300 ${
-        isActive ? 'text-white/80' : 'text-black/60'
-      }`}>
-        {value.description}
-      </p>
+      {editPageId !== undefined ? (
+        <EditableField pageId={editPageId} fieldName={`value_${i + 1}_title`} value={value.title}>
+          <h3 className="text-2xl mb-4">{value.title}</h3>
+        </EditableField>
+      ) : (
+        <h3 className="text-2xl mb-4">{value.title}</h3>
+      )}
 
-      <div className={`inline-block px-4 py-2 rounded-full text-xs tracking-wider transition-all duration-300 ${
-        isActive
-          ? 'bg-white/20 text-white'
-          : 'bg-black/5 text-black/60'
-      }`}>
-        {value.stats}
-      </div>
+      {editPageId !== undefined ? (
+        <EditableField pageId={editPageId} fieldName={`value_${i + 1}_short`} value={value.description} multiline>
+          <p className={`leading-relaxed mb-4 transition-colors duration-300 ${isActive ? 'text-white/80' : 'text-black/60'}`}>
+            {value.description}
+          </p>
+        </EditableField>
+      ) : (
+        <p className={`leading-relaxed mb-4 transition-colors duration-300 ${isActive ? 'text-white/80' : 'text-black/60'}`}>
+          {value.description}
+        </p>
+      )}
+
+      {editPageId !== undefined ? (
+        <EditableField pageId={editPageId} fieldName={`value_${i + 1}_badge`} value={value.stats}>
+          <div className={`inline-block px-4 py-2 rounded-full text-xs tracking-wider transition-all duration-300 ${isActive ? 'bg-white/20 text-white' : 'bg-black/5 text-black/60'}`}>
+            {value.stats}
+          </div>
+        </EditableField>
+      ) : (
+        <div className={`inline-block px-4 py-2 rounded-full text-xs tracking-wider transition-all duration-300 ${isActive ? 'bg-white/20 text-white' : 'bg-black/5 text-black/60'}`}>
+          {value.stats}
+        </div>
+      )}
 
       {/* Click indicator */}
       <div className={`absolute bottom-4 right-4 text-xs transition-opacity duration-300 ${
@@ -482,14 +526,14 @@ function ValueCard({
       <div className={`overflow-hidden transition-all duration-500 ${
         isActive ? 'max-h-96 mt-6 opacity-100' : 'max-h-0 opacity-0'
       }`}>
-        <div className={`border-t pt-4 ${
-          isActive ? 'border-white/20' : 'border-black/10'
-        }`}>
-          <p className={`text-sm leading-relaxed ${
-            isActive ? 'text-white/70' : 'text-black/60'
-          }`}>
-            {value.expandedText}
-          </p>
+        <div className={`border-t pt-4 ${isActive ? 'border-white/20' : 'border-black/10'}`}>
+          {editPageId !== undefined ? (
+            <EditableField pageId={editPageId} fieldName={`value_${i + 1}_expanded`} value={value.expandedText} multiline>
+              <p className={`text-sm leading-relaxed ${isActive ? 'text-white/70' : 'text-black/60'}`}>{value.expandedText}</p>
+            </EditableField>
+          ) : (
+            <p className={`text-sm leading-relaxed ${isActive ? 'text-white/70' : 'text-black/60'}`}>{value.expandedText}</p>
+          )}
         </div>
       </div>
     </div>

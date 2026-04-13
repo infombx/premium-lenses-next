@@ -274,6 +274,7 @@ export interface AboutContent {
   hero_image: string
   stats: Stat[]
   story_title: string
+  story_image: string
   story_paragraphs: string[]
   values_title: string
   values_description: string
@@ -299,6 +300,7 @@ const aboutFallback: AboutContent = {
     { value: '99%', label: 'SATISFACTION' },
   ],
   story_title: 'Our Story',
+  story_image: '',
   story_paragraphs: [
     "Founded with a passion for beauty and self-expression, we've been serving customers for over a decade. What started as a small vision to enhance natural beauty has grown into a trusted source for stunning colored contact lenses.",
     "We believe that everyone deserves to express their unique style. That's why we partner with leading manufacturers to bring you the latest in beauty lens designs, all at prices that make transformation accessible.",

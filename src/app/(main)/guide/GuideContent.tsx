@@ -446,7 +446,9 @@ export default function GuideContent({ content, orderNumber, orderTotal, payment
                 <div className={`${item.color} w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0`}>
                   <item.icon className="w-5 h-5 text-white" />
                 </div>
-                <p className="text-sm leading-relaxed pt-2">{item.tip}</p>
+                <EditableField pageId={PAGE_IDS.guide} fieldName={`safety_tip_${index + 1}`} value={item.tip} multiline>
+                  <p className="text-sm leading-relaxed pt-2">{item.tip}</p>
+                </EditableField>
               </motion.div>
             ))}
           </div>
@@ -546,10 +548,12 @@ export default function GuideContent({ content, orderNumber, orderTotal, payment
             transition={{ duration: 0.6 }}
           >
             <Heart className="w-12 h-12 md:w-16 md:h-16 mx-auto mb-6 text-white/70" />
-            <h2 className="text-3xl md:text-5xl mb-6">{content.cta_title}</h2>
-            <p className="text-white/70 max-w-2xl mx-auto text-base md:text-lg mb-8 leading-relaxed">
-              {content.cta_description}
-            </p>
+            <EditableField pageId={PAGE_IDS.guide} fieldName="cta_title" value={content.cta_title}>
+              <h2 className="text-3xl md:text-5xl mb-6">{content.cta_title}</h2>
+            </EditableField>
+            <EditableField pageId={PAGE_IDS.guide} fieldName="cta_description" value={content.cta_description} multiline>
+              <p className="text-white/70 max-w-2xl mx-auto text-base md:text-lg mb-8 leading-relaxed">{content.cta_description}</p>
+            </EditableField>
             <Link href="/shop">
               <motion.button
                 whileHover={{ scale: 1.05 }}
