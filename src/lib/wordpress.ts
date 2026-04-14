@@ -359,7 +359,7 @@ export async function getAboutContent(): Promise<AboutContent> {
       // ID only — fetch the URL from the media endpoint
       try {
         const media = await wpFetch<{ source_url: string }>(`/wp/v2/media/${raw}`)
-        base.story_image = media.source_url ?? ''
+        base.story_image = media?.source_url ?? ''
       } catch { base.story_image = '' }
     } else {
       base.story_image = String(raw)
