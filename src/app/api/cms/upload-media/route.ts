@@ -34,6 +34,6 @@ export async function POST(request: NextRequest) {
     )
   }
 
-  const data = await wpRes.json() as { source_url: string }
-  return NextResponse.json({ url: data.source_url })
+  const data = await wpRes.json() as { id: number; source_url: string }
+  return NextResponse.json({ url: data.source_url, id: data.id })
 }

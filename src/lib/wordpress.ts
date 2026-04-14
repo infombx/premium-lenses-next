@@ -349,6 +349,23 @@ export async function getAboutContent(): Promise<AboutContent> {
 
   const base = { ...aboutFallback, ...acf } as AboutContent
 
+  // ACF Image fields can return an object {url,...}, an ID (number), or a URL string
+  // Normalise to a plain URL string
+  if (acf.story_image) {
+    const raw = acf.story_image as unknown
+    if (typeof raw === 'object' && raw !== null && 'url' in raw) {
+      base.story_image = (raw as { url: string }).url
+    } else if (typeof raw === 'number') {
+      // ID only — fetch the URL from the media endpoint
+      try {
+        const media = await wpFetch<{ source_url: string }>(`/wp/v2/media/${raw}`)
+        base.story_image = media.source_url ?? ''
+      } catch { base.story_image = '' }
+    } else {
+      base.story_image = String(raw)
+    }
+  }
+
   const stats = Array.isArray(acf.stats) ? (acf.stats as Stat[]) : buildRepeater<Stat>(acf, 'stat', ['value', 'label'])
   if (stats.length) base.stats = stats
 
