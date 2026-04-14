@@ -468,10 +468,10 @@ function ValueCard({
       onMouseLeave={() => setHovered(false)}
     >
       <div className={`w-16 h-16 rounded-full mb-6 flex items-center justify-center transition-all duration-300 ${
-        isActive ? 'bg-white' : 'bg-black'
+        forceExpanded || isActive ? 'bg-white' : 'bg-black'
       }`}>
         <Icon className={`w-8 h-8 transition-colors duration-300 ${
-          isActive ? 'text-black' : 'text-white'
+          forceExpanded || isActive ? 'text-black' : 'text-white'
         }`} />
       </div>
 
@@ -485,24 +485,24 @@ function ValueCard({
 
       {editPageId !== undefined ? (
         <EditableField pageId={editPageId} fieldName={`value_${i + 1}_short`} value={value.description} multiline>
-          <p className={`leading-relaxed mb-4 transition-colors duration-300 ${isActive ? 'text-white/80' : 'text-black/60'}`}>
+          <p className={`leading-relaxed mb-4 transition-colors duration-300 ${forceExpanded || isActive ? 'text-white/80' : 'text-black/60'}`}>
             {value.description}
           </p>
         </EditableField>
       ) : (
-        <p className={`leading-relaxed mb-4 transition-colors duration-300 ${isActive ? 'text-white/80' : 'text-black/60'}`}>
+        <p className={`leading-relaxed mb-4 transition-colors duration-300 ${forceExpanded || isActive ? 'text-white/80' : 'text-black/60'}`}>
           {value.description}
         </p>
       )}
 
       {editPageId !== undefined ? (
         <EditableField pageId={editPageId} fieldName={`value_${i + 1}_badge`} value={value.stats}>
-          <div className={`inline-block px-4 py-2 rounded-full text-xs tracking-wider transition-all duration-300 ${isActive ? 'bg-white/20 text-white' : 'bg-black/5 text-black/60'}`}>
+          <div className={`inline-block px-4 py-2 rounded-full text-xs tracking-wider transition-all duration-300 ${forceExpanded || isActive ? 'bg-white/20 text-white' : 'bg-black/5 text-black/60'}`}>
             {value.stats}
           </div>
         </EditableField>
       ) : (
-        <div className={`inline-block px-4 py-2 rounded-full text-xs tracking-wider transition-all duration-300 ${isActive ? 'bg-white/20 text-white' : 'bg-black/5 text-black/60'}`}>
+        <div className={`inline-block px-4 py-2 rounded-full text-xs tracking-wider transition-all duration-300 ${forceExpanded || isActive ? 'bg-white/20 text-white' : 'bg-black/5 text-black/60'}`}>
           {value.stats}
         </div>
       )}
@@ -521,10 +521,10 @@ function ValueCard({
         <div className={`border-t pt-4 ${forceExpanded || isActive ? 'border-white/20' : 'border-black/10'}`}>
           {editPageId !== undefined ? (
             <EditableField pageId={editPageId} fieldName={`value_${i + 1}_expanded`} value={value.expandedText} multiline>
-              <p className={`text-sm leading-relaxed ${isActive ? 'text-white/70' : 'text-black/60'}`}>{value.expandedText}</p>
+              <p className={`text-sm leading-relaxed ${forceExpanded || isActive ? 'text-white/70' : 'text-black/60'}`}>{value.expandedText}</p>
             </EditableField>
           ) : (
-            <p className={`text-sm leading-relaxed ${isActive ? 'text-white/70' : 'text-black/60'}`}>{value.expandedText}</p>
+            <p className={`text-sm leading-relaxed ${forceExpanded || isActive ? 'text-white/70' : 'text-black/60'}`}>{value.expandedText}</p>
           )}
         </div>
       </div>
