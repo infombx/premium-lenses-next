@@ -184,8 +184,6 @@ export default function GuideContent({ content, orderNumber, orderTotal, payment
         }
       ]
     }
-  ];
-
   ]; // end _unused
 
   const faqs = content.faqs;
