@@ -349,23 +349,19 @@ export async function getAboutContent(): Promise<AboutContent> {
 
   const base = { ...aboutFallback, ...acf } as AboutContent
 
-  // ACF Image fields can return an object {url,...}, an ID (number or numeric string), or a URL string
-  // Normalise to a plain URL string
+  // ACF Image field (Return Format: Image URL) returns a plain URL string.
+  // Guard against object or numeric formats just in case.
   if (acf.story_image) {
     const raw = acf.story_image as unknown
-    if (typeof raw === 'object' && raw !== null && 'url' in raw) {
+    if (typeof raw === 'string' && raw.startsWith('http')) {
+      base.story_image = raw
+    } else if (typeof raw === 'object' && raw !== null && 'url' in raw) {
       base.story_image = (raw as { url: string }).url
-    } else if (
-      typeof raw === 'number' ||
-      (typeof raw === 'string' && /^\d+$/.test(raw))
-    ) {
-      // Bare attachment ID — fetch source_url from media endpoint
+    } else if (typeof raw === 'number' || (typeof raw === 'string' && /^\d+$/.test(raw))) {
       try {
         const media = await wpFetch<{ source_url: string }>(`/wp/v2/media/${raw}`)
         base.story_image = media?.source_url ?? ''
       } catch { base.story_image = '' }
-    } else if (typeof raw === 'string' && raw.startsWith('http')) {
-      base.story_image = raw
     }
   }
 

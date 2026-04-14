@@ -59,9 +59,9 @@ export function EditableImage({ pageId, fieldName, src, alt, className, wrapperC
       const res = await fetch('/api/cms/upload-media', { method: 'POST', body: fd })
       const data = await res.json() as { url?: string; id?: number; error?: string }
       if (!res.ok) throw new Error(data.error ?? 'Upload failed')
-      // Always save the URL — works for ACF Text, URL, and Image (URL return format) fields
+      // Display the URL, but save the attachment ID — ACF Image fields require the ID
       setDisplayUrl(data.url!)
-      setSaveValue(data.url!)
+      setSaveValue(String(data.id!))
       setUrlDraft(data.url!)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Upload failed')

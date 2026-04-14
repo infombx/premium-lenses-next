@@ -23,6 +23,9 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Missing fields' }, { status: 400 })
   }
 
+  // ACF Image fields require an integer attachment ID, not a URL string
+  const acfValue = /^\d+$/.test(String(value)) ? parseInt(value, 10) : value
+
   // Write to WordPress via REST API using the user's JWT
   const wpRes = await fetch(`${WP_URL}/wp-json/wp/v2/pages/${pageId}`, {
     method: 'POST',
@@ -30,7 +33,7 @@ export async function POST(request: NextRequest) {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ acf: { [fieldName]: value } }),
+    body: JSON.stringify({ acf: { [fieldName]: acfValue } }),
   })
 
   if (!wpRes.ok) {
