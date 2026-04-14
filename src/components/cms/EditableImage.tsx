@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Camera, Check, X, Loader2, Upload } from 'lucide-react'
 import { useEditMode } from '@/app/context/EditModeContext'
 
@@ -21,10 +21,14 @@ export function EditableImage({ pageId, fieldName, src, alt, className, wrapperC
   const { isEditMode, saveField } = useEditMode()
   const [editing, setEditing] = useState(false)
   const [draft, setDraft] = useState(src)
+  const [currentSrc, setCurrentSrc] = useState(src)
   const [saving, setSaving] = useState(false)
   const [uploading, setUploading] = useState(false)
   const [error, setError] = useState('')
   const fileRef = useRef<HTMLInputElement>(null)
+
+  // Sync when parent prop changes (e.g. after router.refresh())
+  useEffect(() => { if (!editing) { setCurrentSrc(src); setDraft(src) } }, [src, editing])
 
   if (!isEditMode) {
     if (!src && placeholder) return <>{placeholder}</>
@@ -55,6 +59,7 @@ export function EditableImage({ pageId, fieldName, src, alt, className, wrapperC
     setError('')
     try {
       await saveField(pageId, fieldName, draft)
+      setCurrentSrc(draft) // show new image immediately
       setEditing(false)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Save failed')
@@ -69,8 +74,8 @@ export function EditableImage({ pageId, fieldName, src, alt, className, wrapperC
 
   return (
     <span className={wrapClass} style={wrapperClassName ? { display: 'block' } : undefined}>
-      {src ? (
-        <img src={src} alt={alt} className={className} {...imgProps} />
+      {currentSrc ? (
+        <img src={currentSrc} alt={alt} className={className} {...imgProps} />
       ) : (
         <span className="flex items-center justify-center w-full h-full min-h-[160px] text-black/30 text-sm">
           {placeholder ?? 'No image — click camera to upload'}
