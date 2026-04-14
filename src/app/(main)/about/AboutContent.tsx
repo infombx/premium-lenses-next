@@ -7,6 +7,7 @@ import type { AboutContent as AboutContentType } from '@/lib/wordpress';
 import { EditableField } from '@/components/cms/EditableField';
 import { EditableImage } from '@/components/cms/EditableImage';
 import { PAGE_IDS } from '@/lib/cmsFields';
+import { useEditMode } from '@/app/context/EditModeContext';
 
 const VALUE_ICONS = [Eye, Heart, Zap];
 
@@ -444,23 +445,25 @@ function ValueCard({
   editIndex?: number;
 }) {
   const [hovered, setHovered] = useState(false);
+  const { isEditMode } = useEditMode();
   const Icon = value.icon;
   const i = editIndex ?? index;
+  const forceExpanded = isEditMode;
 
   return (
     <div
-      className={`relative border border-black/10 rounded-2xl p-8 cursor-pointer transition-all duration-500 ${
-        isActive ? 'bg-black text-white scale-105' : 'bg-white hover:shadow-xl'
-      } ${
+      className={`relative border border-black/10 rounded-2xl p-8 transition-all duration-500 ${
+        forceExpanded || isActive ? 'bg-black text-white' : 'bg-white hover:shadow-xl'
+      } ${forceExpanded ? 'cursor-default' : 'cursor-pointer'} ${
         isVisible
           ? 'opacity-100 translate-y-0'
           : 'opacity-0 translate-y-12'
       }`}
       style={{
         transitionDelay: `${index * 150}ms`,
-        transform: hovered && !isActive ? 'translateY(-8px)' : '',
+        transform: hovered && !isActive && !forceExpanded ? 'translateY(-8px)' : '',
       }}
-      onClick={onClick}
+      onClick={forceExpanded ? undefined : onClick}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -513,9 +516,9 @@ function ValueCard({
 
       {/* Expanded Text */}
       <div className={`overflow-hidden transition-all duration-500 ${
-        isActive ? 'max-h-96 mt-6 opacity-100' : 'max-h-0 opacity-0'
+        forceExpanded || isActive ? 'max-h-96 mt-6 opacity-100' : 'max-h-0 opacity-0'
       }`}>
-        <div className={`border-t pt-4 ${isActive ? 'border-white/20' : 'border-black/10'}`}>
+        <div className={`border-t pt-4 ${forceExpanded || isActive ? 'border-white/20' : 'border-black/10'}`}>
           {editPageId !== undefined ? (
             <EditableField pageId={editPageId} fieldName={`value_${i + 1}_expanded`} value={value.expandedText} multiline>
               <p className={`text-sm leading-relaxed ${isActive ? 'text-white/70' : 'text-black/60'}`}>{value.expandedText}</p>
