@@ -17,12 +17,12 @@ export function StatsBar({ stats }: Props) {
               key={index}
               className="text-center md:border-r md:border-black/10 last:border-r-0"
             >
-              <EditableField pageId={PAGE_IDS.homepage} fieldName={`stat_${index + 1}_value`} value={stat.value} inline>
+              <EditableField pageId={PAGE_IDS.homepage} fieldName={`stat_${index + 1}_value`} value={stat.value}>
                 <div className="text-4xl md:text-5xl tracking-tight text-black/80">
                   {stat.value}
                 </div>
               </EditableField>
-              <EditableField pageId={PAGE_IDS.homepage} fieldName={`stat_${index + 1}_label`} value={stat.label} inline>
+              <EditableField pageId={PAGE_IDS.homepage} fieldName={`stat_${index + 1}_label`} value={stat.label}>
                 <div className="text-xs tracking-wider text-black/40 mt-2">
                   {stat.label}
                 </div>
