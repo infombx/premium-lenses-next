@@ -1,6 +1,7 @@
 'use client'
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
+import posthog from 'posthog-js'
 
 export interface CartItem {
   id: number
@@ -37,6 +38,14 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, [items])
 
   const addToCart = (product: Omit<CartItem, 'quantity'>) => {
+    posthog.capture('add_to_cart', {
+      product_id: product.id,
+      product_name: product.name,
+      product_slug: product.slug,
+      product_price: product.price,
+      product_category: product.category,
+      currency: 'MUR',
+    })
     setItems(current => {
       const existing = current.find(i => i.id === product.id)
       if (existing) {

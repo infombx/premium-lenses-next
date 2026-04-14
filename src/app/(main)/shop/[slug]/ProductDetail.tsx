@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import posthog from 'posthog-js'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { Truck, Shield, RotateCcw, ShoppingCart, Star, Facebook, Twitter, Instagram, Linkedin, Minus, Plus, ArrowLeft, Check, Eye, Award } from 'lucide-react'
@@ -15,6 +16,17 @@ interface Props {
 }
 
 export default function ProductDetail({ product, relatedProducts }: Props) {
+  useEffect(() => {
+    posthog.capture('product_viewed', {
+      product_id: product.id,
+      product_name: product.name,
+      product_slug: product.slug,
+      product_price: product.price,
+      product_category: product.category,
+      currency: 'MUR',
+    })
+  }, [product.id, product.name, product.slug, product.price, product.category])
+
   const [quantity, setQuantity] = useState(1)
   const [selectedImage, setSelectedImage] = useState(0)
   const [activeTab, setActiveTab] = useState<'description' | 'features'>('description')

@@ -1,0 +1,40 @@
+# Premium Lenses
+
+> Premium contact lenses and eye care products in Mauritius. Quality, comfort, and style since 2014.
+
+## About
+
+Premium Lenses is a Mauritius-based contact lens retailer founded in 2014. We offer colored contact lenses, prescription lenses, daily disposables, toric lenses, lens accessories, and eye care solutions. We serve customers across Mauritius with cash on delivery via Juice (MCB) or bank transfer.
+
+## Pages
+
+- [Home](https://premiumlenses.mu/) — Featured products, categories, testimonials
+- [Shop](https://premiumlenses.mu/shop) — Full product catalogue: colored lenses, prescription lenses, accessories, solutions
+- [About](https://premiumlenses.mu/about) — Our story, values, and journey since 2014
+- [Guide](https://premiumlenses.mu/guide) — Complete contact lens guide: choosing, inserting, removing, caring, troubleshooting, FAQs
+- [Contact](https://premiumlenses.mu/contact) — Phone, email, location, contact form
+
+## Product Categories
+
+- **Blue Lenses** — colored lenses in blue shades
+- **Brown Lenses** — colored lenses in brown/hazel shades
+- **Gray Lenses** — colored lenses in gray shades
+- **Green Shades** — colored lenses in green shades
+- **Prescribed Lenses** — prescription contact lenses with vision correction
+- **Lens Accessories** — lens cases, tweezers, applicators
+- **Solutions** — multipurpose cleaning and storage solutions
+
+Browse all products: https://premiumlenses.mu/shop
+
+## Key Facts
+
+- **Location:** Mauritius
+- **Currency:** Mauritian Rupee (Rs / MUR)
+- **Payment:** Cash on Delivery — Juice (MCB mobile payment) or bank transfer
+- **Delivery:** Mauritius-wide
+- **Founded:** 2014
+- **Customers:** 50,000+
+
+## Sitemap
+
+https://premiumlenses.mu/sitemap.xml

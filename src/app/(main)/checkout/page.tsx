@@ -3,13 +3,24 @@
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useCart } from '@/app/context/CartContext'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import posthog from 'posthog-js'
 
 const isMauritianMobile = (v: string) => /^[5-9]\d{7}$/.test(v.replace(/\s/g, ''))
 
 export default function CheckoutPage() {
   const { items, getCartTotal, clearCart } = useCart()
   const router = useRouter()
+
+  // Fire checkout_started once on mount
+  useEffect(() => {
+    posthog.capture('checkout_started', {
+      cart_total: getCartTotal(),
+      item_count: items.reduce((n, i) => n + i.quantity, 0),
+      currency: 'MUR',
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const [formData, setFormData] = useState({
     firstName: '',
@@ -85,6 +96,12 @@ export default function CheckoutPage() {
       })
       if (res.ok) {
         const result = await res.json()
+        posthog.capture('order_completed', {
+          order_id: result.number,
+          total: total,
+          currency: 'MUR',
+          items: items.map(i => ({ product_id: i.id, name: i.name, price: i.price, quantity: i.quantity })),
+        })
         clearCart()
         router.push(`/guide?order=${result.number}&total=${total.toFixed(2)}`)
       } else {
