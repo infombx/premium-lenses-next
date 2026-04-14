@@ -405,11 +405,46 @@ export async function getContactContent(): Promise<ContactContent> {
 // Guide Page Content
 // ---------------------------------------------------------------------------
 
+export interface GuideContentItem {
+  title: string
+  description: string
+  pros?: string[]
+  bestFor?: string
+  dos?: string[]
+  donts?: string[]
+}
+
+export interface GuideStep {
+  number: number
+  title: string
+  description: string
+  tips: string[]
+}
+
+export interface GuideProblem {
+  issue: string
+  causes: string[]
+  solutions: string[]
+}
+
+export interface GuideTopic {
+  title: string
+  content?: GuideContentItem[]
+  steps?: GuideStep[]
+  problems?: GuideProblem[]
+}
+
 export interface GuideContent {
   hero_badge: string
   hero_title: string
   hero_subtitle: string
+  safety_tips_title: string
   safety_tips: string[]
+  guide_section_title: string
+  guide_section_subtitle: string
+  topics: GuideTopic[]
+  faq_section_title: string
+  faq_section_subtitle: string
   faqs: FAQItem[]
   cta_title: string
   cta_description: string
@@ -421,6 +456,7 @@ const guideFallback: GuideContent = {
   hero_title: 'Complete Contact Lens Guide',
   hero_subtitle:
     'Everything you need to know about choosing, wearing, and caring for your contact lenses—from first-time wearers to experienced users',
+  safety_tips_title: 'Quick Safety Tips',
   safety_tips: [
     'Always handle lenses with clean, dry hands',
     'Never wear lenses longer than recommended',
@@ -429,35 +465,87 @@ const guideFallback: GuideContent = {
     'Consider UV-blocking lenses for sun protection',
     'Mark your calendar for replacement dates',
   ],
-  faqs: [
+  guide_section_title: 'Comprehensive Guide',
+  guide_section_subtitle: 'Click on each section to explore detailed information',
+  topics: [
     {
-      question: 'How long can I wear my contact lenses each day?',
-      answer: 'Daily disposables can be worn for up to 12-14 hours, while monthly lenses typically allow 10-12 hours of comfortable wear. Never exceed the manufacturer\'s recommended wearing schedule.',
+      title: 'Choosing the Right Lenses',
+      content: [
+        {
+          title: 'Daily Disposables',
+          description: 'Perfect for occasional wearers, travelers, or anyone who wants ultimate convenience. Wear once and throw away—no cleaning solution needed.',
+          pros: ['No maintenance required', 'Most hygienic option', 'Great for allergies', 'Perfect for travel'],
+          bestFor: 'Occasional wearers, active lifestyles, people with allergies',
+        },
+        {
+          title: 'Monthly Lenses',
+          description: 'Ideal for daily wearers seeking cost-effective comfort. Designed for 30 days of wear with proper daily cleaning and storage.',
+          pros: ['Cost-effective for daily wear', 'Comfortable for all-day use', 'Wide variety of options', 'Environmentally friendlier'],
+          bestFor: 'Regular daily wearers, budget-conscious users',
+        },
+        {
+          title: 'Colored Lenses',
+          description: 'Change or enhance your eye color while maintaining vision correction. Available in prescription and non-prescription varieties.',
+          pros: ['Aesthetic enhancement', 'Wide color selection', 'Same comfort as clear lenses', 'FDA approved options'],
+          bestFor: 'Style-conscious wearers, special occasions',
+        },
+        {
+          title: 'Specialty Lenses',
+          description: 'Designed for specific vision needs like astigmatism (toric) or age-related focus issues (multifocal/progressive).',
+          pros: ['Addresses specific vision needs', 'Advanced technology', 'Customized correction', 'High precision'],
+          bestFor: 'Astigmatism, presbyopia, unique prescriptions',
+        },
+      ],
     },
     {
-      question: 'Can I swim or shower with contact lenses?',
-      answer: "It's not recommended to swim or shower while wearing contact lenses. Water can introduce bacteria and microorganisms that may cause serious eye infections.",
+      title: 'How to Insert & Remove Lenses',
+      steps: [
+        { number: 1, title: 'Prepare Your Workspace', description: 'Wash hands thoroughly with soap and water. Dry with a lint-free towel. Ensure your work area is clean and well-lit.', tips: ['Use antibacterial soap', 'Avoid hand lotions before handling', 'Keep nails trimmed and filed'] },
+        { number: 2, title: 'Check the Lens', description: "Place lens on your index finger. Make sure it's not inside out—it should look like a bowl, not a plate with flared edges.", tips: ['Hold lens up to light', 'Edges should curve inward', 'If edges flare out, flip it over'] },
+        { number: 3, title: 'Insert the Lens', description: 'Use your free hand to hold your upper eyelid. Pull down lower lid with middle finger of hand holding lens. Look up and gently place lens on eye.', tips: ['Relax and breathe', 'Look upward, not at the lens', 'Release lid slowly after placing'] },
+        { number: 4, title: 'Center and Settle', description: 'Close your eye gently and roll it around to center the lens. Blink a few times. The lens should feel comfortable.', tips: ["Don't rub your eyes", 'If discomfort persists, remove and retry', 'May take practice—be patient'] },
+        { number: 5, title: 'Removing Lenses', description: 'Wash hands. Look up, pull down lower lid, and gently pinch the lens with thumb and index finger. Remove gently.', tips: ['Never remove with fingernails', 'Always remove before sleeping', 'Store immediately in solution'] },
+      ],
     },
     {
-      question: 'What should I do if a lens gets stuck in my eye?',
-      answer: "Don't panic—lenses cannot get lost behind your eye. Try using rewetting drops to lubricate your eye, then gently massage your closed eyelid.",
+      title: 'Care & Maintenance',
+      content: [
+        {
+          title: 'Daily Cleaning Routine',
+          description: 'After removing lenses, rub each lens with solution for 5 seconds on each side. Rinse thoroughly and store in fresh solution.',
+          dos: ['Use fresh solution daily', 'Rub lenses even with "no-rub" solution', 'Clean case with solution', 'Air dry case upside down'],
+          donts: ['Never use tap water', 'Never reuse old solution', 'Never use saliva', 'Never sleep in daily lenses'],
+        },
+        {
+          title: 'Storage Best Practices',
+          description: 'Store lenses in a clean case filled with fresh multipurpose or prescribed solution. Never add new solution to old.',
+          dos: ['Replace case every 3 months', 'Use only recommended solutions', 'Keep case clean and dry', 'Store in cool, dry place'],
+          donts: ["Don't mix solution brands", "Don't use expired solution", "Don't share lenses or cases", "Don't store in water"],
+        },
+      ],
     },
     {
-      question: 'How often should I replace my contact lens case?',
-      answer: 'Replace your contact lens case every 3 months, or sooner if it becomes damaged or difficult to clean.',
-    },
-    {
-      question: 'Can I use any brand of contact lens solution?',
-      answer: 'Not all solutions are compatible with all lenses. Always use the solution recommended by your eye care professional or the lens manufacturer.',
-    },
-    {
-      question: 'When should I see an eye doctor about my contacts?',
-      answer: 'Schedule annual eye exams even if your vision seems fine. See your eye doctor immediately if you experience persistent redness, pain, or sudden vision changes.',
+      title: 'Troubleshooting Common Issues',
+      problems: [
+        { issue: 'Lens Feels Uncomfortable', causes: ['Inside-out lens', 'Debris on lens', 'Dry eyes', 'Damaged lens'], solutions: ['Remove and check orientation', 'Rinse with solution', 'Use rewetting drops', 'Replace if torn'] },
+        { issue: 'Blurry Vision', causes: ['Dirty lens', 'Wrong lens in wrong eye', 'Prescription changed', 'Lens decentered'], solutions: ['Clean thoroughly', 'Check left/right markings', 'Get eye exam', 'Blink and reposition'] },
+        { issue: 'Red or Irritated Eyes', causes: ['Overwear', 'Poor hygiene', 'Allergic reaction', 'Eye infection'], solutions: ['Remove lenses immediately', 'Clean hands and lenses', 'Try different solution', 'See eye doctor if persists'] },
+        { issue: 'Dry Eyes', causes: ['Low humidity', 'Extended screen time', 'Certain medications', 'Insufficient blinking'], solutions: ['Use rewetting drops', 'Take screen breaks', 'Use humidifier', 'Blink more frequently'] },
+      ],
     },
   ],
+  faq_section_title: 'Frequently Asked Questions',
+  faq_section_subtitle: 'Common questions from contact lens wearers',
+  faqs: [
+    { question: 'How long can I wear my contact lenses each day?', answer: "Daily disposables can be worn for up to 12-14 hours, while monthly lenses typically allow 10-12 hours of comfortable wear. Never exceed the manufacturer's recommended wearing schedule." },
+    { question: 'Can I swim or shower with contact lenses?', answer: "It's not recommended to swim or shower while wearing contact lenses. Water can introduce bacteria and microorganisms that may cause serious eye infections." },
+    { question: 'What should I do if a lens gets stuck in my eye?', answer: "Don't panic—lenses cannot get lost behind your eye. Try using rewetting drops to lubricate your eye, then gently massage your closed eyelid." },
+    { question: 'How often should I replace my contact lens case?', answer: 'Replace your contact lens case every 3 months, or sooner if it becomes damaged or difficult to clean.' },
+    { question: 'Can I use any brand of contact lens solution?', answer: 'Not all solutions are compatible with all lenses. Always use the solution recommended by your eye care professional or the lens manufacturer.' },
+    { question: 'When should I see an eye doctor about my contacts?', answer: 'Schedule annual eye exams even if your vision seems fine. See your eye doctor immediately if you experience persistent redness, pain, or sudden vision changes.' },
+  ],
   cta_title: 'Ready to Find Your Perfect Lenses?',
-  cta_description:
-    'Browse our curated collection of premium contact lenses, all FDA-approved and backed by our expert support team',
+  cta_description: 'Browse our curated collection of premium contact lenses, all FDA-approved and backed by our expert support team',
   cta_button: 'SHOP NOW',
 }
 
@@ -473,6 +561,10 @@ export async function getGuideContent(): Promise<GuideContent> {
 
   const faqs = Array.isArray(acf.faqs) ? (acf.faqs as FAQItem[]) : buildRepeater<FAQItem>(acf, 'faq', ['question', 'answer'])
   if (faqs.length) base.faqs = faqs
+
+  // Topics: try ACF repeater, fall back to built fallback
+  const topics = Array.isArray(acf.topics) ? (acf.topics as GuideTopic[]) : null
+  if (topics?.length) base.topics = topics
 
   return base
 }

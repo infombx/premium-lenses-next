@@ -23,11 +23,12 @@ import {
   Info
 } from 'lucide-react';
 import Link from 'next/link';
-import type { GuideContent as GuideContentType } from '@/lib/wordpress';
+import type { GuideContent as GuideContentType, GuideTopic } from '@/lib/wordpress';
 import { EditableField } from '@/components/cms/EditableField';
 import { PAGE_IDS } from '@/lib/cmsFields';
 
 const TIP_ICONS = [ThumbsUp, Clock, Droplets, Moon, Sun, Calendar];
+const TOPIC_ICONS = [ShoppingBag, Eye, Droplets, AlertCircle];
 
 interface PaymentInfo {
   juice_number: string
@@ -69,7 +70,10 @@ export default function GuideContent({ content, orderNumber, orderTotal, payment
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  const guideTopics = [
+  const guideTopics = content.topics.map((t, i) => ({ ...t, icon: TOPIC_ICONS[i % TOPIC_ICONS.length] }));
+
+  // keep original hardcoded array only as fallback reference — unused, topics come from content now
+  const _unused = [
     {
       icon: ShoppingBag,
       title: 'Choosing the Right Lenses',
@@ -181,6 +185,8 @@ export default function GuideContent({ content, orderNumber, orderTotal, payment
       ]
     }
   ];
+
+  ]; // end _unused
 
   const faqs = content.faqs;
   const quickTips = content.safety_tips.map((tip, i) => ({
@@ -431,7 +437,9 @@ export default function GuideContent({ content, orderNumber, orderTotal, payment
       {/* Quick Tips Banner */}
       <section className="py-12 md:py-16 bg-black/[0.02] border-b border-black/5">
         <div className="max-w-[1440px] mx-auto px-6 md:px-12">
-          <h2 className="text-xl md:text-2xl text-center mb-8 md:mb-12">Quick Safety Tips</h2>
+          <EditableField pageId={PAGE_IDS.guide} fieldName="safety_tips_title" value={content.safety_tips_title}>
+            <h2 className="text-xl md:text-2xl text-center mb-8 md:mb-12">{content.safety_tips_title}</h2>
+          </EditableField>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {quickTips.map((item, index) => (
               <motion.div
@@ -459,10 +467,12 @@ export default function GuideContent({ content, orderNumber, orderTotal, payment
       <section className="py-16 md:py-24">
         <div className="max-w-[1200px] mx-auto px-6 md:px-12">
           <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-3xl md:text-4xl mb-4">Comprehensive Guide</h2>
-            <p className="text-black/60 max-w-2xl mx-auto">
-              Click on each section to explore detailed information
-            </p>
+            <EditableField pageId={PAGE_IDS.guide} fieldName="guide_section_title" value={content.guide_section_title}>
+              <h2 className="text-3xl md:text-4xl mb-4">{content.guide_section_title}</h2>
+            </EditableField>
+            <EditableField pageId={PAGE_IDS.guide} fieldName="guide_section_subtitle" value={content.guide_section_subtitle} multiline>
+              <p className="text-black/60 max-w-2xl mx-auto">{content.guide_section_subtitle}</p>
+            </EditableField>
           </div>
 
           <div className="space-y-4">
@@ -473,6 +483,7 @@ export default function GuideContent({ content, orderNumber, orderTotal, payment
                 index={index}
                 isActive={activeAccordion === index}
                 onClick={() => setActiveAccordion(activeAccordion === index ? null : index)}
+                pageId={PAGE_IDS.guide}
               />
             ))}
           </div>
@@ -483,10 +494,12 @@ export default function GuideContent({ content, orderNumber, orderTotal, payment
       <section className="py-16 md:py-24 bg-black/[0.02]">
         <div className="max-w-[1200px] mx-auto px-6 md:px-12">
           <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-3xl md:text-4xl mb-4">Frequently Asked Questions</h2>
-            <p className="text-black/60 max-w-2xl mx-auto">
-              Common questions from contact lens wearers
-            </p>
+            <EditableField pageId={PAGE_IDS.guide} fieldName="faq_section_title" value={content.faq_section_title}>
+              <h2 className="text-3xl md:text-4xl mb-4">{content.faq_section_title}</h2>
+            </EditableField>
+            <EditableField pageId={PAGE_IDS.guide} fieldName="faq_section_subtitle" value={content.faq_section_subtitle} multiline>
+              <p className="text-black/60 max-w-2xl mx-auto">{content.faq_section_subtitle}</p>
+            </EditableField>
           </div>
 
           <div className="space-y-3">
@@ -561,7 +574,9 @@ export default function GuideContent({ content, orderNumber, orderTotal, payment
                 className="group relative px-8 md:px-10 py-3 md:py-4 bg-white text-black overflow-hidden transition-all duration-300 rounded-lg"
               >
                 <span className="relative z-10 text-xs md:text-sm tracking-widest group-hover:text-white transition-colors duration-300 flex items-center gap-2">
-                  {content.cta_button}
+                  <EditableField pageId={PAGE_IDS.guide} fieldName="cta_button" value={content.cta_button}>
+                    <span>{content.cta_button}</span>
+                  </EditableField>
                   <Sparkles className="w-4 h-4 group-hover:rotate-12 transition-transform" />
                 </span>
                 <div className="absolute inset-0 bg-black transform translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
@@ -579,14 +594,17 @@ function GuideAccordion({
   topic,
   index,
   isActive,
-  onClick
+  onClick,
+  pageId,
 }: {
-  topic: any;
+  topic: GuideTopic & { icon: React.ElementType };
   index: number;
   isActive: boolean;
   onClick: () => void;
+  pageId: number;
 }) {
   const Icon = topic.icon;
+  const ti = index + 1; // topic index for field names
 
   return (
     <motion.div
@@ -611,7 +629,9 @@ function GuideAccordion({
         </div>
 
         <div className="flex-1">
-          <h3 className="text-lg md:text-2xl mb-1">{topic.title}</h3>
+          <EditableField pageId={pageId} fieldName={`topic_${ti}_title`} value={topic.title}>
+            <h3 className="text-lg md:text-2xl mb-1">{topic.title}</h3>
+          </EditableField>
           <p className="text-xs md:text-sm text-black/50">Click to expand</p>
         </div>
 
@@ -634,25 +654,31 @@ function GuideAccordion({
             className="overflow-hidden"
           >
             <div className="px-6 md:px-8 pb-6 md:pb-8 border-t border-black/5">
-              {/* Content based on topic type */}
+              {/* Content items (lens types / care routines) */}
               {topic.content && (
                 <div className="grid md:grid-cols-2 gap-6 mt-6">
-                  {topic.content.map((item: any, idx: number) => (
+                  {topic.content.map((item, idx) => (
                     <div key={idx} className="border border-black/10 rounded-xl p-6 hover:shadow-lg transition-shadow">
                       <h4 className="text-lg mb-3 flex items-center gap-2">
-                        <CheckCircle className="w-5 h-5 text-black" />
-                        {item.title}
+                        <CheckCircle className="w-5 h-5 text-black flex-shrink-0" />
+                        <EditableField pageId={pageId} fieldName={`topic_${ti}_item_${idx + 1}_title`} value={item.title}>
+                          <span>{item.title}</span>
+                        </EditableField>
                       </h4>
-                      <p className="text-sm text-black/60 mb-4 leading-relaxed">{item.description}</p>
+                      <EditableField pageId={pageId} fieldName={`topic_${ti}_item_${idx + 1}_description`} value={item.description} multiline>
+                        <p className="text-sm text-black/60 mb-4 leading-relaxed">{item.description}</p>
+                      </EditableField>
 
                       {item.pros && (
                         <div className="space-y-2 mb-4">
                           <p className="text-xs font-medium text-black/80">Benefits:</p>
                           <ul className="space-y-1">
-                            {item.pros.map((pro: string, i: number) => (
+                            {item.pros.map((pro, i) => (
                               <li key={i} className="text-xs text-black/60 flex items-start gap-2">
                                 <span className="text-black/40 mt-1">•</span>
-                                {pro}
+                                <EditableField pageId={pageId} fieldName={`topic_${ti}_item_${idx + 1}_pro_${i + 1}`} value={pro}>
+                                  <span>{pro}</span>
+                                </EditableField>
                               </li>
                             ))}
                           </ul>
@@ -666,10 +692,12 @@ function GuideAccordion({
                               <ThumbsUp className="w-3 h-3" /> Do:
                             </p>
                             <ul className="space-y-1">
-                              {item.dos.map((d: string, i: number) => (
+                              {item.dos.map((d, i) => (
                                 <li key={i} className="text-xs text-black/60 flex items-start gap-2">
                                   <CheckCircle className="w-3 h-3 text-green-600 flex-shrink-0 mt-0.5" />
-                                  {d}
+                                  <EditableField pageId={pageId} fieldName={`topic_${ti}_item_${idx + 1}_do_${i + 1}`} value={d}>
+                                    <span>{d}</span>
+                                  </EditableField>
                                 </li>
                               ))}
                             </ul>
@@ -679,10 +707,12 @@ function GuideAccordion({
                               <XCircle className="w-3 h-3" /> Don&apos;t:
                             </p>
                             <ul className="space-y-1">
-                              {item.donts.map((d: string, i: number) => (
+                              {item.donts?.map((d, i) => (
                                 <li key={i} className="text-xs text-black/60 flex items-start gap-2">
                                   <XCircle className="w-3 h-3 text-red-600 flex-shrink-0 mt-0.5" />
-                                  {d}
+                                  <EditableField pageId={pageId} fieldName={`topic_${ti}_item_${idx + 1}_dont_${i + 1}`} value={d}>
+                                    <span>{d}</span>
+                                  </EditableField>
                                 </li>
                               ))}
                             </ul>
@@ -692,7 +722,7 @@ function GuideAccordion({
 
                       {item.bestFor && (
                         <div className="mt-4 pt-4 border-t border-black/5">
-                          <p className="text-xs text-black/50">Best for: <span className="text-black/70">{item.bestFor}</span></p>
+                          <p className="text-xs text-black/50">Best for: <EditableField pageId={pageId} fieldName={`topic_${ti}_item_${idx + 1}_bestfor`} value={item.bestFor}><span className="text-black/70">{item.bestFor}</span></EditableField></p>
                         </div>
                       )}
                     </div>
@@ -700,9 +730,10 @@ function GuideAccordion({
                 </div>
               )}
 
+              {/* Steps */}
               {topic.steps && (
                 <div className="space-y-4 mt-6">
-                  {topic.steps.map((step: any, idx: number) => (
+                  {topic.steps.map((step, idx) => (
                     <motion.div
                       key={idx}
                       initial={{ opacity: 0, x: -20 }}
@@ -714,13 +745,17 @@ function GuideAccordion({
                         {step.number}
                       </div>
                       <div className="flex-1">
-                        <h4 className="text-base md:text-lg mb-2">{step.title}</h4>
-                        <p className="text-sm text-black/60 mb-3 leading-relaxed">{step.description}</p>
+                        <EditableField pageId={pageId} fieldName={`topic_${ti}_step_${idx + 1}_title`} value={step.title}>
+                          <h4 className="text-base md:text-lg mb-2">{step.title}</h4>
+                        </EditableField>
+                        <EditableField pageId={pageId} fieldName={`topic_${ti}_step_${idx + 1}_description`} value={step.description} multiline>
+                          <p className="text-sm text-black/60 mb-3 leading-relaxed">{step.description}</p>
+                        </EditableField>
                         <div className="flex flex-wrap gap-2">
-                          {step.tips.map((tip: string, i: number) => (
-                            <span key={i} className="text-xs px-3 py-1 bg-white border border-black/10 rounded-full text-black/60">
-                              {tip}
-                            </span>
+                          {step.tips.map((tip, i) => (
+                            <EditableField key={i} pageId={pageId} fieldName={`topic_${ti}_step_${idx + 1}_tip_${i + 1}`} value={tip}>
+                              <span className="text-xs px-3 py-1 bg-white border border-black/10 rounded-full text-black/60">{tip}</span>
+                            </EditableField>
                           ))}
                         </div>
                       </div>
@@ -729,22 +764,27 @@ function GuideAccordion({
                 </div>
               )}
 
+              {/* Problems */}
               {topic.problems && (
                 <div className="grid md:grid-cols-2 gap-4 mt-6">
-                  {topic.problems.map((problem: any, idx: number) => (
+                  {topic.problems.map((problem, idx) => (
                     <div key={idx} className="border border-black/10 rounded-xl p-5 hover:shadow-lg transition-shadow">
                       <div className="flex items-start gap-3 mb-3">
                         <AlertCircle className="w-5 h-5 text-black/60 flex-shrink-0 mt-0.5" />
-                        <h4 className="text-base font-medium">{problem.issue}</h4>
+                        <EditableField pageId={pageId} fieldName={`topic_${ti}_problem_${idx + 1}_issue`} value={problem.issue}>
+                          <h4 className="text-base font-medium">{problem.issue}</h4>
+                        </EditableField>
                       </div>
 
                       <div className="mb-3">
                         <p className="text-xs text-black/50 mb-2">Common Causes:</p>
                         <ul className="space-y-1">
-                          {problem.causes.map((cause: string, i: number) => (
+                          {problem.causes.map((cause, i) => (
                             <li key={i} className="text-xs text-black/60 flex items-start gap-2">
                               <span className="text-black/40">•</span>
-                              {cause}
+                              <EditableField pageId={pageId} fieldName={`topic_${ti}_problem_${idx + 1}_cause_${i + 1}`} value={cause}>
+                                <span>{cause}</span>
+                              </EditableField>
                             </li>
                           ))}
                         </ul>
@@ -753,10 +793,12 @@ function GuideAccordion({
                       <div>
                         <p className="text-xs text-black/50 mb-2">Solutions:</p>
                         <ul className="space-y-1">
-                          {problem.solutions.map((solution: string, i: number) => (
+                          {problem.solutions.map((solution, i) => (
                             <li key={i} className="text-xs text-black/60 flex items-start gap-2">
                               <CheckCircle className="w-3 h-3 text-green-600 flex-shrink-0 mt-0.5" />
-                              {solution}
+                              <EditableField pageId={pageId} fieldName={`topic_${ti}_problem_${idx + 1}_solution_${i + 1}`} value={solution}>
+                                <span>{solution}</span>
+                              </EditableField>
                             </li>
                           ))}
                         </ul>
