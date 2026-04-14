@@ -10,10 +10,14 @@ interface Props {
   src: string
   alt: string
   className?: string
+  /** Classes applied to the outer wrapper span (e.g. "w-full h-full block") */
+  wrapperClassName?: string
   imgProps?: React.ImgHTMLAttributes<HTMLImageElement>
+  /** Rendered when src is empty and not in edit mode */
+  placeholder?: React.ReactNode
 }
 
-export function EditableImage({ pageId, fieldName, src, alt, className, imgProps }: Props) {
+export function EditableImage({ pageId, fieldName, src, alt, className, wrapperClassName, imgProps, placeholder }: Props) {
   const { isEditMode, saveField } = useEditMode()
   const [editing, setEditing] = useState(false)
   const [draft, setDraft] = useState(src)
@@ -23,6 +27,7 @@ export function EditableImage({ pageId, fieldName, src, alt, className, imgProps
   const fileRef = useRef<HTMLInputElement>(null)
 
   if (!isEditMode) {
+    if (!src && placeholder) return <>{placeholder}</>
     return <img src={src} alt={alt} className={className} {...imgProps} />
   }
 
@@ -58,9 +63,19 @@ export function EditableImage({ pageId, fieldName, src, alt, className, imgProps
     }
   }
 
+  const wrapClass = wrapperClassName
+    ? `relative group/ei outline outline-1 outline-dashed outline-black/20 rounded ${wrapperClassName}`
+    : 'relative group/ei inline-block outline outline-1 outline-dashed outline-black/20 rounded'
+
   return (
-    <span className="relative group/ei inline-block outline outline-1 outline-dashed outline-black/20 rounded">
-      <img src={src} alt={alt} className={className} {...imgProps} />
+    <span className={wrapClass} style={wrapperClassName ? { display: 'block' } : undefined}>
+      {src ? (
+        <img src={src} alt={alt} className={className} {...imgProps} />
+      ) : (
+        <span className="flex items-center justify-center w-full h-full min-h-[160px] text-black/30 text-sm">
+          {placeholder ?? 'No image — click camera to upload'}
+        </span>
+      )}
 
       {/* Camera button */}
       {!editing && (
@@ -68,23 +83,23 @@ export function EditableImage({ pageId, fieldName, src, alt, className, imgProps
           onClick={() => setEditing(true)}
           title={`Edit ${fieldName}`}
           className="
-            absolute top-1.5 right-1.5
-            w-6 h-6 flex items-center justify-center
+            absolute top-2 right-2
+            w-7 h-7 flex items-center justify-center
             bg-black text-white rounded-full
             opacity-0 group-hover/ei:opacity-100
             transition-opacity duration-150 z-50 shadow-md
           "
         >
-          <Camera className="w-3 h-3" />
+          <Camera className="w-3.5 h-3.5" />
         </button>
       )}
 
-      {/* Edit panel */}
+      {/* Edit panel overlay */}
       {editing && (
         <span className="absolute inset-0 flex flex-col items-center justify-center bg-black/85 p-4 rounded-[inherit] z-50 gap-2">
           {/* Preview */}
           {draft && (
-            <img src={draft} alt="preview" className="w-full max-h-32 object-contain rounded mb-1" />
+            <img src={draft} alt="preview" className="w-full max-h-40 object-contain rounded mb-1" />
           )}
 
           {/* Upload button */}

@@ -180,34 +180,23 @@ export default function AboutContent({ content }: Props) {
               }`}
             >
               <div className="aspect-[4/3] bg-black/5 rounded-2xl overflow-hidden">
-                {content.story_image ? (
-                  <EditableImage
-                    pageId={PAGE_IDS.about}
-                    fieldName="story_image"
-                    src={content.story_image}
-                    alt="Our story"
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  <EditableImage
-                    pageId={PAGE_IDS.about}
-                    fieldName="story_image"
-                    src=""
-                    alt="Our story"
-                    className="w-full h-full object-cover"
-                    imgProps={{ style: { display: 'none' } }}
-                  />
-                )}
-                {/* Decorative grid shown when no image set */}
-                {!content.story_image && (
-                  <div className="absolute inset-0 opacity-10 pointer-events-none">
-                    <div className="grid grid-cols-8 grid-rows-6 h-full w-full">
-                      {Array.from({ length: 48 }).map((_, i) => (
-                        <div key={i} className="border border-black/20" />
-                      ))}
+                <EditableImage
+                  pageId={PAGE_IDS.about}
+                  fieldName="story_image"
+                  src={content.story_image}
+                  alt="Our story"
+                  className="w-full h-full object-cover"
+                  wrapperClassName="w-full h-full"
+                  placeholder={
+                    <div className="w-full h-full opacity-10">
+                      <div className="grid grid-cols-8 grid-rows-6 h-full w-full">
+                        {Array.from({ length: 48 }).map((_, i) => (
+                          <div key={i} className="border border-black/20" />
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                )}
+                  }
+                />
               </div>
             </div>
           </div>
