@@ -407,7 +407,7 @@ const contactFallback: ContactContent = {
   form_description:
     "Whether you have a question about colors, need help finding your perfect shade, or just want to share your transformation story, we're here to help.",
   map_embed_url:
-    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d238.14!2d57.4977!3d-20.1609!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjDCsDA5JzM5LjIiUyA1N8KwMjknNTEuNyJF!5e0!3m2!1sen!2smu!4v1234567890',
+    'https://maps.google.com/maps?q=-20.155972,57.517083&z=17&output=embed',
 }
 
 export async function getContactContent(): Promise<ContactContent> {

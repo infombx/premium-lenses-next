@@ -95,7 +95,14 @@ export function Footer({ content, contact }: Props) {
                   <MapPin className="w-4 h-4 text-black/50 mt-0.5 shrink-0" />
                   <div>
                     <p className="text-xs font-medium text-black/40 uppercase tracking-wider mb-0.5">Location</p>
-                    <span className="text-sm text-black/60 leading-snug">{contact.address}</span>
+                    <a
+                      href="https://www.google.com/maps?q=-20.155972,57.517083"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-black/60 hover:text-black transition-colors leading-snug"
+                    >
+                      {contact.address}
+                    </a>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
