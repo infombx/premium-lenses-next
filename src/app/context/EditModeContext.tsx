@@ -36,7 +36,7 @@ export function EditModeProvider({ children }: { children: React.ReactNode }) {
 
   const handleLogout = async () => {
     await fetch('/api/auth/logout', { method: 'POST' })
-    window.location.href = '/'
+    window.location.href = '/home'
   }
 
   const saveField = useCallback(

@@ -1,6 +1,7 @@
 /**
  * WordPress page IDs for inline CMS editing.
  * These are the IDs of the WordPress pages that store ACF content.
+ * Legal page IDs are dynamic — fetched from WordPress at runtime.
  */
 export const PAGE_IDS = {
   homepage: 21,
@@ -19,4 +20,10 @@ export const REVALIDATE_PATHS: Record<number, string[]> = {
   34: ['/guide'],
   36: ['/shop'],
   38: ['/', '/shop', '/about', '/contact', '/guide'],
+}
+
+/** Slug → revalidation paths for pages whose IDs are discovered at runtime (legal pages) */
+export const SLUG_REVALIDATE_PATHS: Record<string, string[]> = {
+  'privacy-policy': ['/privacy-policy'],
+  'terms': ['/terms'],
 }

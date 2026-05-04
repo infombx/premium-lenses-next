@@ -33,7 +33,7 @@ export default async function MainLayout({ children }: { children: React.ReactNo
       <OrganizationSchema global={global} contact={contact} />
       <Header content={global} />
       <main>{children}</main>
-      <Footer content={global} />
+      <Footer content={global} contact={contact} />
     </EditModeProvider>
   )
 }

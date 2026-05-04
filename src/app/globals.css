@@ -1,1 +1,94 @@
 @import "tailwindcss";
+
+/* ── Legal page content (rendered from sanitized HTML / TipTap) ─────────── */
+.legal-content h2 {
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: #000;
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.01em;
+}
+.legal-content h3 {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #111;
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+.legal-content p {
+  font-size: 0.9375rem;
+  line-height: 1.8;
+  color: rgba(0, 0, 0, 0.65);
+  margin-bottom: 1rem;
+}
+.legal-content a {
+  color: #000;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.legal-content a:hover {
+  color: rgba(0, 0, 0, 0.6);
+}
+.legal-content ul,
+.legal-content ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+.legal-content li {
+  font-size: 0.9375rem;
+  line-height: 1.8;
+  color: rgba(0, 0, 0, 0.65);
+  margin-bottom: 0.25rem;
+}
+.legal-content strong {
+  font-weight: 500;
+  color: #111;
+}
+
+/* ── TipTap editor prose styles ─────────────────────────────────────────── */
+.tiptap-content h2 {
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: #000;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+.tiptap-content h3 {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #111;
+  margin-top: 1.5rem;
+  margin-bottom: 0.4rem;
+}
+.tiptap-content p {
+  font-size: 0.9375rem;
+  line-height: 1.8;
+  color: rgba(0, 0, 0, 0.7);
+  margin-bottom: 0.75rem;
+}
+.tiptap-content a {
+  color: #000;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.tiptap-content ul,
+.tiptap-content ol {
+  padding-left: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+.tiptap-content li {
+  font-size: 0.9375rem;
+  line-height: 1.8;
+  color: rgba(0, 0, 0, 0.7);
+}
+.tiptap-content strong {
+  font-weight: 500;
+}
+.tiptap-content p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+  height: 0;
+}

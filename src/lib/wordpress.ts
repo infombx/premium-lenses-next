@@ -722,3 +722,70 @@ export async function getShopHeroContent(): Promise<ShopHeroContent> {
   if (!Object.keys(acf).length) return shopHeroFallback
   return { ...shopHeroFallback, ...acf } as ShopHeroContent
 }
+
+// ---------------------------------------------------------------------------
+// Legal Pages (Privacy Policy & Terms)
+// ---------------------------------------------------------------------------
+
+export interface LegalPageContent {
+  pageId: number | null
+  content: string
+}
+
+const privacyFallback = `
+<h2>Privacy Policy</h2>
+<p>Last updated: ${new Date().getFullYear()}</p>
+<p>At Premium Lenses, we are committed to protecting your personal information and your right to privacy. This policy explains what information we collect, how we use it, and what rights you have in relation to it.</p>
+<h3>Information We Collect</h3>
+<p>We collect information you provide directly to us when you place an order, create an account, or contact us — including your name, email address, phone number, and delivery address.</p>
+<h3>How We Use Your Information</h3>
+<p>We use the information we collect to process your orders, deliver products, send order confirmations and updates, respond to your enquiries, and improve our services.</p>
+<h3>Sharing of Information</h3>
+<p>We do not sell, trade, or otherwise transfer your personal information to outside parties. We may share information with trusted partners who assist us in operating our website or servicing you, so long as those parties agree to keep this information confidential.</p>
+<h3>Data Retention</h3>
+<p>We retain your personal information for as long as necessary to fulfil the purposes for which it was collected, including for the purposes of satisfying any legal, accounting, or reporting requirements.</p>
+<h3>Your Rights</h3>
+<p>You have the right to access, correct, or delete your personal data at any time. To exercise these rights, please contact us at <a href="mailto:hello@premiumlenses.mu">hello@premiumlenses.mu</a>.</p>
+<h3>Contact Us</h3>
+<p>If you have any questions about this Privacy Policy, you may contact us by email at <a href="mailto:hello@premiumlenses.mu">hello@premiumlenses.mu</a> or by phone at +230 XXX XXXX.</p>
+`
+
+const termsFallback = `
+<h2>Terms &amp; Conditions</h2>
+<p>Last updated: ${new Date().getFullYear()}</p>
+<p>By accessing or using the Premium Lenses website, you agree to be bound by these Terms &amp; Conditions. Please read them carefully before placing an order.</p>
+<h3>Products</h3>
+<p>All contact lenses sold on our website are for cosmetic and/or vision correction use. We strongly recommend consulting an eye care professional before using contact lenses for the first time. By purchasing, you confirm that you have had your eyes examined and are using the correct prescription.</p>
+<h3>Orders &amp; Payment</h3>
+<p>Orders are accepted subject to product availability. We reserve the right to cancel any order at our discretion. Payment is accepted via cash on delivery (COD). Prices are displayed in Mauritian Rupees (MUR) and are inclusive of applicable taxes.</p>
+<h3>Delivery</h3>
+<p>We deliver across Mauritius. Delivery timelines are estimates and may vary. Premium Lenses is not responsible for delays caused by circumstances beyond our control.</p>
+<h3>Returns &amp; Exchanges</h3>
+<p>Due to the hygienic nature of contact lenses, we do not accept returns or exchanges on opened products. Defective or incorrectly delivered items may be returned within 7 days of receipt — please contact us with proof of purchase.</p>
+<h3>Limitation of Liability</h3>
+<p>Premium Lenses shall not be liable for any indirect, incidental, or consequential damages arising from the use or inability to use our products. Our maximum liability is limited to the purchase price of the relevant product.</p>
+<h3>Changes to Terms</h3>
+<p>We reserve the right to update these Terms &amp; Conditions at any time. Continued use of the website after changes constitutes acceptance of the new terms.</p>
+<h3>Contact Us</h3>
+<p>For any questions regarding these Terms, contact us at <a href="mailto:hello@premiumlenses.mu">hello@premiumlenses.mu</a>.</p>
+`
+
+export async function getPrivacyPolicyContent(): Promise<LegalPageContent> {
+  const pages = await wpFetch<WPPage[]>('/wp/v2/pages?slug=privacy-policy&_fields=id,acf', { revalidate: 60 })
+  const page = Array.isArray(pages) ? pages[0] : null
+  const acf = page?.acf ?? {}
+  return {
+    pageId: page?.id ?? null,
+    content: (acf.legal_content as string) || privacyFallback,
+  }
+}
+
+export async function getTermsContent(): Promise<LegalPageContent> {
+  const pages = await wpFetch<WPPage[]>('/wp/v2/pages?slug=terms&_fields=id,acf', { revalidate: 60 })
+  const page = Array.isArray(pages) ? pages[0] : null
+  const acf = page?.acf ?? {}
+  return {
+    pageId: page?.id ?? null,
+    content: (acf.legal_content as string) || termsFallback,
+  }
+}

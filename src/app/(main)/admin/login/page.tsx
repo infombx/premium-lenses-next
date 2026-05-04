@@ -22,8 +22,8 @@ export default function AdminLoginPage() {
     })
 
     if (res.ok) {
-      router.push('/')
-      router.refresh()
+      // Use full navigation to cross into the (main) layout tree where EditModeProvider lives
+      window.location.href = '/home'
     } else {
       const data = await res.json()
       setError(data.error ?? 'Login failed')

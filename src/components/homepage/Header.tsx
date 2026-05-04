@@ -38,7 +38,9 @@ export function Header({ content }: Props) {
 
   const isActive = (path: string) => pathname === path;
 
-  const navLinks = content.nav_links.map((l) => ({ path: l.href, label: l.label }));
+  const navLinks = content.nav_links
+    .filter((l) => l.href !== '/guide')
+    .map((l) => ({ path: l.href, label: l.label }));
 
   return (
     <>
