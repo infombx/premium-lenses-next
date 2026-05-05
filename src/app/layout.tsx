@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Script from 'next/script'
+import NextTopLoader from 'nextjs-toploader'
 import './globals.css'
 import { CartProvider } from './context/CartContext'
 import { Providers } from './providers'
@@ -47,6 +48,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Script id="ga-init" strategy="afterInteractive">
           {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GA_ID}');`}
         </Script>
+        <NextTopLoader color="#ffffff" height={2} showSpinner={false} />
         <Providers>
           <CartProvider>
             {children}
