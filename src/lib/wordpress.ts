@@ -617,7 +617,7 @@ const globalFallback: GlobalContent = {
   logo_light: '/logo_black_white.svg',
   logo_dark: '/logo_black.svg',
   nav_links: [
-    { label: 'Home', href: '/' },
+    { label: 'Home', href: '/home' },
     { label: 'Shop', href: '/shop' },
     { label: 'About', href: '/about' },
     { label: 'Contact', href: '/contact' },

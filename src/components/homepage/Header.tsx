@@ -40,7 +40,7 @@ export function Header({ content }: Props) {
 
   const navLinks = content.nav_links
     .filter((l) => l.href !== '/guide')
-    .map((l) => ({ path: l.href, label: l.label }));
+    .map((l) => ({ path: l.href === '/' ? '/home' : l.href, label: l.label }));
 
   return (
     <>
