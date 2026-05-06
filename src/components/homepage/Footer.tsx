@@ -54,8 +54,8 @@ export function Footer({ content, contact }: Props) {
               <h3 className="text-sm mb-6 tracking-wider">SHOP</h3>
               <ul className="space-y-3">
                 {[
-                  { label: 'Colored Shades', href: '/shop?category=colored-shades' },
-                  { label: 'Prescribed Shades', href: '/shop?category=prescribed-shades' },
+                  { label: 'Lens Accessories', href: '/shop?category=lens-accessories' },
+                  { label: 'Prescribed Lenses', href: '/shop?category=prescribed-lenses' },
                   { label: 'Solutions', href: '/shop?category=solutions' },
                   { label: 'All Items', href: '/shop' },
                 ].map((link) => (

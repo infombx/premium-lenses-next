@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react'
 import posthog from 'posthog-js'
-import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { Truck, Shield, RotateCcw, ShoppingCart, Star, Facebook, Twitter, Instagram, Linkedin, Minus, Plus, ArrowLeft, Check, Eye, Award } from 'lucide-react'
 import { ImageWithFallback } from '@/components/figma/ImageWithFallback'
@@ -30,7 +29,6 @@ export default function ProductDetail({ product, relatedProducts }: Props) {
   const [quantity, setQuantity] = useState(1)
   const [selectedImage, setSelectedImage] = useState(0)
   const [activeTab, setActiveTab] = useState<'description' | 'features'>('description')
-  const router = useRouter()
   const { addToCart } = useCart()
 
   const thumbnails = product.images?.length ? product.images : [product.image, product.image, product.image, product.image]
@@ -125,7 +123,7 @@ export default function ProductDetail({ product, relatedProducts }: Props) {
                 <motion.button
                   whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
                   className="group relative flex-1 px-10 py-4 bg-black text-white overflow-hidden transition-all duration-300 rounded-lg shadow-lg hover:shadow-xl"
-                  onClick={() => { for (let i = 0; i < quantity; i++) addToCart(product); router.push('/cart') }}
+                  onClick={() => { for (let i = 0; i < quantity; i++) addToCart(product) }}
                 >
                   <span className="relative z-10 text-sm tracking-widest group-hover:text-black transition-colors duration-300 flex items-center justify-center gap-2">
                     <ShoppingCart className="w-4 h-4" />ADD TO CART

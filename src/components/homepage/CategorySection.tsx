@@ -27,7 +27,7 @@ export function CategorySection({ content }: Props) {
   const categories: Category[] = content.categories.map((c, i) => ({
     title: c.title,
     description: c.description,
-    link: c.slug === 'all' ? '/shop' : `/shop?category=${encodeURIComponent(c.title)}`,
+    link: c.slug === 'all' ? '/shop' : `/shop?category=${c.title.toLowerCase().replace(/\s+/g, '-')}`,
     image: products[i]?.image ?? products[0].image,
     icon: CATEGORY_ICONS[i % CATEGORY_ICONS.length],
   }));

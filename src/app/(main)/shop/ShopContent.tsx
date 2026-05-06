@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
 import { ImageWithFallback } from '@/components/figma/ImageWithFallback'
 import { ShoppingCart, ChevronDown, Eye, Star, Sparkles } from 'lucide-react'
 import { useCart } from '@/app/context/CartContext'
@@ -17,11 +18,32 @@ interface Props {
   heroContent: ShopHeroContent
 }
 
+function resolveCategory(param: string | null, categories: string[]): string {
+  if (!param) return 'ALL ITEMS'
+  const normalized = param.replace(/-/g, ' ').toUpperCase()
+  return categories.find(c => c === normalized) ?? 'ALL ITEMS'
+}
+
 export default function ShopContent({ products, categories, heroContent }: Props) {
-  const [activeCategory, setActiveCategory] = useState('ALL ITEMS')
+  const searchParams = useSearchParams()
+  const [activeCategory, setActiveCategory] = useState(() =>
+    resolveCategory(searchParams.get('category'), categories)
+  )
   const [hoveredProduct, setHoveredProduct] = useState<number | null>(null)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const { addToCart } = useCart()
+
+  // Sync active category when URL param changes (e.g. navigating from footer/home)
+  useEffect(() => {
+    setActiveCategory(resolveCategory(searchParams.get('category'), categories))
+  }, [searchParams, categories])
+
+  // Scroll to products when arriving with a category filter
+  useEffect(() => {
+    if (searchParams.get('category')) {
+      setTimeout(() => document.querySelector('#products')?.scrollIntoView({ behavior: 'smooth' }), 400)
+    }
+  }, [])
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {

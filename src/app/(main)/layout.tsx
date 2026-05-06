@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Header } from '@/components/homepage/Header'
 import { Footer } from '@/components/homepage/Footer'
+import { CartSidebar } from '@/components/cart/CartSidebar'
 import { EditModeProvider } from '@/app/context/EditModeContext'
 import { getGlobalContent, getContactContent } from '@/lib/wordpress'
 import { getPageSEO } from '@/lib/seo'
@@ -32,6 +33,7 @@ export default async function MainLayout({ children }: { children: React.ReactNo
     <EditModeProvider>
       <OrganizationSchema global={global} contact={contact} />
       <Header content={global} />
+      <CartSidebar />
       <main>{children}</main>
       <Footer content={global} contact={contact} />
     </EditModeProvider>

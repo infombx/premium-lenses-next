@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
 import { getProducts, getCategories, mapWooProduct } from '@/lib/woocommerce'
 import { products as staticProducts, categories as staticCategories } from '@/app/data/products'
 import { getShopHeroContent } from '@/lib/wordpress'
@@ -43,7 +44,9 @@ export default async function ShopPage() {
   return (
     <>
       <ItemListSchema products={products} />
-      <ShopContent products={products} categories={categories} heroContent={heroContent} />
+      <Suspense>
+        <ShopContent products={products} categories={categories} heroContent={heroContent} />
+      </Suspense>
     </>
   )
 }

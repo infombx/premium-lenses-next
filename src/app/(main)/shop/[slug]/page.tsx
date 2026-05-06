@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import { getProductBySlug, getProducts, mapWooProduct } from '@/lib/woocommerce'
 import { products as staticProducts } from '@/app/data/products'
 import { ProductSchema } from '@/components/seo/ProductSchema'
+import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema'
 import ProductDetail from './ProductDetail'
 
 interface Props {
@@ -16,19 +17,35 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!product) return { title: 'Product Not Found' }
 
-  const description = product.description
-    ? product.description.replace(/<[^>]+>/g, '').slice(0, 160)
-    : `Buy ${product.name} — premium contact lenses in Mauritius. Quality, comfort, and style.`
+  const rawDesc = product.description?.replace(/<[^>]+>/g, '').trim() ?? ''
+  const category = product.category
+    ? product.category.charAt(0) + product.category.slice(1).toLowerCase()
+    : 'Contact Lenses'
+  const price = product.price > 0 ? ` Rs${product.price}.` : ''
+
+  const description = rawDesc.length > 20
+    ? rawDesc.slice(0, 155) + (rawDesc.length > 155 ? '…' : '')
+    : `Buy ${product.name} — ${category} in Mauritius.${price} Quality, comfort & style. Order today at Premium Lenses.`
+
+  const title = `${product.name} | Premium Lenses`
 
   return {
     title: product.name,
     description,
     openGraph: {
-      title: product.name,
+      title,
       description,
       url: `https://premiumlenses.mu/shop/${slug}`,
       type: 'website',
-      images: product.image ? [{ url: product.image, alt: product.name }] : [],
+      images: product.image
+        ? [{ url: product.image, alt: product.name, width: 800, height: 800 }]
+        : [],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: product.image ? [product.image] : [],
     },
     alternates: { canonical: `https://premiumlenses.mu/shop/${slug}` },
   }
@@ -54,6 +71,11 @@ export default async function ProductDetailPage({ params }: Props) {
   return (
     <>
       <ProductSchema product={product} />
+      <BreadcrumbSchema items={[
+        { name: 'Home', url: 'https://premiumlenses.mu' },
+        { name: 'Shop', url: 'https://premiumlenses.mu/shop' },
+        { name: product.name, url: `https://premiumlenses.mu/shop/${product.slug}` },
+      ]} />
       <ProductDetail product={product} relatedProducts={relatedProducts} />
     </>
   )
