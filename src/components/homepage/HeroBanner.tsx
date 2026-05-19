@@ -62,12 +62,7 @@ export function HeroBanner({ content }: Props) {
                   <div className="absolute inset-0 bg-black transform translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
                 </motion.button>
               </Link>
-              <Link href="/shop">
-                <button className="px-8 py-3 border border-white/40 text-white hover:bg-white hover:text-black transition-all flex items-center justify-center gap-2 group rounded-lg w-full">
-                  {content.hero_cta_secondary}
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </button>
-              </Link>
+              
             </div>
           </div>
 

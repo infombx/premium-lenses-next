@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import posthog from 'posthog-js'
 import Link from 'next/link'
-import { Truck, Shield, RotateCcw, ShoppingCart, Star, Facebook, Twitter, Instagram, Linkedin, Minus, Plus, ArrowLeft, Check, Eye, Award } from 'lucide-react'
+import { Truck, Shield, RotateCcw, ShoppingCart, Star, Facebook, Minus, Plus, ArrowLeft, Check, Eye, Award } from 'lucide-react'
 import { ImageWithFallback } from '@/components/figma/ImageWithFallback'
 import { useCart } from '@/app/context/CartContext'
 import { motion, AnimatePresence } from 'motion/react'
@@ -29,7 +29,34 @@ export default function ProductDetail({ product, relatedProducts }: Props) {
   const [quantity, setQuantity] = useState(1)
   const [selectedImage, setSelectedImage] = useState(0)
   const [activeTab, setActiveTab] = useState<'description' | 'features'>('description')
+  const [selectedVariant, setSelectedVariant] = useState<number | null>(null)
+  const [variantError, setVariantError] = useState(false)
   const { addToCart } = useCart()
+
+  const shareUrl = typeof window !== 'undefined' ? window.location.href : `https://premiumlenses.mu/shop/${product.slug}`
+  const shareText = `Check out ${product.name} on Premium Lenses`
+
+  const shareLinks = [
+    {
+      label: 'Facebook',
+      icon: <Facebook className="w-3.5 h-3.5" />,
+      href: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`,
+    },
+    {
+      label: 'WhatsApp',
+      icon: (
+        <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+        </svg>
+      ),
+      href: `https://wa.me/?text=${encodeURIComponent(`${shareText}: ${shareUrl}`)}`,
+    },
+  ]
+
+
+  const hasVariants = product.variants && product.variants.length > 0
+  const activeVariant = selectedVariant !== null ? product.variants?.[selectedVariant] : undefined
+  const displayPrice = activeVariant?.price ?? product.price
 
   const thumbnails = product.images?.length ? product.images : [product.image, product.image, product.image, product.image]
 
@@ -94,12 +121,14 @@ export default function ProductDetail({ product, relatedProducts }: Props) {
               <motion.h1 initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="text-4xl md:text-5xl mb-4">{product.name}</motion.h1>
 
               <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }} className="flex items-baseline gap-3 mb-6">
-                <p className="text-3xl">Rs{product.price}</p>
+                {hasVariants && selectedVariant === null ? (
+                  <p className="text-3xl">From Rs{product.price}</p>
+                ) : (
+                  <p className="text-3xl">Rs{displayPrice}</p>
+                )}
               </motion.div>
 
-              <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }} className="text-sm text-black/60 leading-relaxed mb-8">
-                {product.description.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()}
-              </motion.p>
+              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }} className="text-sm text-black/60 leading-relaxed mb-8 prose prose-sm max-w-none [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1 [&_li]:leading-relaxed [&_p]:mb-3 [&_strong]:text-black/80" dangerouslySetInnerHTML={{ __html: product.description }} />
 
               <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7 }} className="grid grid-cols-2 gap-3 mb-8">
                 {benefits.map((benefit, index) => {
@@ -113,7 +142,62 @@ export default function ProductDetail({ product, relatedProducts }: Props) {
                 })}
               </motion.div>
 
+              {/* Variant selector */}
+              {hasVariants && product.inStock !== false && (
+                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.95 }} className="mb-4">
+                  <div className="flex items-center justify-between mb-2">
+                    <p className="text-xs tracking-wider text-black/50">{(product.variantLabel || 'PRESCRIPTION POWER').toUpperCase()}</p>
+                    {selectedVariant !== null && (
+                      <button
+                        onClick={() => { setSelectedVariant(null); setVariantError(false) }}
+                        className="text-xs text-black/40 hover:text-black transition-colors underline underline-offset-2"
+                      >
+                        Clear
+                      </button>
+                    )}
+                  </div>
+                  <div className="relative">
+                    <select
+                      value={selectedVariant ?? ''}
+                      onChange={e => {
+                        setSelectedVariant(e.target.value === '' ? null : Number(e.target.value))
+                        setVariantError(false)
+                      }}
+                      className={`w-full appearance-none px-4 py-3.5 pr-10 border rounded-lg text-sm bg-white transition-colors focus:outline-none focus:border-black cursor-pointer ${
+                        variantError ? 'border-red-400' : selectedVariant !== null ? 'border-black/30' : 'border-black/15'
+                      }`}
+                    >
+                      <option value="">Choose {product.variantLabel ? `a ${product.variantLabel.toLowerCase()}` : 'a prescription power'}</option>
+                      {product.variants!.map((v, i) => (
+                        <option key={v.label} value={i}>
+                          {v.label}{v.price !== product.price ? ` — Rs${v.price}` : ''}
+                        </option>
+                      ))}
+                    </select>
+                    <div className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2">
+                      <svg className="w-4 h-4 text-black/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </div>
+                  </div>
+                  {variantError && (
+                    <p className="text-xs text-red-500 mt-1.5">Please select {product.variantLabel ? `a ${product.variantLabel.toLowerCase()}` : 'a prescription power'} before adding to cart.</p>
+                  )}
+                </motion.div>
+              )}
+
+              {/* Out of Stock */}
+              {product.inStock === false && (
+                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1 }} className="mb-8">
+                  <div className="flex items-center gap-3 px-5 py-4 bg-black/[0.03] border border-black/10 rounded-lg">
+                    <div className="w-2 h-2 rounded-full bg-red-400 flex-shrink-0" />
+                    <span className="text-sm text-black/60">This product is currently out of stock.</span>
+                  </div>
+                </motion.div>
+              )}
+
               {/* Quantity & Add to Cart */}
+              {product.inStock !== false && (
               <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1 }} className="flex gap-3 mb-8">
                 <div className="flex items-center border border-black/10 rounded-lg overflow-hidden bg-white shadow-sm">
                   <button onClick={() => setQuantity(q => Math.max(1, q - 1))} className="w-12 h-14 flex items-center justify-center hover:bg-black/5 transition-colors"><Minus className="w-4 h-4" /></button>
@@ -121,16 +205,32 @@ export default function ProductDetail({ product, relatedProducts }: Props) {
                   <button onClick={() => setQuantity(q => q + 1)} className="w-12 h-14 flex items-center justify-center hover:bg-black/5 transition-colors"><Plus className="w-4 h-4" /></button>
                 </div>
                 <motion.button
-                  whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
-                  className="group relative flex-1 px-10 py-4 bg-black text-white overflow-hidden transition-all duration-300 rounded-lg shadow-lg hover:shadow-xl"
-                  onClick={() => { for (let i = 0; i < quantity; i++) addToCart(product) }}
+                  whileHover={!hasVariants || selectedVariant !== null ? { scale: 1.02 } : {}}
+                  whileTap={!hasVariants || selectedVariant !== null ? { scale: 0.98 } : {}}
+                  className={`group relative flex-1 px-10 py-4 overflow-hidden transition-all duration-300 rounded-lg ${
+                    hasVariants && selectedVariant === null
+                      ? 'bg-black/20 text-white cursor-not-allowed'
+                      : 'bg-black text-white shadow-lg hover:shadow-xl'
+                  }`}
+                  onClick={() => {
+                    if (hasVariants && selectedVariant === null) {
+                      setVariantError(true)
+                      return
+                    }
+                    for (let i = 0; i < quantity; i++) addToCart({ ...product, price: displayPrice, variant: activeVariant?.label })
+                  }}
                 >
-                  <span className="relative z-10 text-sm tracking-widest group-hover:text-black transition-colors duration-300 flex items-center justify-center gap-2">
+                  <span className={`relative z-10 text-sm tracking-widest flex items-center justify-center gap-2 ${
+                    hasVariants && selectedVariant === null ? '' : 'group-hover:text-black transition-colors duration-300'
+                  }`}>
                     <ShoppingCart className="w-4 h-4" />ADD TO CART
                   </span>
-                  <div className="absolute inset-0 bg-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+                  {(!hasVariants || selectedVariant !== null) && (
+                    <div className="absolute inset-0 bg-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+                  )}
                 </motion.button>
               </motion.div>
+              )}
 
               {/* Specs */}
               {product.specs && Object.values(product.specs).some(Boolean) && (
@@ -149,10 +249,19 @@ export default function ProductDetail({ product, relatedProducts }: Props) {
               <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.2 }} className="pt-6 border-t border-black/10">
                 <p className="text-xs text-black/40 mb-3 tracking-wider">SHARE THIS PRODUCT</p>
                 <div className="flex gap-2">
-                  {[Facebook, Twitter, Instagram, Linkedin].map((Icon, i) => (
-                    <motion.button key={i} whileHover={{ scale: 1.1, y: -2 }} whileTap={{ scale: 0.95 }} className="w-9 h-9 border border-black/10 rounded-full flex items-center justify-center hover:bg-black hover:text-white hover:border-black transition-all shadow-sm">
-                      <Icon className="w-3.5 h-3.5" />
-                    </motion.button>
+                  {shareLinks.map(({ label, icon, href }) => (
+                    <motion.a
+                      key={label}
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Share on ${label}`}
+                      whileHover={{ scale: 1.1, y: -2 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="w-9 h-9 border border-black/10 rounded-full flex items-center justify-center hover:bg-black hover:text-white hover:border-black transition-all shadow-sm"
+                    >
+                      {icon}
+                    </motion.a>
                   ))}
                 </div>
               </motion.div>

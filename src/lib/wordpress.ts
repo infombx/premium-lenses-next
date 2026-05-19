@@ -19,10 +19,13 @@
 const WP_URL = process.env.NEXT_PUBLIC_WC_URL ?? ''
 const REVALIDATE = 3600 // 1 hour ISR
 
-async function wpFetch<T>(path: string, options?: { revalidate?: number | false }): Promise<T | null> {
+async function wpFetch<T>(path: string, options?: { revalidate?: number | false; tags?: string[] }): Promise<T | null> {
   try {
     const res = await fetch(`${WP_URL}/wp-json${path}`, {
-      next: { revalidate: options?.revalidate !== undefined ? options.revalidate : REVALIDATE },
+      next: {
+        revalidate: options?.revalidate !== undefined ? options.revalidate : REVALIDATE,
+        ...(options?.tags ? { tags: options.tags } : {}),
+      },
     })
     if (!res.ok) return null
     return res.json() as Promise<T>
@@ -391,6 +394,7 @@ export interface ContactContent {
   phone: string
   email: string
   address: string
+  location_link: string
   form_title: string
   form_description: string
   map_embed_url: string
@@ -403,11 +407,12 @@ const contactFallback: ContactContent = {
   phone: '+230 XXX XXXX',
   email: 'hello@premiumlenses.mu',
   address: 'Mauritius',
+  location_link: 'https://maps.google.com/maps?q=-20.155972,57.517083',
   form_title: 'Connect With Us Today!',
   form_description:
     "Whether you have a question about colors, need help finding your perfect shade, or just want to share your transformation story, we're here to help.",
   map_embed_url:
-    'https://maps.google.com/maps?q=-20.155972,57.517083&z=17&output=embed',
+    'https://www.openstreetmap.org/export/embed.html?bbox=57.467083%2C-20.205972%2C57.567083%2C-20.105972&layer=mapnik&marker=-20.155972%2C57.517083',
 }
 
 export async function getContactContent(): Promise<ContactContent> {
@@ -669,7 +674,7 @@ export async function getGlobalContent(): Promise<GlobalContent> {
   // Uses a regular WordPress page (slug: global-settings) — ACF Free compatible.
   // ACF Pro users can use an Options Page instead; change the fetch path to
   // /acf/v3/options/options and adjust the acf extraction accordingly.
-  const page = await wpFetch<WPPage>('/wp/v2/pages?slug=global-settings&_fields=id,acf', { revalidate: 60 })
+  const page = await wpFetch<WPPage>('/wp/v2/pages?slug=global-settings&_fields=id,acf', { revalidate: 60, tags: ['global-content'] })
   const acf = (Array.isArray(page) ? page[0]?.acf : null) ?? {}
   if (!Object.keys(acf).length) return globalFallback
 

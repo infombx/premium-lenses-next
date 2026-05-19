@@ -93,7 +93,7 @@ export function AboutStats({ content }: Props) {
                     fieldName={`about_image_${index + 1}`}
                     src={image}
                     alt="About our brand - Eye color variations"
-                    className="w-full h-full object-cover scale-[2.5] object-[75%_35%] lg:object-[50%_35%]"
+                    className="w-full h-full object-cover"
                   />
                 </div>
               ))}

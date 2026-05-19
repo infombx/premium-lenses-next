@@ -1,6 +1,6 @@
 'use client'
 
-import { Facebook, Instagram, Twitter, MapPin, Mail, Phone } from 'lucide-react';
+import { Facebook, Instagram, MapPin, Mail, Phone } from 'lucide-react';
 import Link from 'next/link';
 import type { GlobalContent, ContactContent } from '@/lib/wordpress';
 import { EditableField } from '@/components/cms/EditableField';
@@ -21,7 +21,7 @@ export function Footer({ content, contact }: Props) {
             {/* Brand Column */}
             <div className="flex flex-col">
               <a href="/home">
-                <img src={content.logo_dark} alt="Premium Lenses" className="h-16 mb-6" />
+                <img src="/Premium Lenses Logo Black.svg" alt="Premium Lenses" className="h-20 mb-6" />
               </a>
               <EditableField pageId={PAGE_IDS.global} fieldName="footer_description" value={content.footer_description} multiline>
                 <p className="text-sm text-black/60 leading-relaxed mb-6 max-w-xs">
@@ -31,21 +31,17 @@ export function Footer({ content, contact }: Props) {
 
               {/* Social Links */}
               <div className="flex gap-3 mt-auto">
-                <EditableField pageId={PAGE_IDS.global} fieldName="social_facebook" value={content.social.facebook}>
-                  <a href={content.social.facebook} target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-black/10 rounded-full flex items-center justify-center hover:bg-black hover:text-white hover:border-black transition-colors" aria-label="Facebook">
-                    <Facebook className="w-4 h-4" />
-                  </a>
-                </EditableField>
-                <EditableField pageId={PAGE_IDS.global} fieldName="social_instagram" value={content.social.instagram}>
-                  <a href={content.social.instagram} target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-black/10 rounded-full flex items-center justify-center hover:bg-black hover:text-white hover:border-black transition-colors" aria-label="Instagram">
-                    <Instagram className="w-4 h-4" />
-                  </a>
-                </EditableField>
-                <EditableField pageId={PAGE_IDS.global} fieldName="social_twitter" value={content.social.twitter}>
-                  <a href={content.social.twitter} target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-black/10 rounded-full flex items-center justify-center hover:bg-black hover:text-white hover:border-black transition-colors" aria-label="Twitter">
-                    <Twitter className="w-4 h-4" />
-                  </a>
-                </EditableField>
+                <a href="https://www.facebook.com/people/Premium-Lenses-Mauritius/100066502244624/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-black/10 rounded-full flex items-center justify-center hover:bg-black hover:text-white hover:border-black transition-colors" aria-label="Facebook">
+                  <Facebook className="w-4 h-4" />
+                </a>
+                <a href="https://www.instagram.com/premium_lenses.mru/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-black/10 rounded-full flex items-center justify-center hover:bg-black hover:text-white hover:border-black transition-colors" aria-label="Instagram">
+                  <Instagram className="w-4 h-4" />
+                </a>
+                <a href="https://www.tiktok.com/@premium_lenses_mru" target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-black/10 rounded-full flex items-center justify-center hover:bg-black hover:text-white hover:border-black transition-colors" aria-label="TikTok">
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/>
+                  </svg>
+                </a>
               </div>
             </div>
 

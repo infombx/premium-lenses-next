@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { revalidatePath } from 'next/cache'
+import { revalidatePath, revalidateTag } from 'next/cache'
 import { REVALIDATE_PATHS, SLUG_REVALIDATE_PATHS } from '@/lib/cmsFields'
 
 const WP_URL = process.env.NEXT_PUBLIC_WC_URL ?? ''
@@ -51,6 +51,10 @@ export async function POST(request: NextRequest) {
 
   for (const path of paths) {
     revalidatePath(path)
+  }
+
+  if (pageId === 38) {
+    revalidateTag('global-content')
   }
 
   return NextResponse.json({ ok: true })

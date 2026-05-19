@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { Eye, Heart, Zap, Users, Award, TrendingUp, ChevronDown, Plus, Minus } from 'lucide-react';
 import { motion } from 'motion/react';
 import type { AboutContent as AboutContentType } from '@/lib/wordpress';
@@ -336,14 +337,16 @@ export default function AboutContent({ content }: Props) {
             <p className="text-black/60 max-w-2xl mx-auto text-lg mb-8">{content.cta_subtitle}</p>
           </EditableField>
           <EditableField pageId={PAGE_IDS.about} fieldName="cta_button" value={content.cta_button}>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="group relative px-10 py-4 bg-black text-white overflow-hidden transition-all duration-300 rounded-lg"
-            >
-              <span className="relative z-10 text-sm tracking-widest group-hover:text-black transition-colors duration-300">{content.cta_button}</span>
-              <div className="absolute inset-0 bg-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-            </motion.button>
+            <Link href="/shop">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="group relative px-10 py-4 bg-black text-white overflow-hidden transition-all duration-300 rounded-lg"
+              >
+                <span className="relative z-10 text-sm tracking-widest group-hover:text-black transition-colors duration-300">{content.cta_button}</span>
+                <div className="absolute inset-0 bg-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+              </motion.button>
+            </Link>
           </EditableField>
         </div>
       </section>

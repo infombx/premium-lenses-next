@@ -34,7 +34,7 @@ export default async function ShopPage() {
   ])
 
   const products = wooProducts.length > 0
-    ? wooProducts.map(mapWooProduct)
+    ? wooProducts.map(p => mapWooProduct(p))
     : staticProducts
 
   const categories = wooProducts.length > 0

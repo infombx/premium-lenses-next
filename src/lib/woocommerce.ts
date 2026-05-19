@@ -11,6 +11,7 @@ export interface WooProduct {
   id: number
   name: string
   slug: string
+  type: string // 'simple' | 'variable' | 'grouped' | 'external'
   price: string
   regular_price: string
   sale_price: string
@@ -22,6 +23,14 @@ export interface WooProduct {
   meta_data: { key: string; value: string }[]
   stock_status: string
   in_stock: boolean
+}
+
+export interface WooVariation {
+  id: number
+  price: string
+  regular_price: string
+  sale_price: string
+  attributes: { name: string; option: string }[]
 }
 
 export interface WooOrder {
@@ -75,7 +84,7 @@ export async function getProducts(params?: { category?: string; per_page?: numbe
 
 export async function getProductBySlug(slug: string): Promise<WooProduct | null> {
   if (!WOO_URL) return null
-  const res = await fetch(`${WOO_URL}/wp-json/wc/v3/products?slug=${slug}&_fields=id,name,slug,price,regular_price,sale_price,description,short_description,images,categories,attributes,stock_status,meta_data`, {
+  const res = await fetch(`${WOO_URL}/wp-json/wc/v3/products?slug=${slug}&_fields=id,name,slug,type,price,regular_price,sale_price,description,short_description,images,categories,attributes,stock_status,meta_data`, {
     headers: { Authorization: getAuthHeader() },
     next: { revalidate: 60 },
   })
@@ -91,6 +100,16 @@ export async function getProduct(id: number): Promise<WooProduct | null> {
     next: { revalidate: 60 },
   })
   if (!res.ok) return null
+  return res.json()
+}
+
+export async function getProductVariations(productId: number): Promise<WooVariation[]> {
+  if (!WOO_URL) return []
+  const res = await fetch(`${WOO_URL}/wp-json/wc/v3/products/${productId}/variations?per_page=100&_fields=id,price,regular_price,sale_price,attributes`, {
+    headers: { Authorization: getAuthHeader() },
+    next: { revalidate: 60 },
+  })
+  if (!res.ok) return []
   return res.json()
 }
 
@@ -144,9 +163,23 @@ function getAttr(product: WooProduct, ...names: string[]): string | undefined {
   }
 }
 
-import type { Product } from '@/app/data/products'
+import type { Product, Variant } from '@/app/data/products'
 
-export function mapWooProduct(p: WooProduct): Product {
+export function mapWooProduct(p: WooProduct, variations?: WooVariation[]): Product {
+  let variants: Variant[] | undefined
+  let variantLabel: string | undefined
+  if (variations && variations.length > 0) {
+    variants = variations
+      .filter(v => parseFloat(v.price) > 0)
+      .map(v => {
+        const label = v.attributes.map(a => a.option).join(' / ') || `Variation ${v.id}`
+        return { label, price: parseFloat(v.price) }
+      })
+      .sort((a, b) => a.price - b.price)
+    const varAttr = p.attributes.find(a => a.options.length > 0)
+    variantLabel = varAttr?.name
+  }
+
   return {
     id: p.id,
     slug: p.slug,
@@ -157,6 +190,9 @@ export function mapWooProduct(p: WooProduct): Product {
     category: p.categories[0]?.name?.toUpperCase() || 'PRODUCTS',
     description: cleanDescription(p.description || p.short_description || ''),
     features: p.attributes.flatMap(a => a.options.map(o => `${a.name}: ${o}`)),
+    variants,
+    variantLabel,
+    inStock: p.stock_status !== 'outofstock',
     specs: {
       dia: getAttr(p, 'diameter', 'dia', 'DIA'),
       bc: getAttr(p, 'base curve', 'bc', 'B.C'),

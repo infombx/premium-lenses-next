@@ -63,9 +63,9 @@ export function Header({ content }: Props) {
               {/* Logo */}
               <Link href="/home" className="flex items-center group flex-shrink-0">
                 <img
-                  src={content.logo_light}
+                  src="/Premium Lenses Logo White.svg"
                   alt="Premium Lenses"
-                  className="h-16 md:h-20 transition-all duration-500 mx-[20px] my-[0px]"
+                  className="h-10 md:h-12 transition-all duration-500 mx-[20px] my-[0px]"
                 />
               </Link>
 

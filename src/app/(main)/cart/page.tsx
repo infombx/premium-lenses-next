@@ -12,22 +12,33 @@ export default function CartPage() {
   const { items, removeFromCart, updateQuantity, getCartTotal } = useCart();
   const [couponCode, setCouponCode] = useState('');
   const [discount, setDiscount] = useState(0);
+  const [cartUpdated, setCartUpdated] = useState(false);
 
   const subtotal = getCartTotal();
-  const shipping = subtotal > 50 ? 0 : 5; // Free shipping over $50
+  const shipping = subtotal > 50 ? 0 : 5;
   const total = subtotal - discount + shipping;
+
+  const showUpdated = () => {
+    setCartUpdated(true);
+    setTimeout(() => setCartUpdated(false), 2000);
+  };
+
+  const handleRemove = (id: number, variant?: string) => {
+    removeFromCart(id, variant);
+    showUpdated();
+  };
+
+  const handleQuantity = (id: number, qty: number, variant?: string) => {
+    updateQuantity(id, qty, variant);
+    showUpdated();
+  };
 
   const handleApplyCoupon = () => {
     if (couponCode.toUpperCase() === 'SAVE10') {
-      setDiscount(subtotal * 0.1); // 10% discount
+      setDiscount(subtotal * 0.1);
     } else if (couponCode) {
       alert('Invalid coupon code');
     }
-  };
-
-  const handleUpdateCart = () => {
-    // Placeholder for update cart functionality
-    alert('Cart updated successfully!');
   };
 
   if (items.length === 0) {
@@ -100,14 +111,14 @@ export default function CartPage() {
               <div className="space-y-4 md:space-y-6">
                 {items.map((item) => (
                   <div
-                    key={item.id}
+                    key={`${item.id}-${item.variant ?? ''}`}
                     className="grid grid-cols-1 md:grid-cols-12 gap-4 pb-4 md:pb-6 border-b border-black/10"
                   >
                     {/* Product Info */}
                     <div className="md:col-span-5 flex gap-4">
                       {/* Remove Button */}
                       <button
-                        onClick={() => removeFromCart(item.id)}
+                        onClick={() => handleRemove(item.id, item.variant)}
                         className="w-6 h-6 flex items-center justify-center hover:bg-black/5 rounded-full transition-colors flex-shrink-0"
                       >
                         <X className="w-4 h-4 text-black/40" />
@@ -131,6 +142,9 @@ export default function CartPage() {
                           {item.name}
                         </Link>
                         <p className="text-xs text-black/40 mt-1">{item.category}</p>
+                        {item.variant && (
+                          <p className="text-xs text-black/60 mt-0.5">Power: {item.variant}</p>
+                        )}
                       </div>
                     </div>
 
@@ -145,7 +159,7 @@ export default function CartPage() {
                       <span className="text-sm text-black/60 md:hidden mr-4">Quantity:</span>
                       <div className="flex items-center border border-black/10 rounded-lg overflow-hidden">
                         <button
-                          onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                          onClick={() => handleQuantity(item.id, item.quantity - 1, item.variant)}
                           className="w-8 h-10 flex items-center justify-center hover:bg-black/5 transition-colors"
                           disabled={item.quantity <= 1}
                         >
@@ -155,7 +169,7 @@ export default function CartPage() {
                           {item.quantity}
                         </div>
                         <button
-                          onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                          onClick={() => handleQuantity(item.id, item.quantity + 1, item.variant)}
                           className="w-8 h-10 flex items-center justify-center hover:bg-black/5 transition-colors"
                         >
                           <Plus className="w-3 h-3" />
@@ -172,8 +186,8 @@ export default function CartPage() {
                 ))}
               </div>
 
-              {/* Coupon & Update Cart */}
-              <div className="mt-8 flex flex-col md:flex-row gap-4 justify-between">
+              {/* Coupon & Cart Updated notice */}
+              <div className="mt-8 flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
                 <div className="flex gap-2">
                   <input
                     type="text"
@@ -189,12 +203,9 @@ export default function CartPage() {
                     APPLY COUPON
                   </button>
                 </div>
-                <button
-                  onClick={handleUpdateCart}
-                  className="px-6 py-3 border border-black/10 text-black text-xs tracking-wider hover:bg-black/5 transition-colors rounded-lg"
-                >
-                  UPDATE CART
-                </button>
+                {cartUpdated && (
+                  <p className="text-xs text-black/50 transition-opacity">Cart updated.</p>
+                )}
               </div>
             </div>
 

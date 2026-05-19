@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { getProductBySlug, getProducts, mapWooProduct } from '@/lib/woocommerce'
+import { getProductBySlug, getProducts, getProductVariations, mapWooProduct } from '@/lib/woocommerce'
 import { products as staticProducts } from '@/app/data/products'
 import { ProductSchema } from '@/components/seo/ProductSchema'
 import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema'
@@ -59,8 +59,15 @@ export default async function ProductDetailPage({ params }: Props) {
     getProducts({ per_page: 100 }),
   ])
 
-  const allProducts = wooAll.length > 0 ? wooAll.map(mapWooProduct) : staticProducts
-  const product = wooProduct ? mapWooProduct(wooProduct) : allProducts.find(p => p.slug === slug)
+  const allProducts = wooAll.length > 0 ? wooAll.map(p => mapWooProduct(p)) : staticProducts
+
+  let product
+  if (wooProduct) {
+    const variations = wooProduct.type === 'variable' ? await getProductVariations(wooProduct.id) : []
+    product = mapWooProduct(wooProduct, variations)
+  } else {
+    product = allProducts.find(p => p.slug === slug)
+  }
 
   if (!product) notFound()
 

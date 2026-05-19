@@ -71,7 +71,7 @@ export default function CheckoutPage() {
         city: '',
         state: '',
         postcode: '',
-        country: formData.country,
+        country: 'MU',
         email: formData.email,
         phone: formData.phone,
       },
@@ -83,7 +83,7 @@ export default function CheckoutPage() {
         city: '',
         state: '',
         postcode: '',
-        country: formData.country,
+        country: 'MU',
       },
       line_items: items.map(item => ({ product_id: item.id, quantity: item.quantity })),
     }
@@ -210,16 +210,10 @@ export default function CheckoutPage() {
                     </div>
 
                     <div>
-                      <label className="block text-sm mb-1">Country / Region <span className="text-red-500">*</span></label>
-                      <select
-                        name="country"
-                        value={formData.country}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-4 py-3 border border-black/10 rounded-lg text-sm focus:outline-none focus:border-black transition-colors bg-[#fdf8f8]"
-                      >
-                        <option value="MU">Mauritius</option>
-                      </select>
+                      <label className="block text-sm mb-1">Country / Region</label>
+                      <div className="w-full px-4 py-3 border border-black/10 rounded-lg text-sm bg-[#fdf8f8] text-black/50">
+                        Mauritius
+                      </div>
                     </div>
 
                     <div>
@@ -277,11 +271,14 @@ export default function CheckoutPage() {
                     </div>
                     <div className="divide-y divide-black/5">
                       {items.map(item => (
-                        <div key={item.id} className="flex justify-between items-center py-3 text-sm">
+                        <div key={`${item.id}-${item.variant ?? ''}`} className="flex justify-between items-start py-3 text-sm">
                           <span className="text-black/70">
-                            {item.name} <span className="text-black/40">×{item.quantity}</span>
+                            <span>{item.name} <span className="text-black/40">×{item.quantity}</span></span>
+                            {item.variant && (
+                              <span className="block text-xs text-black/40">Power: {item.variant}</span>
+                            )}
                           </span>
-                          <span>Rs{(item.price * item.quantity).toFixed(2)}</span>
+                          <span className="flex-shrink-0 ml-4">Rs{(item.price * item.quantity).toFixed(2)}</span>
                         </div>
                       ))}
                     </div>
@@ -332,7 +329,7 @@ export default function CheckoutPage() {
                     <p>
                       Please make sure to put your Contact Details correctly.<br />
                       Your personal data will be used to process your order, contact you for the payment process, and for other purposes described in our{' '}
-                      <a href="#" className="text-[#8B4513] hover:underline">privacy policy</a>.
+                      <Link href="/privacy-policy" className="text-black hover:underline">privacy policy</Link>.
                     </p>
                     <label className="flex items-start gap-2 cursor-pointer">
                       <input
@@ -345,7 +342,7 @@ export default function CheckoutPage() {
                       />
                       <span>
                         I have read and agree to the website{' '}
-                        <a href="#" className="text-[#8B4513] hover:underline">terms and conditions</a>{' '}
+                        <Link href="/terms" className="text-black hover:underline">terms and conditions</Link>{' '}
                         <span className="text-red-500">*</span>
                       </span>
                     </label>
@@ -355,7 +352,7 @@ export default function CheckoutPage() {
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="w-full py-4 bg-[#8B7355] hover:bg-[#7a6449] text-white text-sm tracking-wider rounded-lg transition-colors disabled:opacity-60"
+                    className="w-full py-4 bg-black hover:bg-black/80 text-white text-sm tracking-wider rounded-lg transition-colors disabled:opacity-60"
                   >
                     {submitting ? 'Placing order...' : 'Place order'}
                   </button>

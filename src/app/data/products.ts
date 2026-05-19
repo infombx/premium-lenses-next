@@ -1,3 +1,8 @@
+export interface Variant {
+  label: string;
+  price: number;
+}
+
 export interface Product {
   id: number;
   slug: string;
@@ -8,6 +13,9 @@ export interface Product {
   category: string;
   description: string;
   features: string[];
+  variants?: Variant[];
+  variantLabel?: string;
+  inStock?: boolean;
   specs?: {
     dia?: string;
     bc?: string;
@@ -17,6 +25,26 @@ export interface Product {
     waterContent?: string;
     madeIn?: string;
   };
+}
+
+// Prescription power variants for colored lenses
+// Plano = base price, mild Rx (+Rs 5), strong Rx (+Rs 10)
+function coloredVariants(base: number): Variant[] {
+  return [
+    { label: '0.00 (Plano)', price: base },
+    { label: '-0.50', price: base + 5 },
+    { label: '-1.00', price: base + 5 },
+    { label: '-1.50', price: base + 5 },
+    { label: '-2.00', price: base + 5 },
+    { label: '-2.50', price: base + 5 },
+    { label: '-3.00', price: base + 5 },
+    { label: '-3.50', price: base + 10 },
+    { label: '-4.00', price: base + 10 },
+    { label: '-4.50', price: base + 10 },
+    { label: '-5.00', price: base + 10 },
+    { label: '-5.50', price: base + 10 },
+    { label: '-6.00', price: base + 10 },
+  ];
 }
 
 export const products: Product[] = [
@@ -37,6 +65,7 @@ export const products: Product[] = [
       'Water Content: 40%',
       'Made in Korea'
     ],
+    variants: coloredVariants(25),
     specs: {
       dia: '14.2mm',
       bc: '8.7mm',
@@ -64,6 +93,7 @@ export const products: Product[] = [
       'Water Content: 40%',
       'Made in Korea'
     ],
+    variants: coloredVariants(28),
     specs: {
       dia: '14.5mm',
       bc: '8.8mm',
@@ -91,6 +121,7 @@ export const products: Product[] = [
       'Water Content: 40%',
       'Made in Korea'
     ],
+    variants: coloredVariants(25),
     specs: {
       dia: '14.2mm',
       bc: '8.7mm',
@@ -118,6 +149,7 @@ export const products: Product[] = [
       'Water Content: 40%',
       'Made in Korea'
     ],
+    variants: coloredVariants(28),
     specs: {
       dia: '14.0mm',
       bc: '8.6mm',
@@ -145,6 +177,7 @@ export const products: Product[] = [
       'Water Content: 40%',
       'Made in Korea'
     ],
+    variants: coloredVariants(28),
     specs: {
       dia: '14.0mm',
       bc: '8.6mm',
@@ -172,6 +205,7 @@ export const products: Product[] = [
       'Water Content: 40%',
       'Made in Korea'
     ],
+    variants: coloredVariants(28),
     specs: {
       dia: '14.0mm',
       bc: '8.6mm',

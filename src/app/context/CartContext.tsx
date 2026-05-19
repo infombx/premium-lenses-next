@@ -11,6 +11,7 @@ export interface CartItem {
   image: string
   quantity: number
   category: string
+  variant?: string
 }
 
 interface CartContextType {
@@ -19,8 +20,8 @@ interface CartContextType {
   openCart: () => void
   closeCart: () => void
   addToCart: (product: Omit<CartItem, 'quantity'>) => void
-  removeFromCart: (id: number) => void
-  updateQuantity: (id: number, quantity: number) => void
+  removeFromCart: (id: number, variant?: string) => void
+  updateQuantity: (id: number, quantity: number, variant?: string) => void
   clearCart: () => void
   getCartTotal: () => number
   getCartCount: () => number
@@ -54,22 +55,22 @@ export function CartProvider({ children }: { children: ReactNode }) {
       currency: 'MUR',
     })
     setItems(current => {
-      const existing = current.find(i => i.id === product.id)
+      const existing = current.find(i => i.id === product.id && i.variant === product.variant)
       if (existing) {
-        return current.map(i => i.id === product.id ? { ...i, quantity: i.quantity + 1 } : i)
+        return current.map(i => i.id === product.id && i.variant === product.variant ? { ...i, quantity: i.quantity + 1 } : i)
       }
       return [...current, { ...product, quantity: 1 }]
     })
     setIsCartOpen(true)
   }
 
-  const removeFromCart = (id: number) => {
-    setItems(current => current.filter(i => i.id !== id))
+  const removeFromCart = (id: number, variant?: string) => {
+    setItems(current => current.filter(i => !(i.id === id && i.variant === variant)))
   }
 
-  const updateQuantity = (id: number, quantity: number) => {
+  const updateQuantity = (id: number, quantity: number, variant?: string) => {
     if (quantity < 1) return
-    setItems(current => current.map(i => i.id === id ? { ...i, quantity } : i))
+    setItems(current => current.map(i => i.id === id && i.variant === variant ? { ...i, quantity } : i))
   }
 
   const clearCart = () => setItems([])

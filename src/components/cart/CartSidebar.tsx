@@ -69,7 +69,7 @@ export function CartSidebar() {
           ) : (
             <ul className="divide-y divide-black/8 px-6">
               {items.map((item) => (
-                <li key={item.id} className="py-5 flex gap-4">
+                <li key={`${item.id}-${item.variant ?? ''}`} className="py-5 flex gap-4">
                   {/* Image */}
                   <Link href={`/shop/${item.slug}`} onClick={closeCart} className="flex-shrink-0">
                     <div className="w-20 h-20 rounded-lg overflow-hidden bg-black/5">
@@ -84,7 +84,7 @@ export function CartSidebar() {
                         {item.name}
                       </Link>
                       <button
-                        onClick={() => removeFromCart(item.id)}
+                        onClick={() => removeFromCart(item.id, item.variant)}
                         className="flex-shrink-0 w-5 h-5 flex items-center justify-center text-black/30 hover:text-black transition-colors"
                         aria-label="Remove item"
                       >
@@ -92,13 +92,17 @@ export function CartSidebar() {
                       </button>
                     </div>
 
-                    <p className="text-xs text-black/40 mb-3">{item.category}</p>
+                    <p className="text-xs text-black/40">{item.category}</p>
+                    {item.variant && (
+                      <p className="text-xs text-black/60 mb-3">Power: {item.variant}</p>
+                    )}
+                    {!item.variant && <div className="mb-3" />}
 
                     <div className="flex items-center justify-between">
                       {/* Quantity */}
                       <div className="flex items-center border border-black/10 rounded-lg overflow-hidden">
                         <button
-                          onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                          onClick={() => updateQuantity(item.id, item.quantity - 1, item.variant)}
                           disabled={item.quantity <= 1}
                           className="w-8 h-8 flex items-center justify-center hover:bg-black/5 disabled:opacity-30 transition-colors"
                         >
@@ -108,7 +112,7 @@ export function CartSidebar() {
                           {item.quantity}
                         </span>
                         <button
-                          onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                          onClick={() => updateQuantity(item.id, item.quantity + 1, item.variant)}
                           className="w-8 h-8 flex items-center justify-center hover:bg-black/5 transition-colors"
                         >
                           <Plus className="w-3 h-3" />

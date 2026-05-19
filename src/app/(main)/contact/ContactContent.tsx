@@ -3,6 +3,9 @@
 import { Phone, Mail, MapPin } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
+import dynamic from 'next/dynamic';
+
+const MapboxMap = dynamic(() => import('@/components/MapboxMap'), { ssr: false })
 import type { ContactContent as ContactContentType } from '@/lib/wordpress';
 import { EditableField } from '@/components/cms/EditableField';
 import { PAGE_IDS } from '@/lib/cmsFields';
@@ -11,6 +14,23 @@ interface Props { content: ContactContentType }
 
 export default function ContactContent({ content }: Props) {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', message: '' });
+  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus('sending');
+    const res = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(form),
+    });
+    setStatus(res.ok ? 'sent' : 'error');
+  };
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -71,35 +91,37 @@ export default function ContactContent({ content }: Props) {
         <div className="max-w-[1440px] mx-auto px-6 md:px-12">
           <div className="grid md:grid-cols-3 gap-6">
             {/* Phone Card */}
-            <div className="bg-white border border-black/10 rounded-xl p-8 text-center hover:border-black/20 transition-colors">
-              <div className="w-12 h-12 bg-black/5 rounded-full flex items-center justify-center mx-auto mb-4">
+            <a href={`tel:${content.phone.replace(/\s/g, '')}`} className="bg-white border border-black/10 rounded-xl p-8 text-center hover:border-black/20 transition-colors block group">
+              <div className="w-12 h-12 bg-black/5 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-black/10 transition-colors">
                 <Phone className="w-5 h-5 text-black" />
               </div>
               <p className="text-sm text-black/60 mb-2">Call Us</p>
               <EditableField pageId={PAGE_IDS.contact} fieldName="phone" value={content.phone}>
-                <p className="text-black">{content.phone}</p>
+                <p className="text-black group-hover:underline underline-offset-2">{content.phone}</p>
               </EditableField>
-            </div>
+            </a>
 
             {/* Email Card */}
-            <div className="bg-white border border-black/10 rounded-xl p-8 text-center hover:border-black/20 transition-colors">
-              <div className="w-12 h-12 bg-black/5 rounded-full flex items-center justify-center mx-auto mb-4">
+            <a href={`mailto:${content.email}`} className="bg-white border border-black/10 rounded-xl p-8 text-center hover:border-black/20 transition-colors block group">
+              <div className="w-12 h-12 bg-black/5 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-black/10 transition-colors">
                 <Mail className="w-5 h-5 text-black" />
               </div>
               <p className="text-sm text-black/60 mb-2">Email Us</p>
               <EditableField pageId={PAGE_IDS.contact} fieldName="email" value={content.email}>
-                <p className="text-black">{content.email}</p>
+                <p className="text-black group-hover:underline underline-offset-2">{content.email}</p>
               </EditableField>
-            </div>
+            </a>
 
             {/* Location Card */}
-            <div className="bg-white border border-black/10 rounded-xl p-8 text-center hover:border-black/20 transition-colors">
-              <div className="w-12 h-12 bg-black/5 rounded-full flex items-center justify-center mx-auto mb-4">
+            <a href={content.location_link} target="_blank" rel="noopener noreferrer" className="bg-white border border-black/10 rounded-xl p-8 text-center hover:border-black/20 transition-colors block group">
+              <div className="w-12 h-12 bg-black/5 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-black/10 transition-colors">
                 <MapPin className="w-5 h-5 text-black" />
               </div>
               <p className="text-sm text-black/60 mb-2">Visit Us</p>
-              <p className="text-black">{content.address}</p>
-            </div>
+              <EditableField pageId={PAGE_IDS.contact} fieldName="location_link" value={content.location_link}>
+                <p className="text-black group-hover:underline underline-offset-2">{content.address}</p>
+              </EditableField>
+            </a>
           </div>
         </div>
       </section>
@@ -117,88 +139,81 @@ export default function ContactContent({ content }: Props) {
               </EditableField>
             </div>
 
-            <form className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-6">
-                {/* Name */}
-                <div>
-                  <label className="block text-sm mb-2 text-black/80">Name*</label>
-                  <input
-                    type="text"
-                    className="w-full px-4 py-3 bg-white border border-black/10 rounded-lg focus:outline-none focus:border-black transition-colors"
-                    placeholder="Enter your name"
-                  />
+            {status === 'sent' ? (
+              <div className="text-center py-16">
+                <div className="w-14 h-14 bg-black/5 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-6 h-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
                 </div>
-
-                {/* Company */}
-                <div>
-                  <label className="block text-sm mb-2 text-black/80">Company*</label>
-                  <input
-                    type="text"
-                    className="w-full px-4 py-3 bg-white border border-black/10 rounded-lg focus:outline-none focus:border-black transition-colors"
-                    placeholder="Enter your company name"
-                  />
-                </div>
+                <h3 className="text-xl mb-2">Message sent!</h3>
+                <p className="text-black/60 text-sm">We'll get back to you as soon as possible.</p>
               </div>
-
-              <div className="grid md:grid-cols-2 gap-6">
-                {/* Email */}
-                <div>
-                  <label className="block text-sm mb-2 text-black/80">Email*</label>
-                  <input
-                    type="email"
-                    className="w-full px-4 py-3 bg-white border border-black/10 rounded-lg focus:outline-none focus:border-black transition-colors"
-                    placeholder="Enter your email"
-                  />
+            ) : (
+              <form className="space-y-6" onSubmit={handleSubmit}>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm mb-2 text-black/80">Name *</label>
+                    <input name="name" type="text" required value={form.name} onChange={handleChange}
+                      className="w-full px-4 py-3 bg-white border border-black/10 rounded-lg focus:outline-none focus:border-black transition-colors"
+                      placeholder="Enter your name" />
+                  </div>
+                  <div>
+                    <label className="block text-sm mb-2 text-black/80">Company</label>
+                    <input name="company" type="text" value={form.company} onChange={handleChange}
+                      className="w-full px-4 py-3 bg-white border border-black/10 rounded-lg focus:outline-none focus:border-black transition-colors"
+                      placeholder="Enter your company name" />
+                  </div>
                 </div>
 
-                {/* Phone */}
-                <div>
-                  <label className="block text-sm mb-2 text-black/80">Phone Number*</label>
-                  <input
-                    type="tel"
-                    className="w-full px-4 py-3 bg-white border border-black/10 rounded-lg focus:outline-none focus:border-black transition-colors"
-                    placeholder="Enter your phone number"
-                  />
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm mb-2 text-black/80">Email *</label>
+                    <input name="email" type="email" required value={form.email} onChange={handleChange}
+                      className="w-full px-4 py-3 bg-white border border-black/10 rounded-lg focus:outline-none focus:border-black transition-colors"
+                      placeholder="Enter your email" />
+                  </div>
+                  <div>
+                    <label className="block text-sm mb-2 text-black/80">Phone Number</label>
+                    <input name="phone" type="tel" value={form.phone} onChange={handleChange}
+                      className="w-full px-4 py-3 bg-white border border-black/10 rounded-lg focus:outline-none focus:border-black transition-colors"
+                      placeholder="Enter your phone number" />
+                  </div>
                 </div>
-              </div>
 
-              {/* Message */}
-              <div>
-                <label className="block text-sm mb-2 text-black/80">Message*</label>
-                <textarea
-                  rows={6}
-                  className="w-full px-4 py-3 bg-white border border-black/10 rounded-lg focus:outline-none focus:border-black transition-colors resize-none"
-                  placeholder="Enter your message"
-                />
-              </div>
+                <div>
+                  <label className="block text-sm mb-2 text-black/80">Message *</label>
+                  <textarea name="message" rows={6} required value={form.message} onChange={handleChange}
+                    className="w-full px-4 py-3 bg-white border border-black/10 rounded-lg focus:outline-none focus:border-black transition-colors resize-none"
+                    placeholder="Enter your message" />
+                </div>
 
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                type="submit"
-                className="group relative px-10 py-4 bg-black text-white overflow-hidden transition-all duration-300 rounded-lg"
-              >
-                <span className="relative z-10 text-sm tracking-widest group-hover:text-black transition-colors duration-300">SEND MESSAGE</span>
-                <div className="absolute inset-0 bg-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-              </motion.button>
-            </form>
+                {status === 'error' && (
+                  <p className="text-sm text-red-500">Something went wrong. Please try again.</p>
+                )}
+
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  type="submit"
+                  disabled={status === 'sending'}
+                  className="group relative px-10 py-4 bg-black text-white overflow-hidden transition-all duration-300 rounded-lg disabled:opacity-60"
+                >
+                  <span className="relative z-10 text-sm tracking-widest group-hover:text-black transition-colors duration-300">
+                    {status === 'sending' ? 'SENDING...' : 'SEND MESSAGE'}
+                  </span>
+                  <div className="absolute inset-0 bg-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+                </motion.button>
+              </form>
+            )}
           </div>
         </div>
       </section>
 
       {/* Map Section */}
       <section className="py-0">
-        <div className="w-full h-[400px] md:h-[500px] bg-black/5 border-t border-black/10 relative overflow-hidden">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d479631.0317183673!2d57.3421191!3d-20.1608912!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x217c504df94474c9%3A0x4203d9c2116bd031!2sMauritius!5e0!3m2!1sen!2s!4v1234567890123!5m2!1sen!2s"
-            width="100%"
-            height="100%"
-            style={{ border: 0 }}
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            title="Mauritius Location"
-          />
+        <div className="w-full h-[400px] md:h-[500px] border-t border-black/10">
+          <MapboxMap />
         </div>
       </section>
     </div>

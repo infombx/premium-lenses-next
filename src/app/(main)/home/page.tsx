@@ -12,7 +12,7 @@ export default async function HomePage() {
     getProducts({ per_page: 4 }),
     getHomepageContent(),
   ])
-  const products = wooProducts.length > 0 ? wooProducts.map(mapWooProduct) : undefined
+  const products = wooProducts.length > 0 ? wooProducts.map(p => mapWooProduct(p)) : undefined
 
   return (
     <>
