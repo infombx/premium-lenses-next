@@ -54,7 +54,7 @@ export async function POST(request: NextRequest) {
   }
 
   if (pageId === 38) {
-    revalidateTag('global-content')
+    revalidateTag('global-content', {})
   }
 
   return NextResponse.json({ ok: true })
